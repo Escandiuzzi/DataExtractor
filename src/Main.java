@@ -1,4 +1,4 @@
-import Managers.PDFManager;
+import Handlers.PDFHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,11 +8,11 @@ public class Main {
         String home = System.getProperty("user.home");
         String filepath = home + File.separator + "Documents" + File.separator + "document.pdf";
 
-        PDFManager pdfManager = new PDFManager();
-        pdfManager.setFilePath(filepath);
+        PDFHandler pdfHandler = new PDFHandler();
+        pdfHandler.setFilePath(filepath);
+
         try {
-            String text = pdfManager.toText();
-            System.out.println(text);
+            pdfHandler.printSubWords("CPF");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
