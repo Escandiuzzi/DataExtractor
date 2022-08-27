@@ -1,4 +1,4 @@
-package Handlers;
+package Managers;
 
 import Utils.TextPositionSequence;
 
