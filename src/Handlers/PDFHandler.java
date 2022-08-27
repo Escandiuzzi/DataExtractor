@@ -2,6 +2,9 @@ package Handlers;
 
 import Utils.TextPositionSequence;
 
+import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.io.RandomAccessFile;
+import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.TextPosition;
@@ -17,6 +20,24 @@ public class PDFHandler {
 
     public PDFHandler() {
 
+    }
+
+    public String toText() throws IOException {
+
+        File file = new File(filePath);
+        PDFParser parser = new PDFParser(new RandomAccessFile(file, "r")); // update for PDFBox V 2.0
+
+        parser.parse();
+        COSDocument cosDoc = parser.getDocument();
+        PDFTextStripper pdfStripper = new PDFTextStripper();
+
+        PDDocument pdDoc = new PDDocument(cosDoc);
+        pdDoc.getNumberOfPages();
+
+        pdfStripper.setStartPage(0);
+        pdfStripper.setEndPage(pdDoc.getNumberOfPages());
+
+        return pdfStripper.getText(pdDoc);
     }
 
     public void setFilePath(String filePath) {
