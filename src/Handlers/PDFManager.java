@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PDFHandler {
+public class PDFManager {
     private PDDocument pdDocument;
     private String filePath;
 
-    public PDFHandler() {
+    public PDFManager() {
 
     }
 

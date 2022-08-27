@@ -1,5 +1,5 @@
 import Handlers.DataHandler;
-import Handlers.PDFHandler;
+import Handlers.PDFManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +11,12 @@ public class Main {
         String home = System.getProperty("user.home");
         String filepath = home + File.separator + "Documents" + File.separator + "document.pdf";
 
-        PDFHandler pdfHandler = new PDFHandler();
-        pdfHandler.setFilePath(filepath);
+        DataHandler dataHandler = new DataHandler();
+        PDFManager pdfManager = new PDFManager();
+        pdfManager.setFilePath(filepath);
 
         try {
-            DataHandler dataHandler = new DataHandler();
-            dataHandler.ShowData(pdfHandler.toText());
+            dataHandler.ShowData(pdfManager.toText());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
