@@ -23,21 +23,21 @@ public class PDFManager {
     }
 
     public String toText() throws IOException {
-
         File file = new File(filePath);
         PDFParser parser = new PDFParser(new RandomAccessFile(file, "r")); // update for PDFBox V 2.0
 
         parser.parse();
-        COSDocument cosDoc = parser.getDocument();
+        COSDocument cosDocument = parser.getDocument();
         PDFTextStripper pdfStripper = new PDFTextStripper();
+        pdfStripper.setSortByPosition(true);
 
-        PDDocument pdDoc = new PDDocument(cosDoc);
-        pdDoc.getNumberOfPages();
+        pdDocument = new PDDocument(cosDocument);
+        pdDocument.getNumberOfPages();
 
         pdfStripper.setStartPage(0);
-        pdfStripper.setEndPage(pdDoc.getNumberOfPages());
+        pdfStripper.setEndPage(pdDocument.getNumberOfPages());
 
-        return pdfStripper.getText(pdDoc);
+        return pdfStripper.getText(pdDocument);
     }
 
     public void setFilePath(String filePath) {

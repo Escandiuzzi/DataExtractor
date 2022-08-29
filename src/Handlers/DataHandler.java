@@ -9,6 +9,7 @@ public class DataHandler {
     final Pattern documentCodePattern = Pattern.compile("(\\d{9}\\.\\d{1} \\d{10}\\.\\d{1} \\d{10}\\.\\d{1} \\d \\d{14})");
     final Pattern cpfPattern = Pattern.compile("\\d{3}.\\d{3}.\\d{3}-?\\d{2}" );
     final Pattern datePattern = Pattern.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})");
+    final Pattern moneyPattern = Pattern.compile("\\d{1,4}(\\.\\d{3})*,\\d{2}");
 
     public void ShowData(String text) {
 
@@ -27,11 +28,15 @@ public class DataHandler {
         Matcher dateMatcher = datePattern.matcher(text);
         dateMatcher.find();
 
+        Matcher moneyMatcher = moneyPattern.matcher(text);
+        moneyMatcher.find();
+
         PrintIfValid("CNPJ: ", cnpjMatcher);
         PrintIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
         PrintIfValid("Código Boleto: ", documentCodeMatcher);
         PrintIfValid("CPF: ", cpfMatcher);
         PrintIfValid("Data de vencimento: ", dateMatcher);
+        PrintIfValid("Valor: ", moneyMatcher);
     }
 
     private void PrintIfValid(String prefix, Matcher matcher) {
