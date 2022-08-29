@@ -10,7 +10,6 @@ public class DataHandler {
     final Pattern cpfPattern = Pattern.compile("\\d{3}.\\d{3}.\\d{3}-?\\d{2}" );
     final Pattern datePattern = Pattern.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})");
 
-
     public void ShowData(String text) {
 
         Matcher cnpjMatcher = cnpjPattern.matcher(text);
@@ -28,10 +27,18 @@ public class DataHandler {
         Matcher dateMatcher = datePattern.matcher(text);
         dateMatcher.find();
 
-        System.out.println("CNPJ: " + cnpjMatcher.group(0));
-        System.out.println("Código Beneficiario: " + agencyCodePatternMatcher.group(0));
-        System.out.println("Código Boleto: " + documentCodeMatcher.group(0));
-        System.out.println("CPF: " + cpfMatcher.group(0));
-        System.out.println("Data de vencimento: " + dateMatcher.group(0));
+        PrintIfValid("CNPJ: ", cnpjMatcher);
+        PrintIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
+        PrintIfValid("Código Boleto: ", documentCodeMatcher);
+        PrintIfValid("CPF: ", cpfMatcher);
+        PrintIfValid("Data de vencimento: ", dateMatcher);
+    }
+
+    private void PrintIfValid(String prefix, Matcher matcher) {
+        try {
+            System.out.println(prefix + matcher.group(0));
+        } catch (IllegalStateException ex) {
+            System.out.println("Could not find " + prefix);
+        }
     }
 }
