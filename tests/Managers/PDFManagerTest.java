@@ -31,6 +31,7 @@ public class PDFManagerTest {
             assertNotNull(ex);
         }
 
-        assertThat(result, is("Sample PDF generated for JUnit DataExtraction test \n"));
+        String expectedOutput = "Sample PDF generated for JUnit DataExtraction test \n";
+        assertThat(result, is(expectedOutput));
     }
 }
