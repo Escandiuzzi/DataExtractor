@@ -15,7 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PDFManager {
+
+    final String Beneficiary = "beneficiary";
+    final String Payer = "payer";
+
     private PDDocument pdDocument;
+    private PDFParser parser;
+    private COSDocument cosDocument;
+    private PDFTextStripper pdfStripper;
     private String filePath;
     private File file;
     private Map<String, String> infos;
@@ -25,61 +32,62 @@ public class PDFManager {
     }
 
     public Map<String, String> ExtractTextByArea() throws IOException {
-        try
-        {
-            file = new File(filePath);
-            PDFParser parser = new PDFParser(new RandomAccessFile(file, "r")); // update for PDFBox V 2.0
+        InitializeDocument();
+        PDFTextStripperByArea stripper = CreatePDFStripperByArea();
 
-            parser.parse();
-            COSDocument cosDocument = parser.getDocument();
-            PDFTextStripper pdfStripper = new PDFTextStripper();
-            pdfStripper.setSortByPosition(true);
+        AddRects(stripper);
 
-            pdDocument = new PDDocument(cosDocument);
-            PDFTextStripperByArea stripper = new PDFTextStripperByArea();
-            stripper.setSortByPosition( true );
+        PDPage firstPage = pdDocument.getPage(0);
+        stripper.extractRegions( firstPage );
 
-            Rectangle beneficiaryRect = new Rectangle( 10, 60, 275, 10 );
-            stripper.addRegion( "beneficiary", beneficiaryRect );
-
-            Rectangle payerRect = new Rectangle( 10, 110, 120, 10 );
-            stripper.addRegion( "payer", payerRect );
-
-
-            PDPage firstPage = pdDocument.getPage(0);
-            stripper.extractRegions( firstPage );
-
-            infos = new HashMap<String, String>();
-
-            infos.put("beneficiary", stripper.getTextForRegion( "beneficiary" ));
-            infos.put("payer", stripper.getTextForRegion( "payer" ));
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
+        CreateMap(stripper);
         return infos;
     }
 
     public String toText() throws IOException {
-        file = new File(filePath);
-        PDFParser parser = new PDFParser(new RandomAccessFile(file, "r")); // update for PDFBox V 2.0
-
-        parser.parse();
-        COSDocument cosDocument = parser.getDocument();
-        PDFTextStripper pdfStripper = new PDFTextStripper();
-        pdfStripper.setSortByPosition(true);
-
-        pdDocument = new PDDocument(cosDocument);
-        pdDocument.getNumberOfPages();
-
-        pdfStripper.setStartPage(0);
-        pdfStripper.setEndPage(pdDocument.getNumberOfPages());
-
+        InitializeDocument();
         return pdfStripper.getText(pdDocument);
     }
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    private void InitializeDocument() throws IOException {
+        file = new File(filePath);
+        parser = new PDFParser(new RandomAccessFile(file, "r")); // update for PDFBox V 2.0
+
+        parser.parse();
+        cosDocument = parser.getDocument();
+        pdfStripper = new PDFTextStripper();
+        pdfStripper.setSortByPosition(true);
+
+        pdDocument = new PDDocument(cosDocument);
+
+        pdDocument.getNumberOfPages();
+
+        pdfStripper.setStartPage(0);
+        pdfStripper.setEndPage(pdDocument.getNumberOfPages());
+    }
+
+    private PDFTextStripperByArea CreatePDFStripperByArea() throws IOException{
+        PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+        stripper.setSortByPosition( true );
+
+        return stripper;
+    }
+
+    private void AddRects(PDFTextStripperByArea stripper) {
+        Rectangle beneficiaryRect = new Rectangle( 10, 60, 275, 10 );
+        stripper.addRegion( Beneficiary, beneficiaryRect );
+
+        Rectangle payerRect = new Rectangle( 10, 110, 120, 10 );
+        stripper.addRegion( Payer, payerRect );
+    }
+
+    private void CreateMap(PDFTextStripperByArea stripper) {
+        infos = new HashMap<String, String>();
+        infos.put(Beneficiary, stripper.getTextForRegion( Beneficiary ));
+        infos.put(Payer, stripper.getTextForRegion( Payer ));
     }
 }
