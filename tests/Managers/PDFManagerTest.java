@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,7 +22,7 @@ public class PDFManagerTest {
     }
 
     @Test
-    public void toText() {
+    public void OnToText_WhenParsingAFile_ShouldReturnPDFToString() {
         pdfManager.setFilePath(filePath + "/test.pdf");
         String result = "";
 
@@ -33,5 +35,20 @@ public class PDFManagerTest {
 
         String expectedOutput = "Sample PDF generated for JUnit DataExtraction test \n";
         assertThat(result, is(expectedOutput));
+    }
+
+    @Test
+    public void OnExtractTextByArea_WhenParsingAFile_ShouldReturnMapWithFields() {
+        pdfManager.setFilePath(filePath + "/boleto.pdf");
+        Map<String,String> result = new HashMap<>();
+
+        try {
+            result = pdfManager.ExtractTextByArea();
+        } catch (IOException ex) {
+            assertNotNull(ex);
+        }
+
+        assertThat(result.get("beneficiary"), is("FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\n"));
+        assertThat(result.get("payer"), is("Luiz Felipe Escandiuzzi\n"));
     }
 }

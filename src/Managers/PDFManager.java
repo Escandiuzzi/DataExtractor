@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PDFManager {
-
     final String Beneficiary = "beneficiary";
     final String Payer = "payer";
 

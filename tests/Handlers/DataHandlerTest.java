@@ -44,7 +44,7 @@ public class DataHandlerTest extends TestCase {
     }
 
     @Test
-    public void testShowData() {
+    public void OnShowData_WhenPFDStringIsSent_ShouldFindFieldsAndPrint() {
         String pdfContent = "";
 
         try {
