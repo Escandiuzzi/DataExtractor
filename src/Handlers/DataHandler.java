@@ -1,5 +1,7 @@
 package Handlers;
 
+import Helpers.Finder;
+import Utils.TextPositionSequence;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
@@ -7,6 +9,7 @@ import org.apache.pdfbox.text.PDFTextStripperByArea;
 import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +32,8 @@ public class DataHandler {
     private Matcher dateMatcher;
     private Matcher moneyMatcher;
 
+
+    private PDDocument pdDocument;
     private Map<String, String> infos;
 
     public void PrintData() {
@@ -44,6 +49,8 @@ public class DataHandler {
 
     public void HandleData(String text, PDDocument pdDocument) throws IOException
     {
+        this.pdDocument = pdDocument;
+
         cnpjMatcher = cnpjPattern.matcher(text);
         cnpjMatcher.find();
 
@@ -65,10 +72,10 @@ public class DataHandler {
         moneyMatcher = moneyPattern.matcher(text);
         moneyMatcher.find();
 
-        ExtractTextByArea(pdDocument);
+        ExtractTextByArea();
     }
 
-    private void ExtractTextByArea(PDDocument pdDocument) throws IOException {
+    private void ExtractTextByArea() throws IOException {
         PDFTextStripperByArea stripper = CreatePDFStripperByArea();
         AddRects(stripper);
         PDPage firstPage = pdDocument.getPage(0);
@@ -84,18 +91,39 @@ public class DataHandler {
         return stripper;
     }
 
-    private void AddRects(PDFTextStripperByArea stripper) {
-        Rectangle beneficiaryRect = new Rectangle( 10, 60, 275, 10 );
-        stripper.addRegion( Beneficiary, beneficiaryRect );
+    private void AddRects(PDFTextStripperByArea stripper) throws IOException {
+        TextPositionSequence position = null;
 
-        Rectangle payerRect = new Rectangle( 10, 110, 120, 10 );
-        stripper.addRegion( Payer, payerRect );
+        position =  findTerm("Beneficiário:");
+        if(position != null) {
+            Rectangle beneficiaryRect = new Rectangle((int)position.getX(), (int)position.getY() + 10, 270, 10);
+            stripper.addRegion( Beneficiary, beneficiaryRect );
+        }
+
+        position = findTerm("Pagador:");
+        if(position != null) {
+            Rectangle payerRect = new Rectangle((int)position.getX(), (int)position.getY() + 20, 105, 10);
+            stripper.addRegion( Payer, payerRect );
+        }
+    }
+
+    private TextPositionSequence findTerm(String term) throws IOException {
+        List<TextPositionSequence> positions = Finder.getTermPosition(pdDocument, 1, term);
+
+        if(positions.isEmpty()) return null;
+
+        return positions.get(0);
     }
 
     private void CreateMap(PDFTextStripperByArea stripper) {
         infos = new HashMap<String, String>();
-        infos.put(Beneficiary, stripper.getTextForRegion( Beneficiary ));
-        infos.put(Payer, stripper.getTextForRegion( Payer ));
+
+        List<String> regions = stripper.getRegions();
+
+        if(regions.contains(Beneficiary))
+            infos.put(Beneficiary, stripper.getTextForRegion( Beneficiary ));
+        if(regions.contains(Payer))
+            infos.put(Payer, stripper.getTextForRegion( Payer ));
     }
 
     private void PrintIfValid(String prefix, Matcher matcher) {

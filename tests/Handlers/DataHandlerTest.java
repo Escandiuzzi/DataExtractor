@@ -46,12 +46,12 @@ public class DataHandlerTest {
     public void OnPrintData_WhenDataIsHandled_ShouldPrint() throws IOException {
         String pdfContent = "";
 
-        pdDocument = pdfManager.InitializeDocument(filePath + "/document.pdf");
+        pdDocument = pdfManager.InitializeDocument(filePath + "/boleto.pdf");
         pdfContent = pdfManager.toText();
         dataHandler.HandleData(pdfContent, pdDocument);
         dataHandler.PrintData();
 
-        String expectedOutput = "CNPJ: 88.648.761/0001-03\nCódigo Beneficiario: 2087.7 8284989\nCódigo Boleto: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\nCPF: 8614000016592\nData de vencimento: 08/05/2021\nValor: 1659,23\nBeneficiario: \n\nPagador: CPF: 019.\n\n";
+        String expectedOutput = "CNPJ: 88.648.761/0001-03\nCódigo Beneficiario: 2087.7 8284989\nCódigo Boleto: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\nCPF: 019.723.190-00\nData de vencimento: 08/05/2021\nValor: 1659,23\nBeneficiario: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\n\nPagador: Luiz Felipe Escandiuzzi\n\n";
         String consoleOutput = outContent.toString();
         assertThat(consoleOutput, is(expectedOutput));
     }
