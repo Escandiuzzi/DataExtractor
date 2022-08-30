@@ -1,9 +1,9 @@
 import Handlers.DataHandler;
 import Managers.PDFManager;
+import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,14 +12,13 @@ public class Main {
 
         DataHandler dataHandler = new DataHandler();
         PDFManager pdfManager = new PDFManager();
-        pdfManager.setFilePath(filepath);
 
         try {
-            Map<String, String> map = pdfManager.ExtractTextByArea();
+            PDDocument pdDocument = pdfManager.InitializeDocument(filepath);
+            String pdfContent = pdfManager.toText();
 
-            System.out.println("Beneficiario: " + map.get("beneficiary"));
-            System.out.println("Pagador: " + map.get("payer"));
-            dataHandler.ShowData(pdfManager.toText());
+            dataHandler.HandleData(pdfContent, pdDocument);
+            dataHandler.PrintData();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {
