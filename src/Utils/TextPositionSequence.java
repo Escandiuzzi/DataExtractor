@@ -4,7 +4,7 @@ import org.apache.pdfbox.text.TextPosition;
 
 import java.util.List;
 
-public class TextPositionSequence implements CharSequence{
+public class TextPositionSequence implements CharSequence {
 
     public TextPositionSequence(List<TextPosition> textPositions)
     {

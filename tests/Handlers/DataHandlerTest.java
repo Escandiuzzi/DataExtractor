@@ -1,6 +1,6 @@
 package Handlers;
 
-import Managers.PDFManager;
+import Extractors.PDFExtractor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.After;
 import org.junit.Before;
@@ -19,7 +19,7 @@ public class DataHandlerTest {
     final String filePath = Paths.get("tests","Resources").toAbsolutePath().toString();
 
     private DataHandler dataHandler;
-    private PDFManager pdfManager;
+    private PDFExtractor pdfManager;
     private PDDocument pdDocument;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -29,7 +29,7 @@ public class DataHandlerTest {
 
     @Before
     public void setUp() {
-        pdfManager = new PDFManager();
+        pdfManager = new PDFExtractor();
         dataHandler = new DataHandler();
 
         System.setOut(new PrintStream(outContent));

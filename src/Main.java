@@ -1,12 +1,9 @@
-import Handlers.DataHandler;
-import Managers.PDFManager;
-import org.apache.pdfbox.pdmodel.PDDocument;
-
-import java.io.File;
-import java.io.IOException;
+import GUI.MainWindow;
 
 public class Main {
     public static void main(String[] args) {
+
+        /*
         String home = System.getProperty("user.home");
         String filepath = home + File.separator + "Documents" + File.separator + "document.pdf";
 
@@ -24,5 +21,8 @@ public class Main {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        */
+
+        MainWindow mainWindow = new MainWindow();
     }
 }

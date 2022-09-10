@@ -1,4 +1,4 @@
-package Managers;
+package Extractors;
 
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.io.RandomAccessFile;
@@ -9,14 +9,14 @@ import org.apache.pdfbox.text.PDFTextStripper;;
 import java.io.File;
 import java.io.IOException;
 
-public class PDFManager {
+public class PDFExtractor {
     private PDDocument pdDocument;
     private PDFParser parser;
     private COSDocument cosDocument;
     private PDFTextStripper pdfStripper;
     private File file;
 
-    public PDFManager() {
+    public PDFExtractor() {
 
     }
 

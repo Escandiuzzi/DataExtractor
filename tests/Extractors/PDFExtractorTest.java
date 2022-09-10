@@ -1,4 +1,4 @@
-package Managers;
+package Extractors;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.Before;
@@ -11,13 +11,13 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class PDFManagerTest {
+public class PDFExtractorTest {
     final String filePath = Paths.get("tests","Resources").toAbsolutePath().toString();
-    private PDFManager pdfManager;
+    private PDFExtractor pdfManager;
 
     @Before
     public void setup(){
-        pdfManager = new PDFManager();
+        pdfManager = new PDFExtractor();
     }
 
     @Test
