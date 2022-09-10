@@ -5,11 +5,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-
     JPanel panel;
 
     JLabel header;
     JLabel title;
+
+    JRadioButton jRadioButton1;
+    JRadioButton jRadioButton2;
+
+    ButtonGroup documentTypeGroup;
+    JLabel documentTypeLabel;
 
     JButton cancelButton;
     JButton saveButton;
@@ -22,13 +27,44 @@ public class MainWindow extends JFrame {
         panel = new JPanel(new BorderLayout());
 
         header = new JLabel("Data Extract");
-        Dimension size = header.getPreferredSize();
         header.setBounds(0, 0, 600,30);
         header.setFont(new Font("Sans Serif", Font.BOLD, 18));
 
         header.setBackground(Color.lightGray);
         header.setBorder(new EmptyBorder(0,5,0, 0));//top,left,bottom,right
         header.setOpaque(true);
+
+        JPanel contentPanel = new JPanel(new BorderLayout());
+
+        title = new JLabel("Configurar exportação: ");
+        title.setBounds(10, 0, 180, 50);
+        title.setFont(new Font("Sans Serif", Font.BOLD, 14));
+
+        documentTypeLabel = new JLabel("Selecione o tipo de arquivo: ");
+        documentTypeLabel.setBounds(20, 50, 180, 50);
+
+        jRadioButton1 = new JRadioButton();
+        jRadioButton2 = new JRadioButton();
+
+        jRadioButton1.setText("Boleto");
+        jRadioButton2.setText("Imposto de renda");
+
+        jRadioButton1.setBounds(200, 50, 80, 50);
+        jRadioButton2.setBounds(280, 50, 250, 50);
+
+        contentPanel.add(title);
+        contentPanel.add(documentTypeLabel);
+        contentPanel.add(jRadioButton1);
+        contentPanel.add(jRadioButton2);
+
+        this.add(jRadioButton1);
+        this.add(jRadioButton2);
+        this.add(documentTypeLabel);
+
+        documentTypeGroup = new ButtonGroup();
+
+        documentTypeGroup.add(jRadioButton1);
+        documentTypeGroup.add(jRadioButton2);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         cancelButton = new JButton("Cancel");
@@ -41,8 +77,6 @@ public class MainWindow extends JFrame {
 
         bottomPanel.add(cancelButton, BorderLayout.WEST);
         bottomPanel.add(saveButton, BorderLayout.EAST);
-
-        JPanel contentPanel = new JPanel(new BorderLayout());
 
         panel.add(header, BorderLayout.NORTH);
         panel.add(contentPanel, BorderLayout.CENTER);
