@@ -17,9 +17,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         super("Data Extractor");
         this.setSize(600,400);
-        this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
 
         panel = new JPanel(new BorderLayout());
 
@@ -51,5 +49,7 @@ public class MainWindow extends JFrame {
         panel.add(bottomPanel, BorderLayout.SOUTH);
 
         this.getContentPane().add(panel);
+
+        this.setVisible(true);
     }
 }
