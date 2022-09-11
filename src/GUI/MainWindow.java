@@ -2,11 +2,9 @@ package GUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class MainWindow extends JFrame implements ActionListener {
     JPanel panel;
@@ -20,7 +18,7 @@ public class MainWindow extends JFrame implements ActionListener {
     ButtonGroup documentTypeGroup;
     JLabel documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel;
     JTextField frequencyField;
-    JLabel frequency;
+    JLabel frequency, fileLocation, inputFile, outputFile, errorFile;
     JButton inputDirButton, outputDirButton, errorDirButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
 
@@ -73,41 +71,48 @@ public class MainWindow extends JFrame implements ActionListener {
         frequency.setBounds(230, 60, 50, 40);
 
         //DIRETORIOS
-        inputDirLabel = new JLabel("Entrada: ");
-        inputDirLabel.setBounds(40, 80, 50, 40);
-        outputDirLabel = new JLabel("Saída: ");
-        outputDirLabel.setBounds(40, 100, 50, 40);
-        errorDirLabel = new JLabel("Erro: ");
-        errorDirLabel.setBounds(40, 120, 50, 40);
 
+        fileLocation = new JLabel("Local do Arquivo: ");
+        fileLocation.setBounds(20, 80, 100, 40);
+
+        inputDirLabel = new JLabel("Entrada: ");
+        inputDirLabel.setBounds(40, 100, 50, 40);
+        outputDirLabel = new JLabel("Saída: ");
+        outputDirLabel.setBounds(40, 120, 50, 40);
+        errorDirLabel = new JLabel("Erro: ");
+        errorDirLabel.setBounds(40, 140, 50, 40);
 
         inputDirButton = new JButton("Informe a pasta de entrada");
         outputDirButton = new JButton("Informe a pasta de saída");
         errorDirButton = new JButton("Informe a pasta de erros");
 
-        inputDirButton.setBounds(100, 90, 200, 23);
-        outputDirButton.setBounds(100, 110, 200, 23);
-        errorDirButton.setBounds(100, 130, 200, 23);
+        inputDirButton.setBounds(100, 110, 200, 23);
+        outputDirButton.setBounds(100, 130, 200, 23);
+        errorDirButton.setBounds(100, 150, 200, 23);
+
+        inputFile = new JLabel("");
+        outputFile = new JLabel("");
+        errorFile = new JLabel("");
+
+        inputFile.setBounds(305, 110, 250, 23);
+        outputFile.setBounds(305, 130, 250, 23);
+        errorFile.setBounds(305, 150, 250, 23);
 
         inputDirButton.addActionListener(this);
         outputDirButton.addActionListener(this);
         errorDirButton.addActionListener(this);
 
         inputFileChooser = new JFileChooser();
-        inputFileChooser.setFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File f) {
-                if (f.isDirectory()){
-                    return true;
-                }
-                return false;
-            }
+        outputFileChooser = new JFileChooser();
+        errorFileChooser = new JFileChooser();
 
-            @Override
-            public String getDescription() {
-                return null;
-            }
-        });
+        inputFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        outputFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        errorFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        inputFileChooser.setAcceptAllFileFilterUsed(false);
+        outputFileChooser.setAcceptAllFileFilterUsed(false);
+        errorFileChooser.setAcceptAllFileFilterUsed(false);
 
         contentPanel.add(title);
         contentPanel.add(documentTypeLabel);
@@ -115,6 +120,7 @@ public class MainWindow extends JFrame implements ActionListener {
         contentPanel.add(frequencyField);
         contentPanel.add(frequency);
 
+        contentPanel.add(fileLocation);
         contentPanel.add(inputDirLabel);
         contentPanel.add(outputDirLabel);
         contentPanel.add(errorDirLabel);
@@ -122,6 +128,10 @@ public class MainWindow extends JFrame implements ActionListener {
         contentPanel.add(inputDirButton);
         contentPanel.add(outputDirButton);
         contentPanel.add(errorDirButton);
+
+        contentPanel.add(inputFile);
+        contentPanel.add(outputFile);
+        contentPanel.add(errorFile);
 
         contentPanel.add(jRadioButton1);
         contentPanel.add(jRadioButton2);
@@ -160,19 +170,31 @@ public class MainWindow extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource()==inputDirButton) {
-            inputFileChooser.showSaveDialog(null);
-            System.out.println(inputFileChooser);
-            System.out.println("CLICOU BOTAO INPUT");
+            int result = inputFileChooser.showSaveDialog(null);
+
+            if (result == JFileChooser.APPROVE_OPTION){
+                inputFile.setText(inputFileChooser.getSelectedFile().getAbsolutePath());
+                System.out.println(inputFileChooser.getSelectedFile().getAbsolutePath());
+            }
+
         } else {
             if (e.getSource()==outputDirButton) {
-                outputFileChooser.showSaveDialog(null);
-                System.out.println(outputFileChooser);
-                System.out.println("CLICOU BOTAO OUTPUT");
+                int result = outputFileChooser.showSaveDialog(null);
+
+                if (result == JFileChooser.APPROVE_OPTION){
+                    outputFile.setText(outputFileChooser.getSelectedFile().getAbsolutePath());
+                    System.out.println(outputFileChooser.getSelectedFile().getAbsolutePath());
+                }
+
             } else {
                 if (e.getSource()==errorDirButton) {
-                    errorFileChooser.showSaveDialog(null);
-                    System.out.println(errorFileChooser);
-                    System.out.println("CLICOU BOTAO ERROR");
+                    int result = errorFileChooser.showSaveDialog(null);
+
+                    if (result == JFileChooser.APPROVE_OPTION){
+                        errorFile.setText(errorFileChooser.getSelectedFile().getAbsolutePath());
+                        System.out.println(errorFileChooser.getSelectedFile().getAbsolutePath());
+                    }
+
                 }
             }
         }
