@@ -22,7 +22,6 @@ public class MainWindow extends JFrame implements ActionListener {
     JButton inputDirButton, outputDirButton, errorDirButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
 
-
     JButton cancelButton;
     JButton saveButton;
 
@@ -33,6 +32,20 @@ public class MainWindow extends JFrame implements ActionListener {
 
         panel = new JPanel(new BorderLayout());
 
+        createHeader();
+        JPanel contentPanel = createContentPanel();
+        JPanel bottomPanel = createBottomPanel();
+
+        panel.add(header, BorderLayout.NORTH);
+        panel.add(contentPanel, BorderLayout.CENTER);
+        panel.add(bottomPanel, BorderLayout.SOUTH);
+
+        this.getContentPane().add(panel);
+
+        this.setVisible(true);
+    }
+
+    private void createHeader() {
         header = new JLabel("Data Extract");
         header.setBounds(0, 0, 600,30);
         header.setFont(new Font("Sans Serif", Font.BOLD, 18));
@@ -40,14 +53,54 @@ public class MainWindow extends JFrame implements ActionListener {
         header.setBackground(Color.lightGray);
         header.setBorder(new EmptyBorder(0,5,0, 0));//top,left,bottom,right
         header.setOpaque(true);
+    }
+
+    private JPanel createContentPanel() {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
-
         title = new JLabel("Configurar exportação: ");
         title.setBounds(10, 0, 180, 50);
         title.setFont(new Font("Sans Serif", Font.BOLD, 14));
 
-        // TIPO DO ARQUIVO
+        createDocumentTypeField();
+        createFrequencyField();
+        createDirectoriesField();
+
+        contentPanel.add(title);
+        contentPanel.add(documentTypeLabel);
+        contentPanel.add(frequencyLabel);
+        contentPanel.add(frequencyField);
+        contentPanel.add(frequency);
+
+        contentPanel.add(fileLocation);
+        contentPanel.add(inputDirLabel);
+        contentPanel.add(outputDirLabel);
+        contentPanel.add(errorDirLabel);
+
+        contentPanel.add(inputDirButton);
+        contentPanel.add(outputDirButton);
+        contentPanel.add(errorDirButton);
+
+        contentPanel.add(inputFile);
+        contentPanel.add(outputFile);
+        contentPanel.add(errorFile);
+
+        contentPanel.add(jRadioButton1);
+        contentPanel.add(jRadioButton2);
+
+        this.add(jRadioButton1);
+        this.add(jRadioButton2);
+        this.add(documentTypeLabel);
+
+        documentTypeGroup = new ButtonGroup();
+
+        documentTypeGroup.add(jRadioButton1);
+        documentTypeGroup.add(jRadioButton2);
+
+        return contentPanel;
+    }
+
+    private void createDocumentTypeField() {
         documentTypeLabel = new JLabel("Selecione o tipo de arquivo: ");
         documentTypeLabel.setBounds(20, 50, 180, 40);
 
@@ -59,8 +112,9 @@ public class MainWindow extends JFrame implements ActionListener {
 
         jRadioButton1.setBounds(200, 50, 80, 40);
         jRadioButton2.setBounds(280, 50, 250, 40);
+    }
 
-        // PERIODICIDADE
+    private void createFrequencyField() {
         frequencyLabel = new JLabel("Informe a periodicidade: ");
         frequencyLabel.setBounds(20, 60, 180, 40);
 
@@ -69,9 +123,9 @@ public class MainWindow extends JFrame implements ActionListener {
 
         frequency = new JLabel("horas");
         frequency.setBounds(230, 60, 50, 40);
+    }
 
-        //DIRETORIOS
-
+    private void createDirectoriesField() {
         fileLocation = new JLabel("Local do Arquivo: ");
         fileLocation.setBounds(20, 80, 100, 40);
 
@@ -113,38 +167,44 @@ public class MainWindow extends JFrame implements ActionListener {
         inputFileChooser.setAcceptAllFileFilterUsed(false);
         outputFileChooser.setAcceptAllFileFilterUsed(false);
         errorFileChooser.setAcceptAllFileFilterUsed(false);
+    }
 
-        contentPanel.add(title);
-        contentPanel.add(documentTypeLabel);
-        contentPanel.add(frequencyLabel);
-        contentPanel.add(frequencyField);
-        contentPanel.add(frequency);
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        contentPanel.add(fileLocation);
-        contentPanel.add(inputDirLabel);
-        contentPanel.add(outputDirLabel);
-        contentPanel.add(errorDirLabel);
+        if(e.getSource() == inputDirButton) {
+            int result = inputFileChooser.showSaveDialog(null);
 
-        contentPanel.add(inputDirButton);
-        contentPanel.add(outputDirButton);
-        contentPanel.add(errorDirButton);
+            if (result == JFileChooser.APPROVE_OPTION){
+                inputFile.setText(inputFileChooser.getSelectedFile().getAbsolutePath());
+                System.out.println(inputFileChooser.getSelectedFile().getAbsolutePath());
+            }
 
-        contentPanel.add(inputFile);
-        contentPanel.add(outputFile);
-        contentPanel.add(errorFile);
+        } else {
+            if (e.getSource() == outputDirButton) {
+                int result = outputFileChooser.showSaveDialog(null);
 
-        contentPanel.add(jRadioButton1);
-        contentPanel.add(jRadioButton2);
+                if (result == JFileChooser.APPROVE_OPTION){
+                    outputFile.setText(outputFileChooser.getSelectedFile().getAbsolutePath());
+                    System.out.println(outputFileChooser.getSelectedFile().getAbsolutePath());
+                }
 
-        this.add(jRadioButton1);
-        this.add(jRadioButton2);
-        this.add(documentTypeLabel);
+            } else {
+                if (e.getSource() == errorDirButton) {
+                    int result = errorFileChooser.showSaveDialog(null);
 
-        documentTypeGroup = new ButtonGroup();
+                    if (result == JFileChooser.APPROVE_OPTION){
+                        errorFile.setText(errorFileChooser.getSelectedFile().getAbsolutePath());
+                        System.out.println(errorFileChooser.getSelectedFile().getAbsolutePath());
+                    }
 
-        documentTypeGroup.add(jRadioButton1);
-        documentTypeGroup.add(jRadioButton2);
+                }
+            }
+        }
 
+    }
+
+    private JPanel createBottomPanel() {
         JPanel bottomPanel = new JPanel(new BorderLayout());
         cancelButton = new JButton("Cancel");
         cancelButton.setBackground(Color.white);
@@ -157,47 +217,6 @@ public class MainWindow extends JFrame implements ActionListener {
         bottomPanel.add(cancelButton, BorderLayout.WEST);
         bottomPanel.add(saveButton, BorderLayout.EAST);
 
-        panel.add(header, BorderLayout.NORTH);
-        panel.add(contentPanel, BorderLayout.CENTER);
-        panel.add(bottomPanel, BorderLayout.SOUTH);
-
-        this.getContentPane().add(panel);
-
-        this.setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource()==inputDirButton) {
-            int result = inputFileChooser.showSaveDialog(null);
-
-            if (result == JFileChooser.APPROVE_OPTION){
-                inputFile.setText(inputFileChooser.getSelectedFile().getAbsolutePath());
-                System.out.println(inputFileChooser.getSelectedFile().getAbsolutePath());
-            }
-
-        } else {
-            if (e.getSource()==outputDirButton) {
-                int result = outputFileChooser.showSaveDialog(null);
-
-                if (result == JFileChooser.APPROVE_OPTION){
-                    outputFile.setText(outputFileChooser.getSelectedFile().getAbsolutePath());
-                    System.out.println(outputFileChooser.getSelectedFile().getAbsolutePath());
-                }
-
-            } else {
-                if (e.getSource()==errorDirButton) {
-                    int result = errorFileChooser.showSaveDialog(null);
-
-                    if (result == JFileChooser.APPROVE_OPTION){
-                        errorFile.setText(errorFileChooser.getSelectedFile().getAbsolutePath());
-                        System.out.println(errorFileChooser.getSelectedFile().getAbsolutePath());
-                    }
-
-                }
-            }
-        }
-
+        return bottomPanel;
     }
 }
