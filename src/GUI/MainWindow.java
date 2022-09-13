@@ -8,22 +8,13 @@ import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame implements ActionListener {
     JPanel panel;
-
-    JLabel header;
-    JLabel title;
-
-    JRadioButton jRadioButton1;
-    JRadioButton jRadioButton2;
-
+    JRadioButton jRadioButton1, jRadioButton2;
     ButtonGroup documentTypeGroup;
-    JLabel documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel;
+    JLabel header, title, documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel,
+            frequency, fileLocation, inputFile, outputFile, errorFile;
     JTextField frequencyField;
-    JLabel frequency, fileLocation, inputFile, outputFile, errorFile;
-    JButton inputDirButton, outputDirButton, errorDirButton;
+    JButton inputDirButton, outputDirButton, errorDirButton, cancelButton, saveButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
-
-    JButton cancelButton;
-    JButton saveButton;
 
     public MainWindow() {
         super("Data Extractor");
@@ -58,46 +49,21 @@ public class MainWindow extends JFrame implements ActionListener {
     private JPanel createContentPanel() {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
-        title = new JLabel("Configurar exportação: ");
-        title.setBounds(10, 0, 180, 50);
-        title.setFont(new Font("Sans Serif", Font.BOLD, 14));
 
+        createTitle();
         createDocumentTypeField();
         createFrequencyField();
         createDirectoriesField();
 
-        contentPanel.add(title);
-        contentPanel.add(documentTypeLabel);
-        contentPanel.add(frequencyLabel);
-        contentPanel.add(frequencyField);
-        contentPanel.add(frequency);
-
-        contentPanel.add(fileLocation);
-        contentPanel.add(inputDirLabel);
-        contentPanel.add(outputDirLabel);
-        contentPanel.add(errorDirLabel);
-
-        contentPanel.add(inputDirButton);
-        contentPanel.add(outputDirButton);
-        contentPanel.add(errorDirButton);
-
-        contentPanel.add(inputFile);
-        contentPanel.add(outputFile);
-        contentPanel.add(errorFile);
-
-        contentPanel.add(jRadioButton1);
-        contentPanel.add(jRadioButton2);
-
-        this.add(jRadioButton1);
-        this.add(jRadioButton2);
-        this.add(documentTypeLabel);
-
-        documentTypeGroup = new ButtonGroup();
-
-        documentTypeGroup.add(jRadioButton1);
-        documentTypeGroup.add(jRadioButton2);
+        addComponentsToPanel(contentPanel);
 
         return contentPanel;
+    }
+
+    private void createTitle() {
+        title = new JLabel("Configurar exportação: ");
+        title.setBounds(10, 0, 180, 50);
+        title.setFont(new Font("Sans Serif", Font.BOLD, 14));
     }
 
     private void createDocumentTypeField() {
@@ -112,6 +78,10 @@ public class MainWindow extends JFrame implements ActionListener {
 
         jRadioButton1.setBounds(200, 50, 80, 40);
         jRadioButton2.setBounds(280, 50, 250, 40);
+
+        documentTypeGroup = new ButtonGroup();
+        documentTypeGroup.add(jRadioButton1);
+        documentTypeGroup.add(jRadioButton2);
     }
 
     private void createFrequencyField() {
@@ -119,20 +89,22 @@ public class MainWindow extends JFrame implements ActionListener {
         frequencyLabel.setBounds(20, 60, 180, 40);
 
         frequencyField = new JTextField(5);
-        frequencyField.setBounds(165, 70, 60, 23);
+        frequencyField.setBounds(180, 70, 60, 23);
 
         frequency = new JLabel("horas");
-        frequency.setBounds(230, 60, 50, 40);
+        frequency.setBounds(240, 62, 50, 40);
     }
 
     private void createDirectoriesField() {
         fileLocation = new JLabel("Local do Arquivo: ");
-        fileLocation.setBounds(20, 80, 100, 40);
+        fileLocation.setBounds(20, 80, 120, 40);
 
         inputDirLabel = new JLabel("Entrada: ");
-        inputDirLabel.setBounds(40, 100, 50, 40);
+        inputDirLabel.setBounds(40, 100, 70, 40);
+
         outputDirLabel = new JLabel("Saída: ");
         outputDirLabel.setBounds(40, 120, 50, 40);
+
         errorDirLabel = new JLabel("Erro: ");
         errorDirLabel.setBounds(40, 140, 50, 40);
 
@@ -197,11 +169,38 @@ public class MainWindow extends JFrame implements ActionListener {
                         errorFile.setText(errorFileChooser.getSelectedFile().getAbsolutePath());
                         System.out.println(errorFileChooser.getSelectedFile().getAbsolutePath());
                     }
-
                 }
             }
         }
 
+    }
+
+    private void addComponentsToPanel(JPanel contentPanel) {
+        contentPanel.add(title);
+        contentPanel.add(documentTypeLabel);
+        contentPanel.add(frequencyLabel);
+        contentPanel.add(frequencyField);
+        contentPanel.add(frequency);
+
+        contentPanel.add(fileLocation);
+        contentPanel.add(inputDirLabel);
+        contentPanel.add(outputDirLabel);
+        contentPanel.add(errorDirLabel);
+
+        contentPanel.add(inputDirButton);
+        contentPanel.add(outputDirButton);
+        contentPanel.add(errorDirButton);
+
+        contentPanel.add(inputFile);
+        contentPanel.add(outputFile);
+        contentPanel.add(errorFile);
+
+        contentPanel.add(jRadioButton1);
+        contentPanel.add(jRadioButton2);
+
+        this.add(jRadioButton1);
+        this.add(jRadioButton2);
+        this.add(documentTypeLabel);
     }
 
     private JPanel createBottomPanel() {
