@@ -1,5 +1,6 @@
 package watchers;
 
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
@@ -24,8 +25,10 @@ private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input";
 			Path directory = Path.of(dir);
 
 			// Register the directory with the watch service
-			WatchKey watchKey = directory.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
-					StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
+			WatchKey watchKey = directory.register(watchService, 
+					StandardWatchEventKinds.ENTRY_CREATE,
+					StandardWatchEventKinds.ENTRY_MODIFY, 
+					StandardWatchEventKinds.ENTRY_DELETE);
 
 			// Poll for events
 			while (true) {
@@ -64,8 +67,8 @@ private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input";
 				}
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException x) {
+		    System.err.println(x);
 		}
 
 	}
