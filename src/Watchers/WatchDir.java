@@ -1,4 +1,4 @@
-package watchers;
+package Watchers;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -7,7 +7,7 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-
+import Validator.ValiatorPDF;
 public class WatchDir {
 	
 private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input";
@@ -46,16 +46,24 @@ private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input";
 					if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
 
 						System.out.println("A new file is created : " + fileName);
+						
+						
+						ValiatorPDF vpdf = new ValiatorPDF(fileName.toString());
+						boolean documentValidity = vpdf.validDocument();
+						System.out.println(documentValidity);
+						
 					}
+					
+					
 
-					if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
+					/*if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
 
 						System.out.println("A file has been deleted: " + fileName);
 					}
 					if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
 						System.out.println("A file has been modified: " + fileName);
-					}
+					}*/
 
 				}
 
