@@ -7,10 +7,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class MainWindow extends JFrame implements ActionListener {
     JPanel panel, contentPanel, bottomPanel;
-    JRadioButton jRadioButton1, jRadioButton2;
+    JRadioButton jRadioInvoice, jRadioIR;
     ButtonGroup documentTypeGroup;
     JLabel header, title, documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel,
             frequency, fileLocation, inputFile, outputFile, errorFile;
@@ -26,6 +27,7 @@ public class MainWindow extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         configPersistence = new ConfigPersistence();
+        configPersistence.load();
 
         createHeader();
         createContentPanel();
@@ -36,9 +38,28 @@ public class MainWindow extends JFrame implements ActionListener {
         panel.add(contentPanel, BorderLayout.CENTER);
         panel.add(bottomPanel, BorderLayout.SOUTH);
 
-        this.getContentPane().add(panel);
+        loadSavedState();
 
+        this.getContentPane().add(panel);
         this.setVisible(true);
+    }
+
+    private void loadSavedState() {
+        if(configPersistence.getFileType().equals(ConfigPersistence.Invoice))
+            jRadioInvoice.setSelected(true);
+        else
+            jRadioIR.setSelected(true);
+
+        frequencyField.setText(configPersistence.getFrequency());
+
+        inputFileChooser.setSelectedFile(new File(configPersistence.getInputFolderPath()));
+        inputFile.setText(configPersistence.getInputFolderPath());
+
+        outputFileChooser.setSelectedFile(new File(configPersistence.getOutputFolderPath()));
+        outputFile.setText(configPersistence.getOutputFolderPath());
+
+        errorFileChooser.setSelectedFile(new File(configPersistence.getErrorFolderPath()));
+        errorFile.setText(configPersistence.getErrorFolderPath());
     }
 
     private void createHeader() {
@@ -73,21 +94,21 @@ public class MainWindow extends JFrame implements ActionListener {
         documentTypeLabel = new JLabel("Selecione o tipo de arquivo: ");
         documentTypeLabel.setBounds(20, 50, 180, 40);
 
-        jRadioButton1 = new JRadioButton();
-        jRadioButton2 = new JRadioButton();
+        jRadioInvoice = new JRadioButton();
+        jRadioIR = new JRadioButton();
 
-        jRadioButton1.setActionCommand("Boleto");
-        jRadioButton2.setActionCommand("IR");
+        jRadioInvoice.setActionCommand(ConfigPersistence.Invoice);
+        jRadioIR.setActionCommand(ConfigPersistence.IR);
 
-        jRadioButton1.setText("Boleto");
-        jRadioButton2.setText("Imposto de renda");
+        jRadioInvoice.setText("Boleto");
+        jRadioIR.setText("Imposto de renda");
 
-        jRadioButton1.setBounds(200, 50, 80, 40);
-        jRadioButton2.setBounds(280, 50, 250, 40);
+        jRadioInvoice.setBounds(200, 50, 80, 40);
+        jRadioIR.setBounds(280, 50, 250, 40);
 
         documentTypeGroup = new ButtonGroup();
-        documentTypeGroup.add(jRadioButton1);
-        documentTypeGroup.add(jRadioButton2);
+        documentTypeGroup.add(jRadioInvoice);
+        documentTypeGroup.add(jRadioIR);
     }
 
     private void createFrequencyField() {
@@ -199,11 +220,11 @@ public class MainWindow extends JFrame implements ActionListener {
         contentPanel.add(outputFile);
         contentPanel.add(errorFile);
 
-        contentPanel.add(jRadioButton1);
-        contentPanel.add(jRadioButton2);
+        contentPanel.add(jRadioInvoice);
+        contentPanel.add(jRadioIR);
 
-        this.add(jRadioButton1);
-        this.add(jRadioButton2);
+        this.add(jRadioInvoice);
+        this.add(jRadioIR);
         this.add(documentTypeLabel);
     }
 

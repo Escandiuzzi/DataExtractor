@@ -3,6 +3,7 @@ package Persistence;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,53 +11,89 @@ import java.nio.file.Paths;
 
 public class ConfigPersistence {
 
-    private String fileTypeSelected;
+    public static String PersistencePath = Paths.get("").toAbsolutePath().toString() + "/config.json";
 
-    private String frequency;
+    public static String Invoice = "Boleto";
+    public static String IR = "IR";
 
-    private String inputFolderPath;
+    private Gson gson;
 
-    private String outputFolderPath;
+    private ConfigDto config;
 
-    private String errorFolderPath;
 
 
     public ConfigPersistence() {
+        gson = new Gson();
+        config = new ConfigDto();
     }
 
     public void setFileType(String fileTypeSelected) {
-        this.fileTypeSelected = fileTypeSelected;
+        config.fileTypeSelected = fileTypeSelected;
+    }
+
+    public String getFileType() {
+        return config.fileTypeSelected;
     }
 
     public void setFrequency(String frequency) {
-        this.frequency = frequency;
+        config.frequency = frequency;
+    }
+
+    public String getFrequency() {
+        return config.frequency;
     }
 
     public void setInputFolderPath(String inputFolderPath) {
-        this.inputFolderPath = inputFolderPath;
+        config.inputFolderPath = inputFolderPath;
+    }
+
+    public String getInputFolderPath() {
+        return config.inputFolderPath;
     }
 
     public void setOutputFolderPath(String outputFolderPath) {
-        this.outputFolderPath = outputFolderPath;
+        config.outputFolderPath = outputFolderPath;
+    }
+
+    public String getOutputFolderPath() {
+        return config.outputFolderPath;
     }
 
     public void setErrorFolderPath(String errorFolderPath) {
-        this.errorFolderPath = errorFolderPath;
+        config.errorFolderPath = errorFolderPath;
+    }
+
+    public String getErrorFolderPath() {
+        return config.errorFolderPath;
     }
 
     public void save()
     {
-        Gson gson = new Gson();
-        String json = gson.toJson(this);
-
         try {
-
-            Path currentRelativePath = Paths.get("");
-            String path = currentRelativePath.toAbsolutePath().toString();
-            Files.writeString(Path.of(path + "/config.json"), json,
-                    StandardCharsets.UTF_8);
+            Files.writeString(Path.of(PersistencePath), gson.toJson(config), StandardCharsets.UTF_8);
         } catch (IOException exception) {
             System.out.print("Invalid Path");
+        }
+    }
+
+    public void load() {
+
+        try {
+            Gson gson = new Gson();
+
+            Reader reader = Files.newBufferedReader(Paths.get(PersistencePath));
+
+            ConfigDto config = gson.fromJson(reader, ConfigDto.class);
+            reader.close();
+
+            this.setFileType(config.fileTypeSelected);
+            this.setFrequency(config.frequency);
+            this.setInputFolderPath(config.inputFolderPath);
+            this.setOutputFolderPath(config.outputFolderPath);
+            this.setErrorFolderPath(config.errorFolderPath);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
