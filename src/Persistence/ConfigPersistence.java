@@ -2,15 +2,13 @@ package Persistence;
 
 import com.google.gson.Gson;
 
-import javax.imageio.IIOException;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Config {
+public class ConfigPersistence {
 
     private String fileTypeSelected;
 
@@ -23,7 +21,7 @@ public class Config {
     private String errorFolderPath;
 
 
-    public Config() {
+    public ConfigPersistence() {
     }
 
     public void setFileType(String fileTypeSelected) {
@@ -55,7 +53,7 @@ public class Config {
 
             Path currentRelativePath = Paths.get("");
             String path = currentRelativePath.toAbsolutePath().toString();
-            Files.writeString(Path.of(path + "/config.json"), json,
+            Files.writeString(Path.of(path + "/ConfigPersistence.json"), json,
                     StandardCharsets.UTF_8);
         } catch (IOException exception) {
             System.out.print("Invalid Path");

@@ -1,6 +1,6 @@
 package GUI;
 
-import Persistence.Config;
+import Persistence.ConfigPersistence;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,14 +18,14 @@ public class MainWindow extends JFrame implements ActionListener {
     JButton inputDirButton, outputDirButton, errorDirButton, cancelButton, saveButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
 
-    Config config;
+    ConfigPersistence configPersistence;
 
     public MainWindow() {
         super("Data Extractor");
         this.setSize(600,400);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        config = new Config();
+        configPersistence = new ConfigPersistence();
 
         createHeader();
         createContentPanel();
@@ -224,9 +224,9 @@ public class MainWindow extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                config.setFileType(documentTypeGroup.getSelection().getActionCommand());
+                configPersistence.setFileType(documentTypeGroup.getSelection().getActionCommand());
 
-                config.save();
+                configPersistence.save();
             }
         });
     }

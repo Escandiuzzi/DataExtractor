@@ -1,7 +1,7 @@
 import Extractors.PDFExtractor;
 import GUI.MainWindow;
 import Handlers.DataHandler;
-import Persistence.Config;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.File;
