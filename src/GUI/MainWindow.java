@@ -1,5 +1,7 @@
 package GUI;
 
+import Persistence.Config;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame implements ActionListener {
-    JPanel panel;
+    JPanel panel, contentPanel, bottomPanel;
     JRadioButton jRadioButton1, jRadioButton2;
     ButtonGroup documentTypeGroup;
     JLabel header, title, documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel,
@@ -16,17 +18,20 @@ public class MainWindow extends JFrame implements ActionListener {
     JButton inputDirButton, outputDirButton, errorDirButton, cancelButton, saveButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
 
+    Config config;
+
     public MainWindow() {
         super("Data Extractor");
         this.setSize(600,400);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        panel = new JPanel(new BorderLayout());
+        config = new Config();
 
         createHeader();
-        JPanel contentPanel = createContentPanel();
-        JPanel bottomPanel = createBottomPanel();
+        createContentPanel();
+        createBottomPanel();
 
+        panel = new JPanel(new BorderLayout());
         panel.add(header, BorderLayout.NORTH);
         panel.add(contentPanel, BorderLayout.CENTER);
         panel.add(bottomPanel, BorderLayout.SOUTH);
@@ -46,18 +51,16 @@ public class MainWindow extends JFrame implements ActionListener {
         header.setOpaque(true);
     }
 
-    private JPanel createContentPanel() {
+    private void createContentPanel() {
 
-        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel = new JPanel(new BorderLayout());
 
         createTitle();
         createDocumentTypeField();
         createFrequencyField();
         createDirectoriesField();
 
-        addComponentsToPanel(contentPanel);
-
-        return contentPanel;
+        addComponentsToPanel();
     }
 
     private void createTitle() {
@@ -72,6 +75,9 @@ public class MainWindow extends JFrame implements ActionListener {
 
         jRadioButton1 = new JRadioButton();
         jRadioButton2 = new JRadioButton();
+
+        jRadioButton1.setActionCommand("Boleto");
+        jRadioButton2.setActionCommand("IR");
 
         jRadioButton1.setText("Boleto");
         jRadioButton2.setText("Imposto de renda");
@@ -143,7 +149,6 @@ public class MainWindow extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if(e.getSource() == inputDirButton) {
             int result = inputFileChooser.showSaveDialog(null);
 
@@ -172,10 +177,9 @@ public class MainWindow extends JFrame implements ActionListener {
                 }
             }
         }
-
     }
 
-    private void addComponentsToPanel(JPanel contentPanel) {
+    private void addComponentsToPanel() {
         contentPanel.add(title);
         contentPanel.add(documentTypeLabel);
         contentPanel.add(frequencyLabel);
@@ -203,8 +207,8 @@ public class MainWindow extends JFrame implements ActionListener {
         this.add(documentTypeLabel);
     }
 
-    private JPanel createBottomPanel() {
-        JPanel bottomPanel = new JPanel(new BorderLayout());
+    private void createBottomPanel() {
+        bottomPanel = new JPanel(new BorderLayout());
         cancelButton = new JButton("Cancel");
         cancelButton.setBackground(Color.white);
         cancelButton.setFont(new Font("Sans Serif", Font.BOLD, 12));
@@ -216,6 +220,14 @@ public class MainWindow extends JFrame implements ActionListener {
         bottomPanel.add(cancelButton, BorderLayout.WEST);
         bottomPanel.add(saveButton, BorderLayout.EAST);
 
-        return bottomPanel;
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                config.setFileType(documentTypeGroup.getSelection().getActionCommand());
+
+                config.save();
+            }
+        });
     }
 }

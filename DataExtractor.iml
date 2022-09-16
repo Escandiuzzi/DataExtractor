@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="pdfbox-app-2.0.26" level="project" />
     <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
   </component>
 </module>
