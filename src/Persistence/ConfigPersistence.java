@@ -53,7 +53,7 @@ public class ConfigPersistence {
 
             Path currentRelativePath = Paths.get("");
             String path = currentRelativePath.toAbsolutePath().toString();
-            Files.writeString(Path.of(path + "/ConfigPersistence.json"), json,
+            Files.writeString(Path.of(path + "/config.json"), json,
                     StandardCharsets.UTF_8);
         } catch (IOException exception) {
             System.out.print("Invalid Path");

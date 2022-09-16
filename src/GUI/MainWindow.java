@@ -225,6 +225,10 @@ public class MainWindow extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
 
                 configPersistence.setFileType(documentTypeGroup.getSelection().getActionCommand());
+                configPersistence.setFrequency(frequencyField.getText());
+                configPersistence.setInputFolderPath(inputFile.getText());
+                configPersistence.setOutputFolderPath(outputFile.getText());
+                configPersistence.setErrorFolderPath(errorFile.getText());
 
                 configPersistence.save();
             }
