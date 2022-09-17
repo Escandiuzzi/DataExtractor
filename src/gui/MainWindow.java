@@ -55,6 +55,10 @@ public class MainWindow extends JFrame implements ActionListener {
             inputFile.setText(configPersistence.getInputFolderPath());
             outputFile.setText(configPersistence.getOutputFolderPath());
             errorFile.setText(configPersistence.getErrorFolderPath());
+
+            inputFileChooser.setSelectedFile(new File(configPersistence.getInputFolderPath()));
+            outputFileChooser.setSelectedFile(new File(configPersistence.getOutputFolderPath()));
+            errorFileChooser.setSelectedFile(new File(configPersistence.getErrorFolderPath()));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -114,7 +118,7 @@ public class MainWindow extends JFrame implements ActionListener {
         frequencyLabel.setBounds(20, 60, 180, 40);
 
         frequencyField = new JTextField(5);
-        frequencyField.setBounds(180, 70, 60, 23);
+        frequencyField.setBounds(170, 70, 60, 23);
 
         frequency = new JLabel("horas");
         frequency.setBounds(240, 62, 50, 40);
@@ -122,32 +126,33 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private void createDirectoriesField() {
         fileLocation = new JLabel("Local do Arquivo: ");
-        fileLocation.setBounds(20, 80, 120, 40);
+        fileLocation.setBounds(20, 85, 110, 40);
 
+        /// Input
         inputDirLabel = new JLabel("Entrada: ");
-        inputDirLabel.setBounds(40, 100, 70, 40);
-
-        outputDirLabel = new JLabel("Saída: ");
-        outputDirLabel.setBounds(40, 120, 50, 40);
-
-        errorDirLabel = new JLabel("Erro: ");
-        errorDirLabel.setBounds(40, 140, 50, 40);
+        inputDirLabel.setBounds(40, 110, 70, 40);
 
         inputDirButton = new JButton("Informe a pasta de entrada");
-        outputDirButton = new JButton("Informe a pasta de saída");
-        errorDirButton = new JButton("Informe a pasta de erros");
-
-        inputDirButton.setBounds(100, 110, 200, 23);
-        outputDirButton.setBounds(100, 130, 200, 23);
-        errorDirButton.setBounds(100, 150, 200, 23);
+        inputDirButton.setBounds(100, 120, 200, 23);
 
         inputFile = new JLabel("");
-        outputFile = new JLabel("");
-        errorFile = new JLabel("");
+        inputFile.setBounds(305, 120, 250, 23);
 
-        inputFile.setBounds(305, 110, 250, 23);
-        outputFile.setBounds(305, 130, 250, 23);
-        errorFile.setBounds(305, 150, 250, 23);
+        /// Output
+        outputDirLabel = new JLabel("Saída: ");
+        outputDirLabel.setBounds(40, 140, 50, 40);
+        outputDirButton = new JButton("Informe a pasta de saída");
+        outputDirButton.setBounds(100, 150, 200, 23);
+        outputFile = new JLabel("");
+        outputFile.setBounds(305, 150, 250, 23);
+
+        /// Error
+        errorDirLabel = new JLabel("Erro: ");
+        errorDirLabel.setBounds(40, 170, 50, 40);
+        errorDirButton = new JButton("Informe a pasta de erros");
+        errorDirButton.setBounds(100, 180, 200, 23);
+        errorFile = new JLabel("");
+        errorFile.setBounds(305, 180, 250, 23);
 
         inputDirButton.addActionListener(this);
         outputDirButton.addActionListener(this);
