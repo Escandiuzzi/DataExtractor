@@ -21,13 +21,12 @@ public class MainWindow extends JFrame implements ActionListener {
 
     ConfigPersistence configPersistence;
 
-    public MainWindow() {
+    public MainWindow(ConfigPersistence configPersistence) {
         super("Data Extractor");
         this.setSize(600,400);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        configPersistence = new ConfigPersistence();
-        configPersistence.load();
+        this.configPersistence = configPersistence;
 
         createHeader();
         createContentPanel();
@@ -45,21 +44,25 @@ public class MainWindow extends JFrame implements ActionListener {
     }
 
     private void loadSavedState() {
-        if(configPersistence.getFileType().equals(ConfigPersistence.Invoice))
-            jRadioInvoice.setSelected(true);
-        else
-            jRadioIR.setSelected(true);
+        try {
+            if (configPersistence.getFileType().equals(ConfigPersistence.Invoice))
+                jRadioInvoice.setSelected(true);
+            else if (configPersistence.getFileType().equals(ConfigPersistence.IR))
+                jRadioIR.setSelected(true);
 
-        frequencyField.setText(configPersistence.getFrequency());
+            frequencyField.setText(configPersistence.getFrequency());
 
-        inputFileChooser.setSelectedFile(new File(configPersistence.getInputFolderPath()));
-        inputFile.setText(configPersistence.getInputFolderPath());
+            inputFileChooser.setSelectedFile(new File(configPersistence.getInputFolderPath()));
+            inputFile.setText(configPersistence.getInputFolderPath());
 
-        outputFileChooser.setSelectedFile(new File(configPersistence.getOutputFolderPath()));
-        outputFile.setText(configPersistence.getOutputFolderPath());
+            outputFileChooser.setSelectedFile(new File(configPersistence.getOutputFolderPath()));
+            outputFile.setText(configPersistence.getOutputFolderPath());
 
-        errorFileChooser.setSelectedFile(new File(configPersistence.getErrorFolderPath()));
-        errorFile.setText(configPersistence.getErrorFolderPath());
+            errorFileChooser.setSelectedFile(new File(configPersistence.getErrorFolderPath()));
+            errorFile.setText(configPersistence.getErrorFolderPath());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     private void createHeader() {

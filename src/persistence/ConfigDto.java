@@ -1,13 +1,13 @@
 package persistence;
 
 public class ConfigDto {
-    public String fileTypeSelected;
+    public String fileTypeSelected = "";
 
-    public String frequency;
+    public String frequency = "";
 
-    public String inputFolderPath;
+    public String inputFolderPath = "";
 
-    public String outputFolderPath;
+    public String outputFolderPath = "";
 
-    public String errorFolderPath;
+    public String errorFolderPath = "";
 }

@@ -2,6 +2,7 @@ package persistence;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -20,11 +21,19 @@ public class ConfigPersistence {
 
     private ConfigDto config;
 
-
-
     public ConfigPersistence() {
         gson = new Gson();
         config = new ConfigDto();
+
+
+        try {
+            File configFile = new File(PersistencePath);
+            configFile.createNewFile();
+        } catch (IOException exception) {
+            System.out.println("Could not create config file");
+        }
+
+        load();
     }
 
     public void setFileType(String fileTypeSelected) {
@@ -83,8 +92,11 @@ public class ConfigPersistence {
 
             Reader reader = Files.newBufferedReader(Paths.get(PersistencePath));
 
-            ConfigDto config = gson.fromJson(reader, ConfigDto.class);
+            config = gson.fromJson(reader, ConfigDto.class);
             reader.close();
+
+            if (config == null)
+                updateFileWithEmptyConfig();
 
             this.setFileType(config.fileTypeSelected);
             this.setFrequency(config.frequency);
@@ -96,5 +108,10 @@ public class ConfigPersistence {
             ex.printStackTrace();
         }
 
+    }
+
+    private void updateFileWithEmptyConfig() {
+        config = new ConfigDto();
+        save();
     }
 }
