@@ -1,4 +1,4 @@
-package Watchers;
+package watchers;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -7,7 +7,7 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import Validator.ValiatorPDF;
+import validators.PDFValidator;
 public class WatchDir {
 	
 private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input";
@@ -48,7 +48,7 @@ private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input";
 						System.out.println("A new file is created : " + fileName);
 						
 						
-						ValiatorPDF vpdf = new ValiatorPDF(fileName.toString());
+						PDFValidator vpdf = new PDFValidator(fileName.toString());
 						boolean documentValidity = vpdf.validDocument();
 						System.out.println(documentValidity);
 						

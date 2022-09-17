@@ -1,4 +1,4 @@
-package Extractors;
+package extractors;
 
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.io.RandomAccessFile;

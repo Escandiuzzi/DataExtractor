@@ -1,7 +1,7 @@
-package Handlers;
+package handlers;
 
-import Helpers.Finder;
-import Utils.TextPositionSequence;
+import utils.TextPositionFinder;
+import utils.TextPositionSequence;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
@@ -37,7 +37,6 @@ public class DataHandler {
     private Map<String, String> infos;
 
     public void PrintData() {
-
         PrintIfValid("CNPJ: ", cnpjMatcher);
         PrintIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
         PrintIfValid("Código Boleto: ", documentCodeMatcher);
@@ -108,7 +107,7 @@ public class DataHandler {
     }
 
     private TextPositionSequence findTerm(String term) throws IOException {
-        List<TextPositionSequence> positions = Finder.getTermPosition(pdDocument, 1, term);
+        List<TextPositionSequence> positions = TextPositionFinder.getTermPosition(pdDocument, 1, term);
 
         if(positions.isEmpty()) return null;
 

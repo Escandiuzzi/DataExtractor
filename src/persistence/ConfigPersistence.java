@@ -1,4 +1,4 @@
-package Persistence;
+package persistence;
 
 import com.google.gson.Gson;
 

@@ -1,4 +1,4 @@
-package Persistence;
+package persistence;
 
 public class ConfigDto {
     public String fileTypeSelected;

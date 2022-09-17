@@ -1,13 +1,13 @@
-package Validator;
+package validators;
 
 import java.io.File;
 
 
-public class ValiatorPDF {
+public class PDFValidator {
 	private String file;
-	private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input"; // atributo apenas para teste - não deve permanecer na classe
+	private static String dir = "C:\\Users\\crist\\Desktop\\pdfDir\\input"; // atributo apenas para teste - nï¿½o deve permanecer na classe
 	
-	public ValiatorPDF(String file) {
+	public PDFValidator(String file) {
 		this.file = file;	
 		System.out.println(file);
 	}

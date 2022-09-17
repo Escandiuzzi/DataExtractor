@@ -1,4 +1,4 @@
-package Watchers;
+package watchers;
 
 import java.util.concurrent.Callable;
 

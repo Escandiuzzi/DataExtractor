@@ -1,6 +1,6 @@
-package Handlers;
+package handlers;
 
-import Extractors.PDFExtractor;
+import extractors.PDFExtractor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.After;
 import org.junit.Before;

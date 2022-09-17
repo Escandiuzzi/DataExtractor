@@ -1,6 +1,6 @@
-package GUI;
+package gui;
 
-import Persistence.ConfigPersistence;
+import persistence.ConfigPersistence;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

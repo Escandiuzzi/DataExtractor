@@ -1,4 +1,4 @@
-package Extractors;
+package extractors;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.Before;
