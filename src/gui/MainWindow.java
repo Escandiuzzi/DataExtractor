@@ -52,13 +52,8 @@ public class MainWindow extends JFrame implements ActionListener {
 
             frequencyField.setText(configPersistence.getFrequency());
 
-            inputFileChooser.setSelectedFile(new File(configPersistence.getInputFolderPath()));
             inputFile.setText(configPersistence.getInputFolderPath());
-
-            outputFileChooser.setSelectedFile(new File(configPersistence.getOutputFolderPath()));
             outputFile.setText(configPersistence.getOutputFolderPath());
-
-            errorFileChooser.setSelectedFile(new File(configPersistence.getErrorFolderPath()));
             errorFile.setText(configPersistence.getErrorFolderPath());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
