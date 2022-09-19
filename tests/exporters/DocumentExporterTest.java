@@ -85,7 +85,7 @@ public class DocumentExporterTest {
         invoiceDto.documentCode = "33998284.5 9890000048.4 7963520101.9 9 86140000165923";
         invoiceDto.cpf = "648.846.048-06";
         invoiceDto.date = "08/05/2021";
-        invoiceDto.money = "1659,23";
+        invoiceDto.price = "1659,23";
         invoiceDto.beneficiary = "FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL";
         invoiceDto.payer = "Luiz Felipe Escandiuzzi";
 

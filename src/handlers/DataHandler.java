@@ -25,14 +25,14 @@ public class DataHandler {
     final Pattern invoiceCodePattern = Pattern.compile("(\\d{9}\\.\\d{1} \\d{10}\\.\\d{1} \\d{10}\\.\\d{1} \\d \\d{14})");
     final Pattern cpfPattern = Pattern.compile("\\d{3}.\\d{3}.\\d{3}-?\\d{2}" );
     final Pattern datePattern = Pattern.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})");
-    final Pattern moneyPattern = Pattern.compile("\\d{1,4}(\\.\\d{3})*,\\d{2}");
+    final Pattern pricePattern = Pattern.compile("\\d{1,4}(\\.\\d{3})*,\\d{2}");
 
     private Matcher cnpjMatcher;
     private Matcher agencyCodePatternMatcher;
     private Matcher invoiceCodeMatcher;
     private Matcher cpfMatcher;
     private Matcher dateMatcher;
-    private Matcher moneyMatcher;
+    private Matcher priceMatcher;
 
     private PDDocument pdDocument;
     private Map<String, String> infos;
@@ -50,7 +50,7 @@ public class DataHandler {
         PrintIfValid("Código Boleto: ", invoiceCodeMatcher);
         PrintIfValid("CPF: ", cpfMatcher);
         PrintIfValid("Data de vencimento: ", dateMatcher);
-        PrintIfValid("Valor: ", moneyMatcher);
+        PrintIfValid("Valor: ", priceMatcher);
 
         PrintItemsFromDictionary();
     }
@@ -77,13 +77,15 @@ public class DataHandler {
         dateMatcher = datePattern.matcher(text);
         dateMatcher.find();
 
-        moneyMatcher = moneyPattern.matcher(text);
-        moneyMatcher.find();
+        priceMatcher = pricePattern.matcher(text);
+        priceMatcher.find();
 
         ExtractTextByArea();
 
         exportData();
     }
+
+    public InvoiceDto getInvoiceDto() { return invoiceDto; }
 
     private void exportData() {
         invoiceDto = new InvoiceDto();
@@ -93,7 +95,7 @@ public class DataHandler {
         invoiceDto.documentCode = returnIfValid("Código Boleto: ", invoiceCodeMatcher);
         invoiceDto.cpf = returnIfValid("CPF: ", cpfMatcher);
         invoiceDto.date = returnIfValid("Data de vencimento: ", dateMatcher);
-        invoiceDto.money = returnIfValid("Valor: ", moneyMatcher);
+        invoiceDto.price = returnIfValid("Valor: ", priceMatcher);
         String beneficiary = "";
         String payer = "";
 

@@ -14,7 +14,7 @@ public class InvoiceDto {
 
     public String date;
 
-    public String money;
+    public String price;
 
     public String beneficiary;
 
