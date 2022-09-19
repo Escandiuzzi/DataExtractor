@@ -1,5 +1,6 @@
 package persistence;
 
+import dtos.ConfigDto;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -24,7 +25,6 @@ public class ConfigPersistence {
     public ConfigPersistence() {
         gson = new Gson();
         config = new ConfigDto();
-
 
         try {
             File configFile = new File(PersistencePath);
@@ -107,7 +107,6 @@ public class ConfigPersistence {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     private void updateFileWithEmptyConfig() {

@@ -1,5 +1,7 @@
 package handlers;
 
+import dtos.InvoiceDto;
+import exporters.DocumentExporter;
 import utils.TextPositionFinder;
 import utils.TextPositionSequence;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -20,29 +22,36 @@ public class DataHandler {
 
     final Pattern cnpjPattern = Pattern.compile("([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})\n");
     final Pattern agencyCodePattern = Pattern.compile("\\d{4}(\\.\\d{1}) \\d{7}");
-    final Pattern documentCodePattern = Pattern.compile("(\\d{9}\\.\\d{1} \\d{10}\\.\\d{1} \\d{10}\\.\\d{1} \\d \\d{14})");
+    final Pattern invoiceCodePattern = Pattern.compile("(\\d{9}\\.\\d{1} \\d{10}\\.\\d{1} \\d{10}\\.\\d{1} \\d \\d{14})");
     final Pattern cpfPattern = Pattern.compile("\\d{3}.\\d{3}.\\d{3}-?\\d{2}" );
     final Pattern datePattern = Pattern.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})");
     final Pattern moneyPattern = Pattern.compile("\\d{1,4}(\\.\\d{3})*,\\d{2}");
 
     private Matcher cnpjMatcher;
     private Matcher agencyCodePatternMatcher;
-    private Matcher documentCodeMatcher;
+    private Matcher invoiceCodeMatcher;
     private Matcher cpfMatcher;
     private Matcher dateMatcher;
     private Matcher moneyMatcher;
 
-
     private PDDocument pdDocument;
     private Map<String, String> infos;
+
+    private InvoiceDto invoiceDto;
+
+    DocumentExporter documentExporter;
+    public DataHandler(DocumentExporter documentExporter) {
+        this.documentExporter = documentExporter;
+    }
 
     public void PrintData() {
         PrintIfValid("CNPJ: ", cnpjMatcher);
         PrintIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
-        PrintIfValid("Código Boleto: ", documentCodeMatcher);
+        PrintIfValid("Código Boleto: ", invoiceCodeMatcher);
         PrintIfValid("CPF: ", cpfMatcher);
         PrintIfValid("Data de vencimento: ", dateMatcher);
         PrintIfValid("Valor: ", moneyMatcher);
+
         PrintItemsFromDictionary();
     }
 
@@ -59,8 +68,8 @@ public class DataHandler {
         agencyCodePatternMatcher = agencyCodePattern.matcher(text);
         agencyCodePatternMatcher.find();
 
-        documentCodeMatcher = documentCodePattern.matcher(text);
-        documentCodeMatcher.find();
+        invoiceCodeMatcher = invoiceCodePattern.matcher(text);
+        invoiceCodeMatcher.find();
 
         cpfMatcher = cpfPattern.matcher(text);
         cpfMatcher.find();
@@ -72,6 +81,32 @@ public class DataHandler {
         moneyMatcher.find();
 
         ExtractTextByArea();
+
+        exportData();
+    }
+
+    private void exportData() {
+        invoiceDto = new InvoiceDto();
+
+        invoiceDto.cnpj = returnIfValid("CNPJ: ", cnpjMatcher);
+        invoiceDto.agencyCode =  returnIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
+        invoiceDto.documentCode = returnIfValid("Código Boleto: ", invoiceCodeMatcher);
+        invoiceDto.cpf = returnIfValid("CPF: ", cpfMatcher);
+        invoiceDto.date = returnIfValid("Data de vencimento: ", dateMatcher);
+        invoiceDto.money = returnIfValid("Valor: ", moneyMatcher);
+        String beneficiary = "";
+        String payer = "";
+
+        if(infos.containsKey(Beneficiary))
+            beneficiary = infos.get(Beneficiary).replace("\n", "");
+
+        if(infos.containsKey(Payer))
+            payer = infos.get(Payer).replace("\n", "");
+
+        invoiceDto.beneficiary = beneficiary;
+        invoiceDto.payer = payer;
+
+        documentExporter.exportDocument(invoiceDto);
     }
 
     private void ExtractTextByArea() throws IOException {
@@ -79,7 +114,6 @@ public class DataHandler {
         AddRects(stripper);
         PDPage firstPage = pdDocument.getPage(0);
         stripper.extractRegions( firstPage );
-
         CreateMap(stripper);
     }
 
@@ -125,6 +159,17 @@ public class DataHandler {
             infos.put(Payer, stripper.getTextForRegion( Payer ));
     }
 
+    private String returnIfValid(String prefix, Matcher matcher) {
+        try {
+            String value = matcher.group(0);
+            return value;
+        } catch (IllegalStateException ex) {
+            System.out.println("Could not find " + prefix);
+        }
+
+        return "";
+    }
+
     private void PrintIfValid(String prefix, Matcher matcher) {
         try {
             System.out.println(prefix + matcher.group(0));
@@ -132,6 +177,7 @@ public class DataHandler {
             System.out.println("Could not find " + prefix);
         }
     }
+
     private void PrintItemsFromDictionary() {
         if(infos.containsKey(Beneficiary))
             System.out.println("Beneficiario: " + infos.get(Beneficiary));

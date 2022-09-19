@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class MainWindow extends JFrame implements ActionListener {
+public class MainWindow extends JDialog implements ActionListener {
     JPanel panel, contentPanel, bottomPanel;
     JRadioButton jRadioInvoice, jRadioIR;
     ButtonGroup documentTypeGroup;
@@ -22,9 +22,10 @@ public class MainWindow extends JFrame implements ActionListener {
     ConfigPersistence configPersistence;
 
     public MainWindow(ConfigPersistence configPersistence) {
-        super("Data Extractor");
+        super((Window)null);
+        setModal(true);
         this.setSize(600,400);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         this.configPersistence = configPersistence;
 
@@ -243,6 +244,14 @@ public class MainWindow extends JFrame implements ActionListener {
 
         bottomPanel.add(cancelButton, BorderLayout.WEST);
         bottomPanel.add(saveButton, BorderLayout.EAST);
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                dispose();
+            }
+        });
 
         saveButton.addActionListener(new ActionListener() {
             @Override

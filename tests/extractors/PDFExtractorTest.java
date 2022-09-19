@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class PDFExtractorTest {
-    final String filePath = Paths.get("tests","Resources").toAbsolutePath().toString();
+    final String filePath = Paths.get("tests", "resources").toAbsolutePath().toString();
     private PDFExtractor pdfManager;
 
     @Before
@@ -21,11 +21,11 @@ public class PDFExtractorTest {
     }
 
     @Test
-    public void OnToText_WhenParsingAFile_ShouldReturnPDFToString() {
+    public void onGetDocumentData_WhenParsingAFile_ShouldReturnPDFToString() {
         String result = "";
         try {
             pdfManager.InitializeDocument(filePath + "/test.pdf");
-            result = pdfManager.toText();
+            result = pdfManager.getDocumentData();
         } catch (IOException ex) {
             assertNotNull(ex);
         }
@@ -35,7 +35,7 @@ public class PDFExtractorTest {
     }
 
     @Test
-    public void OnDocumentInitialize_WhenAValidFilePathIsSet_ShouldReturnANewDocument() {
+    public void onDocumentInitialize_WhenAValidFilePathIsSet_ShouldReturnANewDocument() {
         PDDocument pdDocument = null;
         try {
             pdDocument = pdfManager.InitializeDocument(filePath + "/document.pdf");
