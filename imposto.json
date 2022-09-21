@@ -1,0 +1,125 @@
+{
+  "sessoes": [
+    {
+      "nome": "IDENTIFICAÇÃO DO CONTRIBUINTE",
+      "campos": [
+        {
+          "nome": "Nome",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 155,
+          "altura": 10,
+          "largura": 249,
+          "tabela": false
+        },
+        {
+          "nome": "CPF",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "\\d{3}.\\d{3}.\\d{3}-?\\d{2}",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "Data de Nascimento",
+          "conteudo": "",
+          "tipo": "Date",
+          "pattern": "",
+          "x": 155,
+          "altura": 10,
+          "largura": 45,
+          "tabela": false
+        },
+        {
+          "nome": "Título Eleitoral",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "Possui cônjuge ou companheiro(a)",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 155,
+          "altura": 10,
+          "largura": 20,
+          "tabela": false
+        },
+        {
+          "nome": "CPF do cônjuge ou companheiro(a)",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "Houve alteração de dados cadastrais",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 155,
+          "altura": 10,
+          "largura": 20,
+          "tabela": false
+        },
+        {
+          "nome": "Um dos declarantes é pessoa com doença grave ou portadora de deficiência física ou mental?",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 425,
+          "altura": 10,
+          "largura": 25,
+          "tabela": false
+        }
+      ],
+      "tabela": false
+    },
+    {
+      "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOAS JURÍDICAS PELOS DEPENDENTES",
+      "campos": [
+        {
+          "nome": "NOME DA FONTE PAGADORA",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "REND. RECEBIDOS",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "CONTR. PREVID.",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        }
+      ]
+    }
+  ]
+}
