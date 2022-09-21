@@ -39,7 +39,7 @@ public class PDFExtractor {
         return pdDocument;
     }
 
-    public String toText() throws IOException {
+    public String getDocumentData() throws IOException {
         return pdfStripper.getText(pdDocument);
     }
 }
