@@ -13,21 +13,28 @@ import java.nio.file.Paths;
 
 public class ConfigPersistence {
 
-    public static String PersistencePath = Paths.get("").toAbsolutePath().toString() + "/config.json";
-
     public static String Invoice = "Boleto";
     public static String IR = "IR";
+
+    private static String filePath;
 
     private Gson gson;
 
     private ConfigDto config;
 
     public ConfigPersistence() {
+        this(Paths.get("").toAbsolutePath().toString() + "/config.json");
+    }
+
+    public ConfigPersistence(String filePath)
+    {
         gson = new Gson();
         config = new ConfigDto();
 
+        this.filePath = filePath;
+
         try {
-            File configFile = new File(PersistencePath);
+            File configFile = new File(this.filePath);
             configFile.createNewFile();
         } catch (IOException exception) {
             System.out.println("Could not create config file");
@@ -79,7 +86,7 @@ public class ConfigPersistence {
     public void save()
     {
         try {
-            Files.writeString(Path.of(PersistencePath), gson.toJson(config), StandardCharsets.UTF_8);
+            Files.writeString(Path.of(filePath), gson.toJson(config), StandardCharsets.UTF_8);
         } catch (IOException exception) {
             System.out.print("Invalid Path");
         }
@@ -90,7 +97,7 @@ public class ConfigPersistence {
         try {
             Gson gson = new Gson();
 
-            Reader reader = Files.newBufferedReader(Paths.get(PersistencePath));
+            Reader reader = Files.newBufferedReader(Paths.get(filePath));
 
             config = gson.fromJson(reader, ConfigDto.class);
             reader.close();

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class DocumentExporterTest {
 
-    final String filePath = Paths.get("tests","exporters", "files").toAbsolutePath().toString();
+    final String folderPath = Paths.get("tests","exporters", "files").toAbsolutePath().toString();
 
     private DocumentExporter documentExporter;
 
@@ -36,12 +36,12 @@ public class DocumentExporterTest {
 
     @After
     public void tearDown() {
-        Arrays.stream(new File(filePath).listFiles()).forEach(File::delete);
+        Arrays.stream(new File(folderPath).listFiles()).forEach(File::delete);
     }
 
     @Test
     public void onExportDocument_WhenMethodCalled_ShouldExportDataAsJson() {
-        when(configPersistence.getOutputFolderPath()).thenReturn(filePath);
+        when(configPersistence.getOutputFolderPath()).thenReturn(folderPath);
 
         InvoiceDto invoiceDto = getSimpleInvoiceDto();
 
@@ -54,7 +54,7 @@ public class DocumentExporterTest {
 
     @Test
     public void onExportDocument_WhenJsonIsCreated_ShouldContainInvoiceInfo() {
-        when(configPersistence.getOutputFolderPath()).thenReturn(filePath);
+        when(configPersistence.getOutputFolderPath()).thenReturn(folderPath);
 
         InvoiceDto loadedInvoice = null;
 
@@ -64,7 +64,7 @@ public class DocumentExporterTest {
         try {
             Gson gson = new Gson();
 
-            String path = Arrays.stream(new File(filePath).listFiles()).findFirst().get().getAbsolutePath();
+            String path = Arrays.stream(new File(folderPath).listFiles()).findFirst().get().getAbsolutePath();
             Reader reader = Files.newBufferedReader(Paths.get(path));
 
             loadedInvoice = gson.fromJson(reader, InvoiceDto.class);
