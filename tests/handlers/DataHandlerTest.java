@@ -7,6 +7,9 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import persistence.ConfigPersistence;
 
 import java.io.ByteArrayOutputStream;
@@ -17,7 +20,9 @@ import java.nio.file.Paths;
 import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DataHandlerTest {
 
     final String filePath = Paths.get("tests", "resources").toAbsolutePath().toString();
@@ -25,7 +30,9 @@ public class DataHandlerTest {
     private DataHandler dataHandler;
     private PDFExtractor pdfManager;
     private PDDocument pdDocument;
-    private DocumentExporter documentExporter;
+
+    @Mock
+    DocumentExporter documentExporter;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -36,7 +43,6 @@ public class DataHandlerTest {
     @Before
     public void setUp() {
         pdfManager = new PDFExtractor();
-        documentExporter = new DocumentExporter(new ConfigPersistence());
         dataHandler = new DataHandler(documentExporter);
 
         System.setOut(new PrintStream(outContent));
@@ -52,7 +58,6 @@ public class DataHandlerTest {
     @Test
     public void onPrintData_WhenDataIsHandled_ShouldPrint() throws IOException {
         String pdfContent = "";
-
         pdDocument = pdfManager.InitializeDocument(filePath + "/boleto.pdf");
         pdfContent = pdfManager.getDocumentData();
         dataHandler.HandleData(pdfContent, pdDocument);
@@ -73,6 +78,8 @@ public class DataHandlerTest {
         dataHandler.HandleData(pdfContent, pdDocument);
 
         InvoiceDto invoiceDto = dataHandler.getInvoiceDto();
+
+        verify(documentExporter, times(1)).exportDocument(invoiceDto);
 
         assertEquals("88.648.761/0001-03", invoiceDto.cnpj);
         assertEquals("2087.7 8284989", invoiceDto.agencyCode);
