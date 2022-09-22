@@ -22,7 +22,6 @@ public class DocumentExporter {
     }
 
     public void exportDocument(InvoiceDto invoice) {
-
         String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
         try {
             Files.writeString(Path.of(configPersistence.getOutputFolderPath() + "/document-" + date

@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import persistence.ConfigPersistence;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Paths;
@@ -58,7 +59,7 @@ public class DataHandlerTest {
     @Test
     public void onPrintData_WhenDataIsHandled_ShouldPrint() throws IOException {
         String pdfContent = "";
-        pdDocument = pdfManager.InitializeDocument(filePath + "/boleto.pdf");
+        pdDocument = pdfManager.InitializeDocument(filePath +  File.separator + "boleto.pdf");
         pdfContent = pdfManager.getDocumentData();
         dataHandler.HandleData(pdfContent, pdDocument);
 
@@ -73,7 +74,7 @@ public class DataHandlerTest {
     public void onGetInvoiceDto_WhenDataWasHandled_ShouldFillInvoiceWithData() throws IOException {
         String pdfContent = "";
 
-        pdDocument = pdfManager.InitializeDocument(filePath + "/boleto.pdf");
+        pdDocument = pdfManager.InitializeDocument(filePath + File.separator + "boleto.pdf");
         pdfContent = pdfManager.getDocumentData();
         dataHandler.HandleData(pdfContent, pdDocument);
 

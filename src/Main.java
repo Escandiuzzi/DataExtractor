@@ -8,14 +8,17 @@ import persistence.ConfigPersistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class Main {
+    private static final String folderPath = Paths.get("src","resources", "invoices").toAbsolutePath().toString();
+
     public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        String filepath = home + File.separator + "Documents" + File.separator + "document.pdf";
+
+        String filepath = folderPath +  File.separator + "document2.pdf";
 
         ConfigPersistence configPersistence = new ConfigPersistence();
-        MainWindow mainWindow = new MainWindow(configPersistence);
+        //MainWindow mainWindow = new MainWindow(configPersistence);
 
         PDFExtractor pdfExtractor = new PDFExtractor();
 

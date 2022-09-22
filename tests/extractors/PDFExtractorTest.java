@@ -4,6 +4,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -24,7 +25,7 @@ public class PDFExtractorTest {
     public void onGetDocumentData_WhenParsingAFile_ShouldReturnPDFToString() {
         String result = "";
         try {
-            pdfManager.InitializeDocument(filePath + "/test.pdf");
+            pdfManager.InitializeDocument(filePath +  File.separator + "test.pdf");
             result = pdfManager.getDocumentData();
         } catch (IOException ex) {
             assertNotNull(ex);
@@ -38,7 +39,7 @@ public class PDFExtractorTest {
     public void onDocumentInitialize_WhenAValidFilePathIsSet_ShouldReturnANewDocument() {
         PDDocument pdDocument = null;
         try {
-            pdDocument = pdfManager.InitializeDocument(filePath + "/document.pdf");
+            pdDocument = pdfManager.InitializeDocument(filePath +  File.separator + "document1.pdf");
         } catch (IOException ex) {
             assertNotNull(ex);
         }

@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
 public class ConfigPersistenceTest {
 
     private static final String folderPath = Paths.get("tests","persistence", "files").toAbsolutePath().toString();
-    private static final String configPath = folderPath + "/config.json";
-    private static final String expectedConfigPath = folderPath + "/expectedConfig.json";
+    private static final String configPath = folderPath + File.separator + "config.json";
+    private static final String expectedConfigPath = folderPath +  File.separator +"expectedConfig.json";
 
     private ConfigPersistence _configPersistence;
 

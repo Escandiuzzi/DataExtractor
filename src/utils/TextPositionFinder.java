@@ -19,7 +19,7 @@ public class TextPositionFinder {
             protected void writeString(String text, List<TextPosition> textPositions) throws IOException
             {
                 TextPositionSequence word = new TextPositionSequence(textPositions);
-                String string = word.toString();
+                String string = word.toString().toLowerCase();
 
                 int fromIndex = 0;
                 int index;
