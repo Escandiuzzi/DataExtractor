@@ -2,23 +2,24 @@ package handlers;
 
 import dtos.InvoiceDto;
 import exporters.DocumentExporter;
+import handlers.invoice.InvoiceField;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
 import utils.TextPositionFinder;
 import utils.TextPositionSequence;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 
 import static handlers.invoice.InvoiceFields.*;
 
 public class DataHandler {
     private PDDocument pdDocument;
+
     private PDFTextStripperByArea stripper;
 
     private Map<String, String> infos;
@@ -27,7 +28,10 @@ public class DataHandler {
 
     private boolean isSantander;
 
+    private List<InvoiceField> invoiceFields;
+
     DocumentExporter documentExporter;
+
     public DataHandler(DocumentExporter documentExporter) {
         this.documentExporter = documentExporter;
     }
@@ -35,28 +39,22 @@ public class DataHandler {
     public InvoiceDto getInvoiceDto() { return invoiceDto; }
 
     public void PrintData() {
-        /*PrintIfValid("CNPJ: ", invoiceDto.cnpj);
-        PrintIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
-        PrintIfValid("Código Boleto: ", invoiceCodeMatcher);
-        PrintIfValid("CPF: ", cpfMatcher);
-        PrintIfValid("Data de vencimento: ", dateMatcher);
-        PrintIfValid("Valor: ", priceMatcher);
-        */
-        PrintItemsFromDictionary();
+        for (String field : invoiceFieldsKeys) {
+            if (infos.containsKey(field)) {
+                System.out.println(field + ": " + infos.get(field).trim());
+            }
+        }
     }
 
     public void HandleData(String text, PDDocument pdDocument) throws IOException
     {
         this.pdDocument = pdDocument;
+
         checkBankInstitution();
 
-        stripper = CreatePDFStripperByArea();
+        CreatePDFStripperByArea();
 
-        if (isSantander) {
-            ExtractSantanderInvoiceData();
-        } else {
-            ExtractTextByArea();
-        }
+        extractTextByArea();
 
         exportData();
     }
@@ -73,100 +71,17 @@ public class DataHandler {
         isSantander = position != null;
     }
 
-    private void ExtractSantanderInvoiceData() throws IOException {
-        AddSantanderRects();
+    private void CreatePDFStripperByArea() throws IOException{
+        stripper = new PDFTextStripperByArea();
+        stripper.setSortByPosition( true );
     }
 
-    private void AddSantanderRects() throws IOException {
-        TextPositionSequence position = null;
+    private void extractTextByArea() throws IOException {
 
-        /*
-            public static final String BeneficiaryCode = "beneficiaryCode";
-            public static final String ExpireAt = "expireAt";
-            public static final String OurAt = "ourNumber";
-            public static final String Price = "price";
-            public static final String DocumentNumber = "documentNumber";
-            public static final String Additions = "additions";
-            public static final String ChargedValue = "chargedValue";
-            public static final String ProcessDate = "processDate";
-            public static final String Discount = "discount";
-            public static final String Deductions = "deductions";
-            public static final String fine = "fine";
-            public static final String OtherAdditions = "otherAdditions";
-        */
-
-        position = findTerm("Beneficiário:");
-        if(position != null) {
-            Rectangle beneficiaryRect = new Rectangle((int)position.getX(), (int)position.getY() + 10, 270, 10);
-            stripper.addRegion(Beneficiary, beneficiaryRect );
-
-            Rectangle cnpjRect = new Rectangle((int)position.getX() + 30, (int)position.getY() + 20, 270, 10);
-            stripper.addRegion(Cnpj, cnpjRect );
+        if (isSantander) {
+            invoiceFields = invoiceFieldsSantander;
         }
 
-        position = findTerm("Pagador:");
-        if(position != null) {
-            Rectangle payerRect = new Rectangle((int)position.getX(), (int)position.getY() + 20, 105, 10);
-            stripper.addRegion( Payer, payerRect );
-
-            Rectangle cpfRect = new Rectangle((int)position.getX() + 105, (int)position.getY() + 20, 105, 10);
-            stripper.addRegion( Cpf, cpfRect );
-        }
-
-
-        if(infos.containsKey(Beneficiary))
-            System.out.println(infos.get(Beneficiary).replace("\n", ""));
-
-        if(infos.containsKey(Payer))
-            System.out.println(infos.get(Payer).replace("\n", ""));
-
-
-        if(regions.contains(Beneficiary))
-            infos.put(Beneficiary, stripper.getTextForRegion( Beneficiary ));
-
-
-
-
-        position = findTerm("Agência/Código Beneficiário:");
-        if(position != null) {
-            Rectangle beneficiaryRect = new Rectangle((int)position.getX(), (int)position.getY() + 10, 270, 10);
-            stripper.addRegion( Beneficiary, beneficiaryRect );
-        }
-
-        position = findTerm("Agência/Código Beneficiário:");
-        if(position != null) {
-            Rectangle beneficiaryRect = new Rectangle((int)position.getX(), (int)position.getY() + 10, 270, 10);
-            stripper.addRegion( Beneficiary, beneficiaryRect );
-        }
-
-    }
-
-
-    private void exportData() {
-        /*invoiceDto = new InvoiceDto();
-
-        invoiceDto.cnpj = returnIfValid("CNPJ: ", cnpjMatcher);
-        invoiceDto.agencyCode =  returnIfValid("Código Beneficiario: ", agencyCodePatternMatcher);
-        invoiceDto.documentCode = returnIfValid("Código Boleto: ", invoiceCodeMatcher);
-        invoiceDto.cpf = returnIfValid("CPF: ", cpfMatcher);
-        invoiceDto.date = returnIfValid("Data de vencimento: ", dateMatcher);
-        invoiceDto.price = returnIfValid("Valor: ", priceMatcher);
-        String beneficiary = "";
-        String payer = "";
-
-        if(infos.containsKey(Beneficiary))
-            beneficiary = infos.get(Beneficiary).replace("\n", "");
-
-        if(infos.containsKey(Payer))
-            payer = infos.get(Payer).replace("\n", "");
-
-        invoiceDto.beneficiary = beneficiary;
-        invoiceDto.payer = payer; */
-
-        documentExporter.exportDocument(invoiceDto);
-    }
-
-    private void ExtractTextByArea() throws IOException {
         AddRects();
 
         PDPage firstPage = pdDocument.getPage(0);
@@ -175,26 +90,17 @@ public class DataHandler {
         CreateMap();
     }
 
-    private PDFTextStripperByArea CreatePDFStripperByArea() throws IOException{
-        PDFTextStripperByArea stripper = new PDFTextStripperByArea();
-        stripper.setSortByPosition( true );
-
-        return stripper;
-    }
-
     private void AddRects() throws IOException {
         TextPositionSequence position = null;
 
-        position = findTerm("Beneficiário");
-        if(position != null) {
-            Rectangle beneficiaryRect = new Rectangle((int)position.getX(), (int)position.getY() + 10, 270, 10);
-            stripper.addRegion( Beneficiary, beneficiaryRect );
-        }
-
-        position = findTerm("Pagador:");
-        if(position != null) {
-            Rectangle payerRect = new Rectangle((int)position.getX(), (int)position.getY() + 20, 105, 10);
-            stripper.addRegion( Payer, payerRect );
+        for (InvoiceField field: invoiceFields) {
+            position = findTerm(field.searchTerm());
+            if( position == null) {
+                System.out.println("Could not find term " + field.searchTerm());
+                continue;
+            }
+            Rectangle rect = new Rectangle((int)position.getX() + field.offsetX(), (int)position.getY() + field.offsetY(), field.width(), field.height());
+            stripper.addRegion(field.name(), rect);
         }
     }
 
@@ -211,28 +117,33 @@ public class DataHandler {
 
         List<String> regions = stripper.getRegions();
 
-        if(regions.contains(Beneficiary))
-            infos.put(Beneficiary, stripper.getTextForRegion( Beneficiary ));
-        if(regions.contains(Payer))
-            infos.put(Payer, stripper.getTextForRegion( Payer ));
+        for (InvoiceField field: invoiceFields) {
+            if(regions.contains(field.name())) {
+                infos.put(field.name(),  stripper.getTextForRegion( field.name() ).trim());
+            }
+        }
     }
 
-    private String returnIfValid(String prefix, Matcher matcher) {
-        try {
-            String value = matcher.group(0);
-            return value;
-        } catch (IllegalStateException ex) {
-            System.out.println("Could not find " + prefix);
+    private void exportData() {
+        invoiceDto = new InvoiceDto();
+
+        invoiceDto.beneficiary = returnIfValid(Beneficiary);
+        invoiceDto.payer = returnIfValid(Payer);
+        invoiceDto.cnpj = returnIfValid(Cnpj);
+        invoiceDto.agencyCode = returnIfValid(BeneficiaryCode);
+        invoiceDto.documentCode = returnIfValid(DocumentNumber);
+        invoiceDto.cpf = returnIfValid(Cpf);
+        invoiceDto.date = returnIfValid(DueDate);
+        invoiceDto.price = returnIfValid(DocumentPrice);
+
+        documentExporter.exportDocument(invoiceDto);
+    }
+
+    private String returnIfValid(String field) {
+        if (infos.containsKey(field)) {
+           return infos.get(field);
         }
 
         return "";
-    }
-
-    private void PrintItemsFromDictionary() {
-        if(infos.containsKey(Beneficiary))
-            System.out.println("Beneficiario: " + infos.get(Beneficiary));
-
-        if(infos.containsKey(Payer))
-            System.out.println("Pagador: " + infos.get(Payer));
     }
 }

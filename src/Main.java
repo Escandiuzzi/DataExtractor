@@ -15,10 +15,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String filepath = folderPath +  File.separator + "document2.pdf";
+        String filepath = folderPath +  File.separator + "document1.pdf";
 
         ConfigPersistence configPersistence = new ConfigPersistence();
-        //MainWindow mainWindow = new MainWindow(configPersistence);
+        MainWindow mainWindow = new MainWindow(configPersistence);
 
         PDFExtractor pdfExtractor = new PDFExtractor();
 
