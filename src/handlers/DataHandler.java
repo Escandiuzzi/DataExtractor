@@ -40,6 +40,7 @@ public class DataHandler {
 
     public DataHandler(DocumentExporter documentExporter) {
         this.documentExporter = documentExporter;
+        invoiceFields = defaultInvoiceFields;
     }
 
     public InvoiceDto getInvoiceDto() { return invoiceDto; }

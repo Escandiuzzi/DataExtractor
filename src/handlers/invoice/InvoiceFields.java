@@ -34,7 +34,27 @@ public class InvoiceFields {
     public static final List<InvoiceField> invoiceFieldsSantander =
             Arrays.asList(
                     new InvoiceField("Beneficiário:", Beneficiary, 0,10,270,10),
-                    new InvoiceField("Beneficiário:", Cnpj, 34,20, 100,10),
+                    new InvoiceField("CNPJ:", Cnpj, 25,0, 100,10),
+                    new InvoiceField("Pagador:", Payer, 0,20,105,10),
+                    new InvoiceField("Cpf:", Cpf, 20,0,100,10),
+                    new InvoiceField("Agência/Código Beneficiário:", BeneficiaryCode, 0,3,120,10),
+                    new InvoiceField("Vencimento:", DueDate, 0,3,130,10),
+                    new InvoiceField("Nosso Número:", OurNumber,  0,3,120,10),
+                    new InvoiceField("Valor do Documento:", DocumentPrice, 0,3,130,10),
+                    new InvoiceField("Número Documento:", DocumentNumber, 0,3,120,10),
+                    new InvoiceField("Acréscimos:", Addition, 0,3,130,10),
+                    new InvoiceField("Valor Cobrado:", ChargedValue, 0,3,130,10),
+                    new InvoiceField("Data do Documento", DocumentDate, 0,10,100,10),
+                    new InvoiceField("Desconto/Abatimento", Discount, 0,10,150,10),
+                    new InvoiceField("Moeda", Currency, 0,10,100,10),
+                    new InvoiceField("Outras Deduções", OtherDeductions, 0,10,150,10),
+                    new InvoiceField("Mora/Multa", Penalty, 0,10,150,10)
+            );
+
+    public static final List<InvoiceField> defaultInvoiceFields =
+            Arrays.asList(
+                    new InvoiceField("Beneficiário", Beneficiary, 0,10,270,10),
+                    new InvoiceField("CNPJ/CPF", Cnpj, 0,20, 100,10),
                     new InvoiceField("Pagador:", Payer, 0,20,105,10),
                     new InvoiceField("Pagador:", Cpf, 134,20,100,10),
                     new InvoiceField("Agência/Código Beneficiário:", BeneficiaryCode, 0,3,120,10),

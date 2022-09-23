@@ -20,9 +20,6 @@ public class ExtractData {
         document = PDDocument.load(new File(path));
     }
 
-    protected void writeString(String text, List<TextPosition> textPositions) throws IOException {
-    }
-
     final class Result {
         public int page;
         public TextPositionSequence position;
