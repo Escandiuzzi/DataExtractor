@@ -3,6 +3,7 @@ package handlers;
 import dtos.InvoiceDto;
 import exporters.DocumentExporter;
 import handlers.invoice.InvoiceField;
+import handlers.invoice.InvoiceFields;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 
 import static handlers.invoice.InvoiceFields.*;
 
@@ -30,7 +32,11 @@ public class DataHandler {
 
     private List<InvoiceField> invoiceFields;
 
-    DocumentExporter documentExporter;
+    private Matcher invoiceCodeMatcher;
+
+    private DocumentExporter documentExporter;
+
+    private String documentCode;
 
     public DataHandler(DocumentExporter documentExporter) {
         this.documentExporter = documentExporter;
@@ -39,6 +45,7 @@ public class DataHandler {
     public InvoiceDto getInvoiceDto() { return invoiceDto; }
 
     public void PrintData() {
+        System.out.println("Document Code: " + documentCode);
         for (String field : invoiceFieldsKeys) {
             if (infos.containsKey(field)) {
                 System.out.println(field + ": " + infos.get(field).trim());
@@ -54,9 +61,23 @@ public class DataHandler {
 
         CreatePDFStripperByArea();
 
+        extractTextByRegex(text);
+
         extractTextByArea();
 
         exportData();
+    }
+
+    private void extractTextByRegex(String text) {
+        invoiceCodeMatcher = invoiceCodePattern.matcher(text);
+        invoiceCodeMatcher.find();
+
+        try {
+            documentCode = invoiceCodeMatcher.group(0);
+
+        } catch (IllegalStateException ex) {
+            System.out.println("Could not find invoice code");
+        }
     }
 
     private void checkBankInstitution() {
@@ -131,7 +152,7 @@ public class DataHandler {
         invoiceDto.payer = returnIfValid(Payer);
         invoiceDto.cnpj = returnIfValid(Cnpj);
         invoiceDto.agencyCode = returnIfValid(BeneficiaryCode);
-        invoiceDto.documentCode = returnIfValid(DocumentNumber);
+        invoiceDto.documentCode = documentCode;
         invoiceDto.cpf = returnIfValid(Cpf);
         invoiceDto.date = returnIfValid(DueDate);
         invoiceDto.price = returnIfValid(DocumentPrice);

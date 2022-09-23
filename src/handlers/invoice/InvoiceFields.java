@@ -2,8 +2,12 @@ package handlers.invoice;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InvoiceFields {
+
+    public static final Pattern invoiceCodePattern = Pattern.compile("(\\d{9}\\.\\d{1} \\d{10}\\.\\d{1} \\d{10}\\.\\d{1} \\d \\d{14})");
 
     public static final String Beneficiary = "Beneficiary";
     public static final String Cnpj = "Cnpj";
@@ -30,9 +34,9 @@ public class InvoiceFields {
     public static final List<InvoiceField> invoiceFieldsSantander =
             Arrays.asList(
                     new InvoiceField("Beneficiário:", Beneficiary, 0,10,270,10),
-                    new InvoiceField("Beneficiário:", Cnpj, 30,20, 100,10),
+                    new InvoiceField("Beneficiário:", Cnpj, 34,20, 100,10),
                     new InvoiceField("Pagador:", Payer, 0,20,105,10),
-                    new InvoiceField("Pagador:", Cpf, 130,20,100,10),
+                    new InvoiceField("Pagador:", Cpf, 134,20,100,10),
                     new InvoiceField("Agência/Código Beneficiário:", BeneficiaryCode, 0,3,120,10),
                     new InvoiceField("Vencimento:", DueDate, 0,3,130,10),
                     new InvoiceField("Nosso Número:", OurNumber,  0,3,120,10),

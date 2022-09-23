@@ -65,7 +65,23 @@ public class DataHandlerTest {
 
         dataHandler.PrintData();
 
-        String expectedOutput = "CNPJ: 88.648.761/0001-03\nCódigo Beneficiario: 2087.7 8284989\nCódigo Boleto: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\nCPF: 019.723.190-00\nData de vencimento: 08/05/2021\nValor: 1659,23\nBeneficiario: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\n\nPagador: Luiz Felipe Escandiuzzi\n\n";
+        String expectedOutput = "Document Code: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\n" +
+                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\n" +
+                "Cnpj: 88.648.761/0001-03\n" +
+                "Payer: Luiz Felipe Escandiuzzi\n" +
+                "Cpf: 019.723.190-00\n" +
+                "BeneficiaryCode: 2087.7 8284989\n" +
+                "DueDate: 08/05/2021\n" +
+                "OurNumber: 000004879635-2\n" +
+                "DocumentPrice: 1659,23\n" +
+                "DocumentNumber: 11928792\n" +
+                "Addition: \n" +
+                "ChargedValue: \n" +
+                "DocumentDate: 03/05/2021\n" +
+                "Discount: \n" +
+                "Currency: R$\n" +
+                "OtherDeductions: \n" +
+                "Penalty: \n";
         String consoleOutput = outContent.toString();
         assertThat(consoleOutput, is(expectedOutput));
     }

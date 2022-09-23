@@ -39,7 +39,7 @@ public class PDFExtractorTest {
     public void onDocumentInitialize_WhenAValidFilePathIsSet_ShouldReturnANewDocument() {
         PDDocument pdDocument = null;
         try {
-            pdDocument = pdfManager.InitializeDocument(filePath +  File.separator + "document1.pdf");
+            pdDocument = pdfManager.InitializeDocument(filePath +  File.separator + "document.pdf");
         } catch (IOException ex) {
             assertNotNull(ex);
         }
