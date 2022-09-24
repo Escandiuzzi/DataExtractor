@@ -3,7 +3,6 @@ package handlers;
 import dtos.InvoiceDto;
 import exporters.DocumentExporter;
 import handlers.invoice.InvoiceField;
-import handlers.invoice.InvoiceFields;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
-import static handlers.invoice.InvoiceFields.*;
+import static handlers.invoice.Invoice.*;
 
 public class DataHandler {
     private PDDocument pdDocument;
@@ -28,11 +27,7 @@ public class DataHandler {
 
     private InvoiceDto invoiceDto;
 
-    private boolean isSantander;
-
     private List<InvoiceField> invoiceFields;
-
-    private Matcher invoiceCodeMatcher;
 
     private DocumentExporter documentExporter;
 
@@ -40,13 +35,11 @@ public class DataHandler {
 
     public DataHandler(DocumentExporter documentExporter) {
         this.documentExporter = documentExporter;
-        invoiceFields = defaultInvoiceFields;
     }
 
     public InvoiceDto getInvoiceDto() { return invoiceDto; }
 
     public void PrintData() {
-        System.out.println("Document Code: " + documentCode);
         for (String field : invoiceFieldsKeys) {
             if (infos.containsKey(field)) {
                 System.out.println(field + ": " + infos.get(field).trim());
@@ -62,35 +55,31 @@ public class DataHandler {
 
         CreatePDFStripperByArea();
 
-        extractTextByRegex(text);
-
         extractTextByArea();
 
-        exportData();
-    }
+        PrintData();
 
-    private void extractTextByRegex(String text) {
-        invoiceCodeMatcher = invoiceCodePattern.matcher(text);
-        invoiceCodeMatcher.find();
-
-        try {
-            documentCode = invoiceCodeMatcher.group(0);
-
-        } catch (IllegalStateException ex) {
-            System.out.println("Could not find invoice code");
-        }
+        //exportData();
     }
 
     private void checkBankInstitution() {
         TextPositionSequence position = null;
 
         try {
-            position = findTerm("Santander");
+
+            if(findTerm(Santander) != null) {
+                invoiceFields = invoiceFieldsSantander;
+            } else if (findTerm(Sicredi) != null) {
+                invoiceFields = invoiceFieldsSicredi;
+            } else if (findTerm("Banrisul") != null) {
+
+            } else if (findTerm(NuBank) != null) {
+                invoiceFields = invoiceFieldsNuBank;
+            }
+
         } catch (IOException e) {
             System.out.println(e);
         }
-
-        isSantander = position != null;
     }
 
     private void CreatePDFStripperByArea() throws IOException{
@@ -99,11 +88,6 @@ public class DataHandler {
     }
 
     private void extractTextByArea() throws IOException {
-
-        if (isSantander) {
-            invoiceFields = invoiceFieldsSantander;
-        }
-
         AddRects();
 
         PDPage firstPage = pdDocument.getPage(0);
@@ -152,11 +136,19 @@ public class DataHandler {
         invoiceDto.beneficiary = returnIfValid(Beneficiary);
         invoiceDto.payer = returnIfValid(Payer);
         invoiceDto.cnpj = returnIfValid(Cnpj);
-        invoiceDto.agencyCode = returnIfValid(BeneficiaryCode);
-        invoiceDto.documentCode = documentCode;
+        invoiceDto.beneficiaryCode = returnIfValid(BeneficiaryCode);
+        invoiceDto.documentNumber = documentCode;
         invoiceDto.cpf = returnIfValid(Cpf);
-        invoiceDto.date = returnIfValid(DueDate);
-        invoiceDto.price = returnIfValid(DocumentPrice);
+        invoiceDto.dueDate = returnIfValid(DueDate);
+        invoiceDto.documentPrice = returnIfValid(DocumentPrice);
+        invoiceDto.ourNumber = returnIfValid(OurNumber);
+        invoiceDto.addition = returnIfValid(Addition);
+        invoiceDto.chargedValue = returnIfValid(ChargedValue);
+        invoiceDto.documentDate = returnIfValid(DocumentDate);
+        invoiceDto.discount = returnIfValid(Discount);
+        invoiceDto.currency = returnIfValid(Currency);
+        invoiceDto.otherDeductions = returnIfValid(OtherDeductions);
+        invoiceDto.penalty = returnIfValid(Penalty);
 
         documentExporter.exportDocument(invoiceDto);
     }
