@@ -43,6 +43,57 @@ public class ConfigPersistence {
         load();
     }
 
+    public void save()
+    {
+        try {
+            Files.writeString(Path.of(filePath), gson.toJson(config), StandardCharsets.UTF_8);
+        } catch (IOException exception) {
+            System.out.print("Invalid Path");
+        }
+    }
+
+    public void load() {
+
+        try {
+            Gson gson = new Gson();
+
+            Reader reader = Files.newBufferedReader(Paths.get(filePath));
+
+            config = gson.fromJson(reader, ConfigDto.class);
+            reader.close();
+
+            if (config == null)
+                updateFileWithEmptyConfig();
+
+            this.setFileType(config.fileTypeSelected);
+            this.setFrequency(config.frequency);
+            this.setInputFolderPath(config.inputFolderPath);
+            this.setOutputFolderPath(config.outputFolderPath);
+            this.setErrorFolderPath(config.errorFolderPath);
+            this.setBeneficiaryConfig(config.invoiceConfigDto.beneficiary);
+            this.setCnpjConfig(config.invoiceConfigDto.cnpj);
+            this.setPayerConfig(config.invoiceConfigDto.payer);
+            this.setcpfConfig(config.invoiceConfigDto.cpf);
+            this.setBeneficiaryCodeConfig(config.invoiceConfigDto.beneficiaryCode);
+            this.setDueDateConfig(config.invoiceConfigDto.dueDate);
+            this.setOurNumberConfig(config.invoiceConfigDto.ourNumber);
+            this.setDocumentPriceConfig(config.invoiceConfigDto.documentPrice);
+            this.setDocumentNumberConfig(config.invoiceConfigDto.documentNumber);
+            this.setDocumentNumberConfig(config.invoiceConfigDto.documentNumber);
+            this.setAdditionConfig(config.invoiceConfigDto.addition);
+            this.setChargedValueConfig(config.invoiceConfigDto.chargedValue);
+            this.setDocumentDateConfig(config.invoiceConfigDto.documentDate);
+            this.setDiscountConfig(config.invoiceConfigDto.discount);
+            this.setCurrencyConfig(config.invoiceConfigDto.currency);
+            this.setOtherDeductionsConfig(config.invoiceConfigDto.otherDeductions);
+            this.setPenaltyConfig(config.invoiceConfigDto.penalty);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public void setFileType(String fileTypeSelected) {
         config.fileTypeSelected = fileTypeSelected;
     }
@@ -80,41 +131,73 @@ public class ConfigPersistence {
     }
 
     public String getErrorFolderPath() {
+
         return config.errorFolderPath;
     }
 
-    public void save()
-    {
-        try {
-            Files.writeString(Path.of(filePath), gson.toJson(config), StandardCharsets.UTF_8);
-        } catch (IOException exception) {
-            System.out.print("Invalid Path");
-        }
-    }
+    public boolean getBeneficiaryConfig() { return config.invoiceConfigDto.beneficiary; }
 
-    public void load() {
+    public void setBeneficiaryConfig(boolean exportBeneficiary) { config.invoiceConfigDto.beneficiary = exportBeneficiary; }
 
-        try {
-            Gson gson = new Gson();
+    public boolean getCnpjConfig() { return config.invoiceConfigDto.cnpj; }
 
-            Reader reader = Files.newBufferedReader(Paths.get(filePath));
+    public void setCnpjConfig(boolean exportCnpj) { config.invoiceConfigDto.cnpj = exportCnpj; }
 
-            config = gson.fromJson(reader, ConfigDto.class);
-            reader.close();
+    public boolean getPayerConfig() { return config.invoiceConfigDto.payer; }
 
-            if (config == null)
-                updateFileWithEmptyConfig();
+    public void setPayerConfig(boolean exportPayer) { config.invoiceConfigDto.payer = exportPayer; }
 
-            this.setFileType(config.fileTypeSelected);
-            this.setFrequency(config.frequency);
-            this.setInputFolderPath(config.inputFolderPath);
-            this.setOutputFolderPath(config.outputFolderPath);
-            this.setErrorFolderPath(config.errorFolderPath);
+    public boolean getcpfConfig() { return config.invoiceConfigDto.cpf; }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+    public void setcpfConfig(boolean exportcpf) { config.invoiceConfigDto.cpf = exportcpf; }
+
+    public boolean getBeneficiaryCodeConfig() { return config.invoiceConfigDto.beneficiaryCode; }
+
+    public void setBeneficiaryCodeConfig(boolean exportBeneficiaryCode) { config.invoiceConfigDto.beneficiaryCode = exportBeneficiaryCode; }
+
+    public boolean getDueDateConfig() { return config.invoiceConfigDto.dueDate; }
+
+    public void setDueDateConfig(boolean exportDueDate) { config.invoiceConfigDto.dueDate = exportDueDate; }
+
+    public boolean getOurNumberConfig() { return config.invoiceConfigDto.ourNumber; }
+
+    public void setOurNumberConfig(boolean exportOurNumber) { config.invoiceConfigDto.ourNumber = exportOurNumber; }
+
+    public boolean getDocumentPriceConfig() { return config.invoiceConfigDto.documentPrice; }
+
+    public void setDocumentPriceConfig(boolean exportDocumentPrice) { config.invoiceConfigDto.documentPrice = exportDocumentPrice; }
+
+    public boolean getDocumentNumberConfig() { return config.invoiceConfigDto.documentNumber; }
+
+    public void setDocumentNumberConfig(boolean exportDocumentNumber) { config.invoiceConfigDto.documentNumber = exportDocumentNumber; }
+
+    public boolean getAdditionConfig() { return config.invoiceConfigDto.addition; }
+
+    public void setAdditionConfig(boolean exportAddition) { config.invoiceConfigDto.addition = exportAddition; }
+
+    public boolean getChargedValueConfig() { return config.invoiceConfigDto.chargedValue; }
+
+    public void setChargedValueConfig(boolean exportChargedValue) { config.invoiceConfigDto.chargedValue = exportChargedValue; }
+
+    public boolean getDocumentDateConfig() { return config.invoiceConfigDto.documentDate; }
+
+    public void setDocumentDateConfig(boolean exportDocumentDate) { config.invoiceConfigDto.documentDate = exportDocumentDate; }
+
+    public boolean getDiscountConfig() { return config.invoiceConfigDto.discount; }
+
+    public void setDiscountConfig(boolean exportDiscount) { config.invoiceConfigDto.discount = exportDiscount; }
+
+    public boolean getCurrencyConfig() { return config.invoiceConfigDto.currency; }
+
+    public void setCurrencyConfig(boolean exportCurrency) { config.invoiceConfigDto.currency = exportCurrency; }
+
+    public boolean getOtherDeductionsConfig() { return config.invoiceConfigDto.otherDeductions; }
+
+    public void setOtherDeductionsConfig(boolean exportOtherDeductions) { config.invoiceConfigDto.otherDeductions = exportOtherDeductions; }
+
+    public boolean getPenaltyConfig() { return config.invoiceConfigDto.penalty; }
+
+    public void setPenaltyConfig(boolean exportPenalty) { config.invoiceConfigDto.penalty = exportPenalty; }
 
     private void updateFileWithEmptyConfig() {
         config = new ConfigDto();

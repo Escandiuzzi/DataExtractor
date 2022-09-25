@@ -10,4 +10,6 @@ public class ConfigDto {
     public String outputFolderPath = "";
 
     public String errorFolderPath = "";
+
+    public InvoiceConfigDto invoiceConfigDto = new InvoiceConfigDto();
 }
