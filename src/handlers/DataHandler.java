@@ -47,7 +47,7 @@ public class DataHandler {
         }
     }
 
-    public void HandleData(String text, PDDocument pdDocument) throws IOException
+    public void HandleData(PDDocument pdDocument) throws IOException
     {
         this.pdDocument = pdDocument;
 
@@ -59,7 +59,9 @@ public class DataHandler {
 
         PrintData();
 
-        //exportData();
+        exportData();
+
+        pdDocument.close();
     }
 
     private void checkBankInstitution() {
