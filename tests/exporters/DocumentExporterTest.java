@@ -81,11 +81,11 @@ public class DocumentExporterTest {
         InvoiceDto invoiceDto = new InvoiceDto();
 
         invoiceDto.cnpj = "88.648.761/0001-03";
-        invoiceDto.agencyCode = "2087.7 8284989";
-        invoiceDto.documentCode = "33998284.5 9890000048.4 7963520101.9 9 86140000165923";
+        invoiceDto.beneficiaryCode = "2087.7 8284989";
+        invoiceDto.documentNumber = "33998284.5 9890000048.4 7963520101.9 9 86140000165923";
         invoiceDto.cpf = "648.846.048-06";
-        invoiceDto.date = "08/05/2021";
-        invoiceDto.price = "1659,23";
+        invoiceDto.dueDate = "08/05/2021";
+        invoiceDto.documentPrice = "1659,23";
         invoiceDto.beneficiary = "FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL";
         invoiceDto.payer = "Luiz Felipe Escandiuzzi";
 

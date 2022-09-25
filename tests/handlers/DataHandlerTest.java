@@ -61,7 +61,7 @@ public class DataHandlerTest {
         String pdfContent = "";
         pdDocument = pdfManager.InitializeDocument(filePath +  File.separator + "boleto.pdf");
         pdfContent = pdfManager.getDocumentData();
-        dataHandler.HandleData(pdfContent, pdDocument);
+        dataHandler.HandleData(pdDocument);
 
         dataHandler.PrintData();
 
@@ -92,18 +92,18 @@ public class DataHandlerTest {
 
         pdDocument = pdfManager.InitializeDocument(filePath + File.separator + "boleto.pdf");
         pdfContent = pdfManager.getDocumentData();
-        dataHandler.HandleData(pdfContent, pdDocument);
+        dataHandler.HandleData(pdDocument);
 
         InvoiceDto invoiceDto = dataHandler.getInvoiceDto();
 
         verify(documentExporter, times(1)).exportDocument(invoiceDto);
 
         assertEquals("88.648.761/0001-03", invoiceDto.cnpj);
-        assertEquals("2087.7 8284989", invoiceDto.agencyCode);
-        assertEquals("033998284.5 9890000048.4 7963520101.9 9 86140000165923", invoiceDto.documentCode);
+        assertEquals("2087.7 8284989", invoiceDto.beneficiaryCode);
+        assertEquals("033998284.5 9890000048.4 7963520101.9 9 86140000165923", invoiceDto.documentNumber);
         assertEquals("019.723.190-00", invoiceDto.cpf);
-        assertEquals("08/05/2021", invoiceDto.date);
-        assertEquals("1659,23", invoiceDto.price);
+        assertEquals("08/05/2021", invoiceDto.dueDate);
+        assertEquals("1659,23", invoiceDto.documentPrice);
         assertEquals("FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL", invoiceDto.beneficiary);
         assertEquals("Luiz Felipe Escandiuzzi", invoiceDto.payer);
     }
