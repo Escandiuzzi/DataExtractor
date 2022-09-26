@@ -73,8 +73,8 @@ public class DataHandler {
                 invoiceFields = invoiceFieldsSantander;
             } else if (findTerm(Sicredi) != null) {
                 invoiceFields = invoiceFieldsSicredi;
-            } else if (findTerm("Banrisul") != null) {
-
+            } else if (findTerm(Banrisul) != null) {
+                invoiceFields = invoiceFieldsBanrisul;
             } else if (findTerm(NuBank) != null) {
                 invoiceFields = invoiceFieldsNuBank;
             }

@@ -6,6 +6,8 @@ import java.util.List;
 public class Invoice {
     public static final String Santander = "Santander";
     public static final String NuBank = "Nu";
+
+    public static final String Banrisul = "Banrisul";
     public static final String Sicredi = "Sicredi";
 
     public static final String InvoiceCode = "InvoiceCode";
@@ -92,5 +94,26 @@ public class Invoice {
                     new InvoiceField("Carteira", Currency, 40,5,100,10),
                     new InvoiceField("Outras Deduções", OtherDeductions, 0,3,150,10),
                     new InvoiceField("Mora / Multa", Penalty, 0,3,150,10)
+            );
+
+    public static final List<InvoiceField> invoiceFieldsBanrisul =
+            Arrays.asList(
+                    new InvoiceField("SAC BANRISUL", InvoiceCode, 140,80,400,10),
+                    new InvoiceField("Nome do Beneficiário", Beneficiary, 0,5,200,10),
+                    new InvoiceField("Nome do Beneficiário", Cnpj, 200,5, 200,10),
+                    new InvoiceField("Pagador:", Payer, 30,0,150,10),
+                    new InvoiceField("Pagador:", Cpf, 180,0,100,10),
+                    new InvoiceField("Agência / Código Beneficiário", BeneficiaryCode, 0,5,120,10),
+                    new InvoiceField("Vencimento", DueDate, -10,7,130,10),
+                    new InvoiceField("Nosso Número", OurNumber, -10,5,200,10),
+                    new InvoiceField("Valor Documento", DocumentPrice, 0,3,200,10),
+                    new InvoiceField("Número do Documento", DocumentNumber, 0,5,120,10),
+                    new InvoiceField("Outros Acréscimos", Addition, 0,5,200,10),
+                    new InvoiceField("Valor Cobrado", ChargedValue, 0,7,300,20),
+                    new InvoiceField("Data Documento", DocumentDate, 0,2,200,10),
+                    new InvoiceField("Desconto/Abatimento", Discount, 0,3,150,10),
+                    new InvoiceField("Número Do Documento", Currency, 40,20,100,10),
+                    new InvoiceField("Outras Deduções", OtherDeductions, 0,3,150,10),
+                    new InvoiceField("Mora e Multa", Penalty, 0,3,150,10)
             );
 }
