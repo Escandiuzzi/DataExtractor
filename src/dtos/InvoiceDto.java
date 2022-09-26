@@ -7,6 +7,7 @@ public class InvoiceDto {
     public String beneficiary;
     public String cnpj;
     public String payer;
+
     public String cpf;
     public String beneficiaryCode;
     public String dueDate;

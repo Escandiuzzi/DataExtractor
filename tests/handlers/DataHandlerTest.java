@@ -44,7 +44,7 @@ public class DataHandlerTest {
     @Before
     public void setUp() {
         pdfManager = new PDFExtractor();
-        dataHandler = new DataHandler(documentExporter);
+        dataHandler = new DataHandler(documentExporter, new ConfigPersistence());
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));

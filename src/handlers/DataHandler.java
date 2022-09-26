@@ -6,6 +6,7 @@ import handlers.invoice.InvoiceField;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
+import persistence.ConfigPersistence;
 import utils.TextPositionFinder;
 import utils.TextPositionSequence;
 
@@ -31,10 +32,13 @@ public class DataHandler {
 
     private DocumentExporter documentExporter;
 
+    private ConfigPersistence configPersistence;
+
     private String documentCode;
 
-    public DataHandler(DocumentExporter documentExporter) {
+    public DataHandler(DocumentExporter documentExporter, ConfigPersistence configPersistence) {
         this.documentExporter = documentExporter;
+        this.configPersistence = configPersistence;
     }
 
     public InvoiceDto getInvoiceDto() { return invoiceDto; }
@@ -135,22 +139,53 @@ public class DataHandler {
     private void exportData() {
         invoiceDto = new InvoiceDto();
 
-        invoiceDto.beneficiary = returnIfValid(Beneficiary);
-        invoiceDto.payer = returnIfValid(Payer);
-        invoiceDto.cnpj = returnIfValid(Cnpj);
-        invoiceDto.beneficiaryCode = returnIfValid(BeneficiaryCode);
-        invoiceDto.documentNumber = documentCode;
-        invoiceDto.cpf = returnIfValid(Cpf);
-        invoiceDto.dueDate = returnIfValid(DueDate);
-        invoiceDto.documentPrice = returnIfValid(DocumentPrice);
-        invoiceDto.ourNumber = returnIfValid(OurNumber);
-        invoiceDto.addition = returnIfValid(Addition);
-        invoiceDto.chargedValue = returnIfValid(ChargedValue);
-        invoiceDto.documentDate = returnIfValid(DocumentDate);
-        invoiceDto.discount = returnIfValid(Discount);
-        invoiceDto.currency = returnIfValid(Currency);
-        invoiceDto.otherDeductions = returnIfValid(OtherDeductions);
-        invoiceDto.penalty = returnIfValid(Penalty);
+        if(configPersistence.getBeneficiaryConfig())
+            invoiceDto.beneficiary = returnIfValid(Beneficiary);
+
+        if(configPersistence.getPayerConfig())
+            invoiceDto.payer = returnIfValid(Payer);
+
+        if(configPersistence.getCnpjConfig())
+            invoiceDto.cnpj = returnIfValid(Cnpj);
+
+        if(configPersistence.getBeneficiaryCodeConfig())
+            invoiceDto.beneficiaryCode = returnIfValid(BeneficiaryCode);
+
+        if(configPersistence.getDocumentNumberConfig())
+            invoiceDto.documentNumber = documentCode;
+
+        if(configPersistence.getCpfConfig())
+            invoiceDto.cpf = returnIfValid(Cpf);
+
+        if(configPersistence.getDueDateConfig())
+            invoiceDto.dueDate = returnIfValid(DueDate);
+
+        if(configPersistence.getDocumentPriceConfig())
+            invoiceDto.documentPrice = returnIfValid(DocumentPrice);
+
+        if(configPersistence.getOurNumberConfig())
+            invoiceDto.ourNumber = returnIfValid(OurNumber);
+
+        if(configPersistence.getAdditionConfig())
+            invoiceDto.addition = returnIfValid(Addition);
+
+        if(configPersistence.getChargedValueConfig())
+            invoiceDto.chargedValue = returnIfValid(ChargedValue);
+
+        if(configPersistence.getDocumentDateConfig())
+            invoiceDto.documentDate = returnIfValid(DocumentDate);
+
+        if(configPersistence.getDiscountConfig())
+            invoiceDto.discount = returnIfValid(Discount);
+
+        if(configPersistence.getCurrencyConfig())
+            invoiceDto.currency = returnIfValid(Currency);
+
+        if(configPersistence.getOtherDeductionsConfig())
+            invoiceDto.otherDeductions = returnIfValid(OtherDeductions);
+
+        if(configPersistence.getPenaltyConfig())
+            invoiceDto.penalty = returnIfValid(Penalty);
 
         documentExporter.exportDocument(invoiceDto);
     }

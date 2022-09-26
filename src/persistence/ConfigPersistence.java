@@ -73,7 +73,7 @@ public class ConfigPersistence {
             this.setBeneficiaryConfig(config.invoiceConfigDto.beneficiary);
             this.setCnpjConfig(config.invoiceConfigDto.cnpj);
             this.setPayerConfig(config.invoiceConfigDto.payer);
-            this.setcpfConfig(config.invoiceConfigDto.cpf);
+            this.setCpfConfig(config.invoiceConfigDto.cpf);
             this.setBeneficiaryCodeConfig(config.invoiceConfigDto.beneficiaryCode);
             this.setDueDateConfig(config.invoiceConfigDto.dueDate);
             this.setOurNumberConfig(config.invoiceConfigDto.ourNumber);
@@ -147,9 +147,9 @@ public class ConfigPersistence {
 
     public void setPayerConfig(boolean exportPayer) { config.invoiceConfigDto.payer = exportPayer; }
 
-    public boolean getcpfConfig() { return config.invoiceConfigDto.cpf; }
+    public boolean getCpfConfig() { return config.invoiceConfigDto.cpf; }
 
-    public void setcpfConfig(boolean exportcpf) { config.invoiceConfigDto.cpf = exportcpf; }
+    public void setCpfConfig(boolean exportCpf) { config.invoiceConfigDto.cpf = exportCpf; }
 
     public boolean getBeneficiaryCodeConfig() { return config.invoiceConfigDto.beneficiaryCode; }
 

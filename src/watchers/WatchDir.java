@@ -30,7 +30,7 @@ public class WatchDir {
 		pdfExtractor = new PDFExtractor();
 
 		documentExporter = new DocumentExporter(configPersistence);
-		dataHandler = new DataHandler(documentExporter);
+		dataHandler = new DataHandler(documentExporter, configPersistence);
 		pdfValidator = new PDFValidator();
 	}
 
