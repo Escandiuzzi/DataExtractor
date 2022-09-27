@@ -34,6 +34,9 @@ public class DataHandlerTest {
 
     @Mock
     DocumentExporter documentExporter;
+    @Mock
+    ConfigPersistence configPersistence;
+
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -44,7 +47,7 @@ public class DataHandlerTest {
     @Before
     public void setUp() {
         pdfManager = new PDFExtractor();
-        dataHandler = new DataHandler(documentExporter, new ConfigPersistence());
+        dataHandler = new DataHandler(documentExporter, configPersistence);
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
@@ -58,40 +61,62 @@ public class DataHandlerTest {
 
     @Test
     public void onPrintData_WhenDataIsHandled_ShouldPrint() throws IOException {
-        String pdfContent = "";
         pdDocument = pdfManager.InitializeDocument(filePath +  File.separator + "boleto.pdf");
-        pdfContent = pdfManager.getDocumentData();
         dataHandler.HandleData(pdDocument);
 
         dataHandler.PrintData();
 
-        String expectedOutput = "Document Code: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\n" +
-                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\n" +
-                "Cnpj: 88.648.761/0001-03\n" +
-                "Payer: Luiz Felipe Escandiuzzi\n" +
-                "Cpf: 019.723.190-00\n" +
-                "BeneficiaryCode: 2087.7 8284989\n" +
-                "DueDate: 08/05/2021\n" +
-                "OurNumber: 000004879635-2\n" +
-                "DocumentPrice: 1659,23\n" +
-                "DocumentNumber: 11928792\n" +
-                "Addition: \n" +
-                "ChargedValue: \n" +
-                "DocumentDate: 03/05/2021\n" +
-                "Discount: \n" +
-                "Currency: R$\n" +
-                "OtherDeductions: \n" +
-                "Penalty: \n";
+        String expectedOutput = "InvoiceCode: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\r\n" +
+                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\r\n" +
+                "Cnpj: 88.648.761/0001-03\r\n" +
+                "Payer: Luiz Felipe Escandiuzzi\r\n" +
+                "Cpf: 019.723.190-00\r\n" +
+                "BeneficiaryCode: 2087.7 8284989\r\n" +
+                "DueDate: 08/05/2021\r\n" +
+                "OurNumber: 000004879635-2\r\n" +
+                "DocumentPrice: 1659,23\r\n" +
+                "DocumentNumber: 11928792\r\n" +
+                "Addition: \r\n" +
+                "ChargedValue: \r\n" +
+                "DocumentDate: 03/05/2021\r\n" +
+                "Discount: \r\n" +
+                "Currency: R$\r\n" +
+                "OtherDeductions: \r\n" +
+                "Penalty: \r\n" +
+                "InvoiceCode: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\r\n" +
+                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\r\n" +
+                "Cnpj: 88.648.761/0001-03\r\n" +
+                "Payer: Luiz Felipe Escandiuzzi\r\n" +
+                "Cpf: 019.723.190-00\r\n" +
+                "BeneficiaryCode: 2087.7 8284989\r\n" +
+                "DueDate: 08/05/2021\r\n" +
+                "OurNumber: 000004879635-2\r\n" +
+                "DocumentPrice: 1659,23\r\n" +
+                "DocumentNumber: 11928792\r\n" +
+                "Addition: \r\n" +
+                "ChargedValue: \r\n" +
+                "DocumentDate: 03/05/2021\r\n" +
+                "Discount: \r\n" +
+                "Currency: R$\r\n" +
+                "OtherDeductions: \r\n" +
+                "Penalty: \r\n";
         String consoleOutput = outContent.toString();
         assertThat(consoleOutput, is(expectedOutput));
     }
 
     @Test
     public void onGetInvoiceDto_WhenDataWasHandled_ShouldFillInvoiceWithData() throws IOException {
-        String pdfContent = "";
+        pdDocument = pdfManager.InitializeDocument(filePath + File.separator + "santander.pdf");
 
-        pdDocument = pdfManager.InitializeDocument(filePath + File.separator + "boleto.pdf");
-        pdfContent = pdfManager.getDocumentData();
+        when(configPersistence.getBeneficiaryConfig()).thenReturn(true);
+        when(configPersistence.getPayerConfig()).thenReturn(true);
+        when(configPersistence.getCnpjConfig()).thenReturn(true);
+        when(configPersistence.getBeneficiaryCodeConfig()).thenReturn(true);
+        when(configPersistence.getDocumentNumberConfig()).thenReturn(true);
+        when(configPersistence.getCpfConfig()).thenReturn(true);
+        when(configPersistence.getDueDateConfig()).thenReturn(true);
+        when(configPersistence.getDocumentPriceConfig()).thenReturn(true);
+
         dataHandler.HandleData(pdDocument);
 
         InvoiceDto invoiceDto = dataHandler.getInvoiceDto();

@@ -34,7 +34,6 @@ public class DataHandler {
 
     private ConfigPersistence configPersistence;
 
-    private String documentCode;
 
     public DataHandler(DocumentExporter documentExporter, ConfigPersistence configPersistence) {
         this.documentExporter = documentExporter;
@@ -152,7 +151,7 @@ public class DataHandler {
             invoiceDto.beneficiaryCode = returnIfValid(BeneficiaryCode);
 
         if(configPersistence.getDocumentNumberConfig())
-            invoiceDto.documentNumber = documentCode;
+            invoiceDto.documentNumber = returnIfValid(InvoiceCode);
 
         if(configPersistence.getCpfConfig())
             invoiceDto.cpf = returnIfValid(Cpf);
