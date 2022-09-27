@@ -82,9 +82,354 @@
           "altura": 10,
           "largura": 25,
           "tabela": false
+        },
+        {
+          "nome": "Endereço",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 250,
+          "tabela": false
+        },
+        {
+          "nome": "Número",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "Complemento",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 250,
+          "tabela": false
+        },
+        {
+          "nome": "Bairro/Distrito",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "Município",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 250,
+          "tabela": false
+        },
+        {
+          "nome": "UF",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "CEP",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 250,
+          "tabela": false
+        },
+        {
+          "nome": "DDD/Telefone",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "E-mail",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 250,
+          "tabela": false
+        },
+        {
+          "nome": "DDD/Celular",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 460,
+          "altura": 10,
+          "largura": 100,
+          "tabela": false
+        },
+        {
+          "nome": "Natureza da Ocupação",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 450,
+          "tabela": false
+        },
+        {
+          "nome": "Ocupação Principal",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 450,
+          "tabela": false
+        },
+        {
+          "nome": "Tipo de declaração",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 140,
+          "altura": 10,
+          "largura": 450,
+          "tabela": false
+        },
+        {
+          "nome": "Nº do recibo da última declaração entregue do exercício de",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 230,
+          "altura": 10,
+          "largura": 450,
+          "tabela": false
         }
       ],
       "tabela": false
+    },
+    {
+      "nome": "DEPENDENTES",
+      "campos": [
+        {
+          "nome": "CÓDIGO",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "NOME",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 280,
+          "tabela": true
+        },
+        {
+          "nome": "DATA DE NASCIMENTO",
+          "conteudo": "",
+          "tipo": "Date",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "CPF",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 100,
+          "tabela": true
+        },
+        {
+          "nome": "Email",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 200,
+          "tabela": false
+        },
+        {
+          "nome": "Celular",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 200,
+          "tabela": false
+        },
+        {
+          "nome": "Dependente mora com o titular da declaração?",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 190,
+          "altura": 10,
+          "largura": 200,
+          "tabela": false
+        },
+        {
+          "nome": "TOTAL DE DEDUÇÃO COM DEPENDENTES",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 400,
+          "tabela": false
+        }
+      ]
+    },
+    {
+      "nome": "ALIMENTANDOS",
+      "campos": [
+        {
+          "nome": "NOME",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 220,
+          "tabela": true
+        },
+        {
+          "nome": "RESIDENTE",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 100,
+          "tabela": true
+        },
+        {
+          "nome": "DATA DE NASCIMENTO",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 100,
+          "tabela": true
+        },
+        {
+          "nome": "CPF",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 70,
+          "tabela": true
+        },
+        {
+          "nome": "Alimentando do:",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 10,
+          "largura": 100,
+          "tabela": true
+        }
+      ]
+    },
+    {
+      "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR",
+      "campos": [
+        {
+          "nome": "NOME DA FONTE PAGADORA",
+          "conteudo": "",
+          "tipo": "String",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 200,
+          "tabela": true
+        },
+        {
+          "nome": "REND. RECEBIDOS",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "CONTR. PREVID.",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "IMPOSTO RETIDO",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "13º SALÁRIO",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "IRRF SOBRE 13º",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        }
+      ]
     },
     {
       "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOAS JURÍDICAS PELOS DEPENDENTES",
@@ -111,6 +456,36 @@
         },
         {
           "nome": "CONTR. PREVID.",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "IMPOSTO RETIDO",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "13º SALÁRIO",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "altura": 0,
+          "largura": 0,
+          "tabela": true
+        },
+        {
+          "nome": "IRRF SOBRE 13º",
           "conteudo": "",
           "tipo": "int",
           "pattern": "",

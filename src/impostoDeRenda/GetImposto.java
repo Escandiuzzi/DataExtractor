@@ -36,7 +36,7 @@ public class GetImposto {
 
                     try {
                         ExtractData.Result nextResult = null;
-                        ExtractData.Result result = teste.getSubwords(sessao.nome, 0, 0, 5000);
+                        ExtractData.Result result = teste.getSubwords(sessao.nome, 0, 0, 5000, 0);
 
                         if (result == null){
                             System.out.println("Não encontrou posicao do termo " + sessao.nome);
@@ -44,7 +44,7 @@ public class GetImposto {
                         }
 
                         if ((i + 1) < imposto.sessoes.length){
-                            nextResult = teste.getSubwords(imposto.sessoes[i+1].nome, 0, 0, 5000);
+                            nextResult = teste.getSubwords(imposto.sessoes[i+1].nome, 0, 0, 5000, 0);
 
                             /*
                                 if (nextResult == null){
@@ -57,13 +57,15 @@ public class GetImposto {
 
                         System.out.println("RESULT: " + sessao.nome + " X: " + result.getPosition().getX() + " Y: " + result.getPosition().getY() + " PAGE: " + result.getPage());
 
+                        int heightTable = 0;
+
                         for (int j=0; j<sessao.campos.length; j++){
 
                             Campo campo = sessao.campos[j];
 
                             try {
 
-                                ExtractData.Result campoResult = teste.getSubwords(campo.nome, result.getPage(), (int)result.getPosition().getY(), nextResult == null ? 0 : (int)nextResult.getPosition().getY());
+                                ExtractData.Result campoResult = teste.getSubwords(campo.nome, result.getPage(), (int)result.getPosition().getY(), nextResult == null ? 0 : (int)nextResult.getPosition().getY(), nextResult == null ? result.getPage() + 1 :nextResult.getPage());
 
                                 if (campoResult == null){
                                     System.out.println("Não encontrou posicao do termo " + campo.nome + " page: " + result.getPage());
@@ -72,7 +74,14 @@ public class GetImposto {
 
                                 TextPositionSequence position = campoResult.getPosition();
 
-                                String conteudo = teste.getTextByArea((int)position.getX() + (int)position.getWidth() + 1, (int)position.getY(), (int)position.getWidth() + 200, campo.altura, campo, campoResult.getPage() - 1);
+                                String conteudo = "";
+
+                                if (campo.tabela){
+                                    conteudo = teste.getTextByArea((int)position.getX() - 25, (int)position.getY() + campo.altura, (int)position.getWidth(), campo.altura, campo, campoResult.getPage() - 1);
+                                } else {
+                                    heightTable += campo.altura;
+                                    conteudo = teste.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, (int)position.getY(), (int)position.getWidth() + 200, campo.altura, campo, campoResult.getPage() - 1);
+                                }
 
                                 System.out.println( "Campo: " + campo.nome + ": " + conteudo);
 

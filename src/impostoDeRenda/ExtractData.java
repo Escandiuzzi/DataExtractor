@@ -38,7 +38,7 @@ public class ExtractData {
         }
     }
 
-    List<TextPositionSequence> findSubwords(int page, String searchTerm, int yInicial, int yFinal ) throws IOException
+    List<TextPositionSequence> findSubwords(int page, String searchTerm, int yInicial, int yFinal, int nextPage) throws IOException
     {
         final List<TextPositionSequence> hits = new ArrayList<TextPositionSequence>();
         PDFTextStripper stripper = new PDFTextStripper()
@@ -55,7 +55,7 @@ public class ExtractData {
                 {
                      TextPositionSequence hit = word.subSequence(index, index + searchTerm.length());
 
-                      if (hit.getY() > yInicial && (hit.getY() < yFinal || yFinal == 0)){
+                      if (nextPage != page || (hit.getY() > yInicial && (hit.getY() < yFinal || yFinal == 0))){
                         hits.add(hit);
                       }
 
@@ -73,7 +73,7 @@ public class ExtractData {
     }
 
 
-    public Result getSubwords(String searchTerm, int page, int yInicial, int yFinal) throws IOException
+    public Result getSubwords(String searchTerm, int page, int yInicial, int yFinal, int nextPage) throws IOException
     {
         int lastPage = page;
 
@@ -85,7 +85,7 @@ public class ExtractData {
 
         for (; page <= lastPage; page++)
         {
-            List<TextPositionSequence> results = findSubwords(page, searchTerm, yInicial, yFinal);
+            List<TextPositionSequence> results = findSubwords(page, searchTerm, yInicial, yFinal, nextPage);
             for (TextPositionSequence result : results)
             {
                 hits.add(result);
