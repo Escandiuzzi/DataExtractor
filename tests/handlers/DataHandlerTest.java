@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Paths;
 
+import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -105,7 +106,7 @@ public class DataHandlerTest {
     }
 
     @Test
-    public void onGetInvoiceDto_WhenDataWasHandled_ShouldFillInvoiceWithData() throws IOException {
+    public void onGetInvoiceDto_WhenDataWasHandled_ShouldFillInvoiceWithSelectedData() throws IOException {
         pdDocument = pdfManager.InitializeDocument(filePath + File.separator + "santander.pdf");
 
         when(configPersistence.getBeneficiaryConfig()).thenReturn(true);
@@ -116,6 +117,7 @@ public class DataHandlerTest {
         when(configPersistence.getCpfConfig()).thenReturn(true);
         when(configPersistence.getDueDateConfig()).thenReturn(true);
         when(configPersistence.getDocumentPriceConfig()).thenReturn(true);
+        when(configPersistence.getAdditionConfig()).thenReturn(true);
 
         dataHandler.HandleData(pdDocument);
 
@@ -131,5 +133,8 @@ public class DataHandlerTest {
         assertEquals("1659,23", invoiceDto.documentPrice);
         assertEquals("FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL", invoiceDto.beneficiary);
         assertEquals("Luiz Felipe Escandiuzzi", invoiceDto.payer);
+        assertEquals("", invoiceDto.addition);
+        assertNull(invoiceDto.otherDeductions);
+        assertNull(invoiceDto.currency);
     }
 }
