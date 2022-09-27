@@ -3,6 +3,7 @@ package gui;
 import persistence.ConfigPersistence;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,11 +11,14 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class MainWindow extends JDialog implements ActionListener {
-    JPanel panel, contentPanel, bottomPanel;
+    JPanel panel, contentPanel, invoiceCheckboxPanel, bottomPanel;
     JRadioButton jRadioInvoice, jRadioIR;
     ButtonGroup documentTypeGroup;
     JLabel header, title, documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel,
             frequency, fileLocation, inputFile, outputFile, errorFile;
+
+    JCheckBox beneficiary, cnpj, payer, cpf, beneficiaryCode, dueDate, ourNumber, documentPrice, documentNumber,
+            addition, chargedValue, documentDate, discount, currency, otherDeductions, penalty;
     JTextField frequencyField;
     JButton inputDirButton, outputDirButton, errorDirButton, cancelButton, saveButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
@@ -83,6 +87,7 @@ public class MainWindow extends JDialog implements ActionListener {
         createDocumentTypeField();
         createFrequencyField();
         createDirectoriesField();
+        createInvoiceFieldsPanel();
 
         addComponentsToPanel();
     }
@@ -99,6 +104,21 @@ public class MainWindow extends JDialog implements ActionListener {
 
         jRadioInvoice = new JRadioButton();
         jRadioIR = new JRadioButton();
+
+        jRadioInvoice.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invoiceCheckboxPanel.setVisible(true);
+            }
+        });
+
+        jRadioIR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invoiceCheckboxPanel.setVisible(false);
+            }
+        });
+
 
         jRadioInvoice.setActionCommand(ConfigPersistence.Invoice);
         jRadioIR.setActionCommand(ConfigPersistence.IR);
@@ -170,6 +190,69 @@ public class MainWindow extends JDialog implements ActionListener {
         inputFileChooser.setAcceptAllFileFilterUsed(false);
         outputFileChooser.setAcceptAllFileFilterUsed(false);
         errorFileChooser.setAcceptAllFileFilterUsed(false);
+    }
+
+    private void createInvoiceFieldsPanel() {
+        invoiceCheckboxPanel = new JPanel(new GridLayout(6, 4));
+
+        beneficiary = new JCheckBox("Beneficiario");
+        cnpj = new JCheckBox("CNPJ");
+        payer = new JCheckBox("Pagador");
+        cpf = new JCheckBox("CPF");
+        beneficiaryCode = new JCheckBox("Cod Beneficiario");
+        dueDate = new JCheckBox("Vencimento");
+        ourNumber = new JCheckBox("Nosso Nº");
+        documentPrice = new JCheckBox("Valor");
+        documentNumber = new JCheckBox("Nº Documento");
+        addition = new JCheckBox("Acréscimos");
+        chargedValue = new JCheckBox("Valor Cobrado");
+        documentDate= new JCheckBox("Data Documento");
+        discount = new JCheckBox("Desconto");
+        currency = new JCheckBox("Moeda");
+        otherDeductions = new JCheckBox("Deducoes");
+        penalty = new JCheckBox("Multa");
+
+        invoiceCheckboxPanel.add(beneficiary, 0, 0);
+        invoiceCheckboxPanel.add(cnpj);
+        invoiceCheckboxPanel.add(payer);
+        invoiceCheckboxPanel.add(cpf);
+        invoiceCheckboxPanel.add(beneficiaryCode);
+        invoiceCheckboxPanel.add(dueDate);
+        invoiceCheckboxPanel.add(ourNumber);
+        invoiceCheckboxPanel.add(documentPrice);
+        invoiceCheckboxPanel.add(documentNumber);
+        invoiceCheckboxPanel.add(addition);
+        invoiceCheckboxPanel.add(chargedValue);
+        invoiceCheckboxPanel.add(documentDate);
+        invoiceCheckboxPanel.add(discount);
+        invoiceCheckboxPanel.add(currency);
+        invoiceCheckboxPanel.add(otherDeductions);
+        invoiceCheckboxPanel.add(penalty);
+
+        invoiceCheckboxPanel.setBounds(20, 205, 550, 100);
+
+        contentPanel.add(invoiceCheckboxPanel);
+
+        initializeInvoiceCheckbox();
+    }
+
+    private void initializeInvoiceCheckbox() {
+        beneficiary.setSelected(configPersistence.getBeneficiaryConfig());
+        cnpj.setSelected(configPersistence.getCnpjConfig());
+        payer.setSelected(configPersistence.getPayerConfig());
+        cpf.setSelected(configPersistence.getCpfConfig());
+        beneficiaryCode.setSelected(configPersistence.getBeneficiaryCodeConfig());
+        dueDate.setSelected(configPersistence.getDueDateConfig());
+        ourNumber.setSelected(configPersistence.getOurNumberConfig());
+        documentPrice.setSelected(configPersistence.getDocumentPriceConfig());
+        documentNumber.setSelected(configPersistence.getDocumentNumberConfig());
+        addition.setSelected(configPersistence.getAdditionConfig());
+        chargedValue.setSelected(configPersistence.getChargedValueConfig());
+        documentDate.setSelected(configPersistence.getDocumentDateConfig());
+        discount.setSelected(configPersistence.getDiscountConfig());
+        currency.setSelected(configPersistence.getCurrencyConfig());
+        otherDeductions.setSelected(configPersistence.getOtherDeductionsConfig());
+        penalty.setSelected(configPersistence.getPenaltyConfig());
     }
 
     @Override
@@ -263,7 +346,29 @@ public class MainWindow extends JDialog implements ActionListener {
                 configPersistence.setOutputFolderPath(outputFile.getText());
                 configPersistence.setErrorFolderPath(errorFile.getText());
 
+                updateConfigInvoiceFields();
+
+
                 configPersistence.save();
+            }
+
+            private void updateConfigInvoiceFields() {
+                configPersistence.setBeneficiaryConfig(beneficiary.isSelected());
+                configPersistence.setCnpjConfig(cnpj.isSelected());
+                configPersistence.setPayerConfig(payer.isSelected());
+                configPersistence.setCpfConfig(cpf.isSelected());
+                configPersistence.setBeneficiaryCodeConfig(beneficiaryCode.isSelected());
+                configPersistence.setDueDateConfig(dueDate.isSelected());
+                configPersistence.setOurNumberConfig(ourNumber.isSelected());
+                configPersistence.setDocumentPriceConfig(documentPrice.isSelected());
+                configPersistence.setDocumentNumberConfig(documentNumber.isSelected());
+                configPersistence.setAdditionConfig(addition.isSelected());
+                configPersistence.setChargedValueConfig(chargedValue.isSelected());
+                configPersistence.setDocumentDateConfig(documentDate.isSelected());
+                configPersistence.setDiscountConfig(discount.isSelected());
+                configPersistence.setCurrencyConfig(currency.isSelected());
+                configPersistence.setOtherDeductionsConfig(otherDeductions.isSelected());
+                configPersistence.setPenaltyConfig(penalty.isSelected());
             }
         });
     }

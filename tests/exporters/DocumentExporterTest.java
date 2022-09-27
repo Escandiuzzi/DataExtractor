@@ -30,6 +30,11 @@ public class DocumentExporterTest {
 
     @Before
     public void setup() {
+        File directory = new File(folderPath);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+
         configPersistence = mock(ConfigPersistence.class);
         documentExporter = new DocumentExporter(configPersistence);
     }

@@ -17,9 +17,7 @@ public class PDFExtractorTest {
     private PDFExtractor pdfManager;
 
     @Before
-    public void setup(){
-        pdfManager = new PDFExtractor();
-    }
+    public void setup() {  pdfManager = new PDFExtractor();  }
 
     @Test
     public void onGetDocumentData_WhenParsingAFile_ShouldReturnPDFToString() {
