@@ -24,12 +24,12 @@ public class PDFExtractorTest {
         String result = "";
         try {
             pdfManager.InitializeDocument(filePath +  File.separator + "test.pdf");
-            result = pdfManager.getDocumentData();
+            result = pdfManager.getDocumentData().trim();
         } catch (IOException ex) {
             assertNotNull(ex);
         }
 
-        String expectedOutput = "Sample PDF generated for JUnit DataExtraction test \r\n";
+        String expectedOutput = "Sample PDF generated for JUnit DataExtraction test";
         assertThat(result, is(expectedOutput));
     }
 

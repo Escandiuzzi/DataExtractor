@@ -67,40 +67,23 @@ public class DataHandlerTest {
 
         dataHandler.PrintData();
 
-        String expectedOutput = "InvoiceCode: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\r\n" +
-                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\r\n" +
-                "Cnpj: 88.648.761/0001-03\r\n" +
-                "Payer: Luiz Felipe Escandiuzzi\r\n" +
-                "Cpf: 019.723.190-00\r\n" +
-                "BeneficiaryCode: 2087.7 8284989\r\n" +
-                "DueDate: 08/05/2021\r\n" +
-                "OurNumber: 000004879635-2\r\n" +
-                "DocumentPrice: 1659,23\r\n" +
-                "DocumentNumber: 11928792\r\n" +
-                "Addition: \r\n" +
-                "ChargedValue: \r\n" +
-                "DocumentDate: 03/05/2021\r\n" +
-                "Discount: \r\n" +
-                "Currency: R$\r\n" +
-                "OtherDeductions: \r\n" +
-                "Penalty: \r\n" +
-                "InvoiceCode: 033998284.5 9890000048.4 7963520101.9 9 86140000165923\r\n" +
-                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL\r\n" +
-                "Cnpj: 88.648.761/0001-03\r\n" +
-                "Payer: Luiz Felipe Escandiuzzi\r\n" +
-                "Cpf: 019.723.190-00\r\n" +
-                "BeneficiaryCode: 2087.7 8284989\r\n" +
-                "DueDate: 08/05/2021\r\n" +
-                "OurNumber: 000004879635-2\r\n" +
-                "DocumentPrice: 1659,23\r\n" +
-                "DocumentNumber: 11928792\r\n" +
-                "Addition: \r\n" +
-                "ChargedValue: \r\n" +
-                "DocumentDate: 03/05/2021\r\n" +
-                "Discount: \r\n" +
-                "Currency: R$\r\n" +
-                "OtherDeductions: \r\n" +
-                "Penalty: \r\n";
+        String expectedOutput = "InvoiceCode: 033998284.5 9890000048.4 7963520101.9 9 86140000165923" +
+                "Beneficiary: FUNDAÇÃO UNIVERSIDADE DE CAXIAS DO SUL" +
+                "Cnpj: 88.648.761/0001-03" +
+                "Payer: Luiz Felipe Escandiuzzi" +
+                "Cpf: 019.723.190-00" +
+                "BeneficiaryCode: 2087.7 8284989" +
+                "DueDate: 08/05/2021" +
+                "OurNumber: 000004879635-2" +
+                "DocumentPrice: 1659,23" +
+                "DocumentNumber: 11928792" +
+                "Addition: " +
+                "ChargedValue: " +
+                "DocumentDate: 03/05/2021" +
+                "Discount: " +
+                "Currency: R$" +
+                "OtherDeductions: " +
+                "Penalty: ";
         String consoleOutput = outContent.toString();
         assertThat(consoleOutput, is(expectedOutput));
     }

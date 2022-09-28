@@ -60,8 +60,6 @@ public class DataHandler {
 
         extractTextByArea();
 
-        PrintData();
-
         exportData();
 
         pdDocument.close();
