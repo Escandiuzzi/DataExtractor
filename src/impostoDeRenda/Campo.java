@@ -7,6 +7,7 @@ public class Campo {
     public String tipo;
     public String pattern;
     public int x;
+    public int y;
     public int altura;
     public int largura;
     public boolean tabela;

@@ -2,6 +2,8 @@
   "sessoes": [
     {
       "nome": "IDENTIFICAÇÃO DO CONTRIBUINTE",
+      "tabela": false,
+      "qtdLinhas": 0,
       "campos": [
         {
           "nome": "Nome",
@@ -223,11 +225,12 @@
           "largura": 450,
           "tabela": false
         }
-      ],
-      "tabela": false
+      ]
     },
     {
       "nome": "DEPENDENTES",
+      "tabela": true,
+      "qtdLinhas": 32,
       "campos": [
         {
           "nome": "CÓDIGO",
@@ -235,7 +238,7 @@
           "tipo": "int",
           "pattern": "",
           "x": 0,
-          "altura": 10,
+          "altura": 5,
           "largura": 0,
           "tabela": true
         },
@@ -245,7 +248,7 @@
           "tipo": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
+          "altura": 5,
           "largura": 280,
           "tabela": true
         },
@@ -255,7 +258,7 @@
           "tipo": "Date",
           "pattern": "",
           "x": 0,
-          "altura": 10,
+          "altura": 5,
           "largura": 0,
           "tabela": true
         },
@@ -265,7 +268,7 @@
           "tipo": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
+          "altura": 5,
           "largura": 100,
           "tabela": true
         },
@@ -275,7 +278,7 @@
           "tipo": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
+          "altura": 5,
           "largura": 200,
           "tabela": false
         },
@@ -285,7 +288,7 @@
           "tipo": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
+          "altura": 5,
           "largura": 200,
           "tabela": false
         },
@@ -313,6 +316,8 @@
     },
     {
       "nome": "ALIMENTANDOS",
+      "tabela": true,
+      "qtdLinhas": 2,
       "campos": [
         {
           "nome": "NOME",
@@ -368,6 +373,8 @@
     },
     {
       "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR",
+      "tabela": true,
+      "qtdLinhas": 2,
       "campos": [
         {
           "nome": "NOME DA FONTE PAGADORA",
@@ -375,8 +382,9 @@
           "tipo": "String",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 200,
+          "y": 20,
+          "altura": 5,
+          "largura": 210,
           "tabela": true
         },
         {
@@ -384,9 +392,10 @@
           "conteudo": "",
           "tipo": "int",
           "pattern": "",
-          "x": 0,
-          "altura": 0,
-          "largura": 0,
+          "x": 170,
+          "y": 20,
+          "altura": 5 ,
+          "largura": 100,
           "tabela": true
         },
         {
@@ -394,8 +403,9 @@
           "conteudo": "",
           "tipo": "int",
           "pattern": "",
-          "x": 0,
-          "altura": 0,
+          "x": 270,
+          "y": 20,
+          "altura": 5,
           "largura": 0,
           "tabela": true
         },
@@ -404,8 +414,9 @@
           "conteudo": "",
           "tipo": "int",
           "pattern": "",
-          "x": 0,
-          "altura": 0,
+          "x": 340,
+          "y": 20,
+          "altura": 5,
           "largura": 0,
           "tabela": true
         },
@@ -414,9 +425,10 @@
           "conteudo": "",
           "tipo": "int",
           "pattern": "",
-          "x": 0,
-          "altura": 0,
-          "largura": 0,
+          "x": 420,
+          "y": 20,
+          "altura": 5,
+          "largura": 70,
           "tabela": true
         },
         {
@@ -424,15 +436,29 @@
           "conteudo": "",
           "tipo": "int",
           "pattern": "",
-          "x": 0,
-          "altura": 0,
-          "largura": 0,
+          "x": 490,
+          "y": 20,
+          "altura": 5,
+          "largura": 100,
           "tabela": true
+        },
+        {
+          "nome": "CNPJ/CPF",
+          "conteudo": "",
+          "tipo": "int",
+          "pattern": "",
+          "x": 0,
+          "y": 0,
+          "altura": 5,
+          "largura": 100,
+          "tabela": false
         }
       ]
     },
     {
       "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOAS JURÍDICAS PELOS DEPENDENTES",
+      "tabela": true,
+      "qtdLinhas": 2,
       "campos": [
         {
           "nome": "NOME DA FONTE PAGADORA",

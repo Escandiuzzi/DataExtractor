@@ -77,13 +77,49 @@ public class GetImposto {
                                 String conteudo = "";
 
                                 if (campo.tabela){
-                                    conteudo = teste.getTextByArea((int)position.getX() - 25, (int)position.getY() + campo.altura, (int)position.getWidth(), campo.altura, campo, campoResult.getPage() - 1);
+                                    conteudo = teste.getTextByArea((int)position.getX() - 25, (int)position.getY() + (campo.y > 0 ? campo.y : campo.altura) , (int)position.getWidth(), campo.altura, campo, campoResult.getPage() - 1);
                                 } else {
                                     heightTable += campo.altura;
                                     conteudo = teste.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, (int)position.getY(), (int)position.getWidth() + 200, campo.altura, campo, campoResult.getPage() - 1);
                                 }
 
                                 System.out.println( "Campo: " + campo.nome + ": " + conteudo);
+
+                                if (sessao.tabela){
+
+                                    String conteudo2 = "a";
+
+                                    int y = (int) position.getY() + sessao.qtdLinhas;
+
+                                    System.out.println("Sessao eh tabela !!!");
+
+                                    while (!conteudo2.trim().isEmpty()) {
+
+                                        if (nextResult != null){
+                                            if (nextResult.getPosition().getY() < y && nextResult.getPage() == result.getPage() ){
+                                                break;
+                                            }
+                                        }
+                                        conteudo2 = "";
+
+                                        y += sessao.qtdLinhas;
+
+                                        System.out.println("Position Get Y " + y);
+
+                                        if (campo.tabela) {
+                                            conteudo2 = teste.getTextByArea((int) position.getX() - 25, y, (int) position.getWidth(), campo.altura, campo, campoResult.getPage() - 1);
+                                        } else {
+                                            heightTable += campo.altura;
+                                            conteudo2 = teste.getTextByArea((int) position.getX() + (int) position.getWidth() + 10, y, (int) position.getWidth() + 200, campo.altura, campo, campoResult.getPage() - 1);
+                                        }
+
+                                        if (!conteudo2.trim().isEmpty()){
+                                            System.out.println("Campo 2: " + campo.nome + ": " + conteudo2);
+                                        }
+
+                                    }
+
+                                }
 
                                 // System.out.println("RESULT CAMPO: " + campo.nome + " X: " + position.getX() + " Y: " + position.getY() + " PAGE: " + campoResult.getPage());
 
