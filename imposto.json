@@ -1,524 +1,524 @@
 {
-  "sessoes": [
+  "sections": [
     {
-      "nome": "IDENTIFICAÇÃO DO CONTRIBUINTE",
-      "tabela": false,
-      "qtdLinhas": 0,
-      "campos": [
+      "name": "IDENTIFICAÇÃO DO CONTRIBUINTE",
+      "table": false,
+      "numberOfLines": 0,
+      "fields": [
         {
-          "nome": "Nome",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Nome",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 155,
-          "altura": 10,
-          "largura": 249,
-          "tabela": false
+          "height": 10,
+          "width": 249,
+          "table": false
         },
         {
-          "nome": "CPF",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "CPF",
+          "content": "",
+          "type": "String",
           "pattern": "\\d{3}.\\d{3}.\\d{3}-?\\d{2}",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "Data de Nascimento",
-          "conteudo": "",
-          "tipo": "Date",
+          "name": "Data de Nascimento",
+          "content": "",
+          "type": "Date",
           "pattern": "",
           "x": 155,
-          "altura": 10,
-          "largura": 45,
-          "tabela": false
+          "height": 10,
+          "width": 45,
+          "table": false
         },
         {
-          "nome": "Título Eleitoral",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "Título Eleitoral",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "Possui cônjuge ou companheiro(a)",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Possui cônjuge ou companheiro(a)",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 155,
-          "altura": 10,
-          "largura": 20,
-          "tabela": false
+          "height": 10,
+          "width": 20,
+          "table": false
         },
         {
-          "nome": "CPF do cônjuge ou companheiro(a)",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "CPF do cônjuge ou companheiro(a)",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "Houve alteração de dados cadastrais",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Houve alteração de dados cadastrais",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 155,
-          "altura": 10,
-          "largura": 20,
-          "tabela": false
+          "height": 10,
+          "width": 20,
+          "table": false
         },
         {
-          "nome": "Um dos declarantes é pessoa com doença grave ou portadora de deficiência física ou mental?",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Um dos declarantes é pessoa com doença grave ou portadora de deficiência física ou mental?",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 425,
-          "altura": 10,
-          "largura": 25,
-          "tabela": false
+          "height": 10,
+          "width": 25,
+          "table": false
         },
         {
-          "nome": "Endereço",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Endereço",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 250,
-          "tabela": false
+          "height": 10,
+          "width": 250,
+          "table": false
         },
         {
-          "nome": "Número",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Número",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "Complemento",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Complemento",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 250,
-          "tabela": false
+          "height": 10,
+          "width": 250,
+          "table": false
         },
         {
-          "nome": "Bairro/Distrito",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Bairro/Distrito",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "Município",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Município",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 250,
-          "tabela": false
+          "height": 10,
+          "width": 250,
+          "table": false
         },
         {
-          "nome": "UF",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "UF",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "CEP",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "CEP",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 250,
-          "tabela": false
+          "height": 10,
+          "width": 250,
+          "table": false
         },
         {
-          "nome": "DDD/Telefone",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "DDD/Telefone",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "E-mail",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "E-mail",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 250,
-          "tabela": false
+          "height": 10,
+          "width": 250,
+          "table": false
         },
         {
-          "nome": "DDD/Celular",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "DDD/Celular",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 460,
-          "altura": 10,
-          "largura": 100,
-          "tabela": false
+          "height": 10,
+          "width": 100,
+          "table": false
         },
         {
-          "nome": "Natureza da Ocupação",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Natureza da Ocupação",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 450,
-          "tabela": false
+          "height": 10,
+          "width": 450,
+          "table": false
         },
         {
-          "nome": "Ocupação Principal",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Ocupação Principal",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 450,
-          "tabela": false
+          "height": 10,
+          "width": 450,
+          "table": false
         },
         {
-          "nome": "Tipo de declaração",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Tipo de declaração",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 140,
-          "altura": 10,
-          "largura": 450,
-          "tabela": false
+          "height": 10,
+          "width": 450,
+          "table": false
         },
         {
-          "nome": "Nº do recibo da última declaração entregue do exercício de",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Nº do recibo da última declaração entregue do exercício de",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 230,
-          "altura": 10,
-          "largura": 450,
-          "tabela": false
+          "height": 10,
+          "width": 450,
+          "table": false
         }
       ]
     },
     {
-      "nome": "DEPENDENTES",
-      "tabela": true,
-      "qtdLinhas": 32,
-      "campos": [
+      "name": "DEPENDENTES",
+      "table": true,
+      "numberOfLines": 32,
+      "fields": [
         {
-          "nome": "CÓDIGO",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "CÓDIGO",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 5,
-          "largura": 0,
-          "tabela": true
+          "height": 5,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "NOME",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "NOME",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 5,
-          "largura": 280,
-          "tabela": true
+          "height": 5,
+          "width": 280,
+          "table": true
         },
         {
-          "nome": "DATA DE NASCIMENTO",
-          "conteudo": "",
-          "tipo": "Date",
+          "name": "DATA DE NASCIMENTO",
+          "content": "",
+          "type": "Date",
           "pattern": "",
           "x": 0,
-          "altura": 5,
-          "largura": 0,
-          "tabela": true
+          "height": 5,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "CPF",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "CPF",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 5,
-          "largura": 100,
-          "tabela": true
+          "height": 5,
+          "width": 100,
+          "table": true
         },
         {
-          "nome": "Email",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Email",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 5,
-          "largura": 200,
-          "tabela": false
+          "height": 5,
+          "width": 200,
+          "table": false
         },
         {
-          "nome": "Celular",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Celular",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 5,
-          "largura": 200,
-          "tabela": false
+          "height": 5,
+          "width": 200,
+          "table": false
         },
         {
-          "nome": "Dependente mora com o titular da declaração?",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Dependente mora com o titular da declaração?",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 190,
-          "altura": 10,
-          "largura": 200,
-          "tabela": false
+          "height": 10,
+          "width": 200,
+          "table": false
         },
         {
-          "nome": "TOTAL DE DEDUÇÃO COM DEPENDENTES",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "TOTAL DE DEDUÇÃO COM DEPENDENTES",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
-          "largura": 400,
-          "tabela": false
+          "height": 10,
+          "width": 400,
+          "table": false
         }
       ]
     },
     {
-      "nome": "ALIMENTANDOS",
-      "tabela": true,
-      "qtdLinhas": 2,
-      "campos": [
+      "name": "ALIMENTANDOS",
+      "table": true,
+      "numberOfLines": 2,
+      "fields": [
         {
-          "nome": "NOME",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "NOME",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 10,
-          "largura": 220,
-          "tabela": true
+          "height": 10,
+          "width": 220,
+          "table": true
         },
         {
-          "nome": "RESIDENTE",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "RESIDENTE",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
-          "largura": 100,
-          "tabela": true
+          "height": 10,
+          "width": 100,
+          "table": true
         },
         {
-          "nome": "DATA DE NASCIMENTO",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "DATA DE NASCIMENTO",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
-          "largura": 100,
-          "tabela": true
+          "height": 10,
+          "width": 100,
+          "table": true
         },
         {
-          "nome": "CPF",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "CPF",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
-          "largura": 70,
-          "tabela": true
+          "height": 10,
+          "width": 70,
+          "table": true
         },
         {
-          "nome": "Alimentando do:",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "Alimentando do:",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 10,
-          "largura": 100,
-          "tabela": true
+          "height": 10,
+          "width": 100,
+          "table": true
         }
       ]
     },
     {
-      "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR",
-      "tabela": true,
-      "qtdLinhas": 2,
-      "campos": [
+      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR",
+      "table": true,
+      "numberOfLines": 2,
+      "fields": [
         {
-          "nome": "NOME DA FONTE PAGADORA",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "NOME DA FONTE PAGADORA",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
           "y": 20,
-          "altura": 5,
-          "largura": 210,
-          "tabela": true
+          "height": 5,
+          "width": 210,
+          "table": true
         },
         {
-          "nome": "REND. RECEBIDOS",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "REND. RECEBIDOS",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 170,
           "y": 20,
-          "altura": 5 ,
-          "largura": 100,
-          "tabela": true
+          "height": 5 ,
+          "width": 100,
+          "table": true
         },
         {
-          "nome": "CONTR. PREVID.",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "CONTR. PREVID.",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 270,
           "y": 20,
-          "altura": 5,
-          "largura": 0,
-          "tabela": true
+          "height": 5,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "IMPOSTO RETIDO",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "IMPOSTO RETIDO",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 340,
           "y": 20,
-          "altura": 5,
-          "largura": 0,
-          "tabela": true
+          "height": 5,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "13º SALÁRIO",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "13º SALÁRIO",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 420,
           "y": 20,
-          "altura": 5,
-          "largura": 70,
-          "tabela": true
+          "height": 5,
+          "width": 70,
+          "table": true
         },
         {
-          "nome": "IRRF SOBRE 13º",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "IRRF SOBRE 13º",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 490,
           "y": 20,
-          "altura": 5,
-          "largura": 100,
-          "tabela": true
+          "height": 5,
+          "width": 100,
+          "table": true
         },
         {
-          "nome": "CNPJ/CPF",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "CNPJ/CPF",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
           "y": 0,
-          "altura": 5,
-          "largura": 100,
-          "tabela": false
+          "height": 5,
+          "width": 100,
+          "table": false
         }
       ]
     },
     {
-      "nome": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOAS JURÍDICAS PELOS DEPENDENTES",
-      "tabela": true,
-      "qtdLinhas": 2,
-      "campos": [
+      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOAS JURÍDICAS PELOS DEPENDENTES",
+      "table": true,
+      "numberOfLines": 2,
+      "fields": [
         {
-          "nome": "NOME DA FONTE PAGADORA",
-          "conteudo": "",
-          "tipo": "String",
+          "name": "NOME DA FONTE PAGADORA",
+          "content": "",
+          "type": "String",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 0,
-          "tabela": true
+          "height": 0,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "REND. RECEBIDOS",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "REND. RECEBIDOS",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 0,
-          "tabela": true
+          "height": 0,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "CONTR. PREVID.",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "CONTR. PREVID.",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 0,
-          "tabela": true
+          "height": 0,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "IMPOSTO RETIDO",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "IMPOSTO RETIDO",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 0,
-          "tabela": true
+          "height": 0,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "13º SALÁRIO",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "13º SALÁRIO",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 0,
-          "tabela": true
+          "height": 0,
+          "width": 0,
+          "table": true
         },
         {
-          "nome": "IRRF SOBRE 13º",
-          "conteudo": "",
-          "tipo": "int",
+          "name": "IRRF SOBRE 13º",
+          "content": "",
+          "type": "int",
           "pattern": "",
           "x": 0,
-          "altura": 0,
-          "largura": 0,
-          "tabela": true
+          "height": 0,
+          "width": 0,
+          "table": true
         }
       ]
     }

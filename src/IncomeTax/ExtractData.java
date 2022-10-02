@@ -1,4 +1,4 @@
-package impostoDeRenda;
+package IncomeTax;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class ExtractData {
         }
     }
 
-    List<TextPositionSequence> findSubwords(int page, String searchTerm, int yInicial, int yFinal, int nextPage) throws IOException
+    List<TextPositionSequence> findSubwords(int page, String searchTerm, int yIni, int yFinal, int nextPage) throws IOException
     {
         final List<TextPositionSequence> hits = new ArrayList<TextPositionSequence>();
         PDFTextStripper stripper = new PDFTextStripper()
@@ -55,7 +55,7 @@ public class ExtractData {
                 {
                      TextPositionSequence hit = word.subSequence(index, index + searchTerm.length());
 
-                      if (nextPage != page || (hit.getY() > yInicial && (hit.getY() < yFinal || yFinal == 0))){
+                      if (nextPage != page || (hit.getY() > yIni && (hit.getY() < yFinal || yFinal == 0))){
                         hits.add(hit);
                       }
 
@@ -73,7 +73,7 @@ public class ExtractData {
     }
 
 
-    public Result getSubwords(String searchTerm, int page, int yInicial, int yFinal, int nextPage) throws IOException
+    public Result getSubwords(String searchTerm, int page, int yIni, int yFinal, int nextPage) throws IOException
     {
         int lastPage = page;
 
@@ -85,7 +85,7 @@ public class ExtractData {
 
         for (; page <= lastPage; page++)
         {
-            List<TextPositionSequence> results = findSubwords(page, searchTerm, yInicial, yFinal, nextPage);
+            List<TextPositionSequence> results = findSubwords(page, searchTerm, yIni, yFinal, nextPage);
             for (TextPositionSequence result : results)
             {
                 hits.add(result);
@@ -103,19 +103,19 @@ public class ExtractData {
         return new Result(page, hits.get(0));
     }
 
-    public String getTextByArea(int x, int y, int width, int height, Campo campo, int page ) throws IOException {
+    public String getTextByArea(int x, int y, int width, int height, Field field, int page ) throws IOException {
 
-        if (campo.tabela){
+        if (field.table){
             height +=20;
         }
 
         PDFTextStripperByArea stripper = new PDFTextStripperByArea();
         stripper.setSortByPosition( true );
-        Rectangle rect = new Rectangle( campo.x > 0 ? campo.x : x, y, campo.largura > 0 ? campo.largura : width, height);
-        stripper.addRegion( campo.nome, rect );
+        Rectangle rect = new Rectangle( field.x > 0 ? field.x : x, y, field.width > 0 ? field.width : width, height);
+        stripper.addRegion( field.name, rect );
         stripper.extractRegions( document.getPage(page) );
         // System.out.println( "Text in the area:" + rect );
 
-        return stripper.getTextForRegion( campo.nome );
+        return stripper.getTextForRegion( field.name );
     }
 }

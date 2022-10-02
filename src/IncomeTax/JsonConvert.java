@@ -1,4 +1,4 @@
-package impostoDeRenda;
+package IncomeTax;
 
 import com.google.gson.Gson;
 
@@ -11,39 +11,39 @@ import java.nio.file.Paths;
 public class JsonConvert {
 
     Gson gson;
-    ImpostoDeRenda imposto;
+    IncomeTax incomeTax;
 
-    public static String ImpostoPath = Paths.get("").toAbsolutePath().toString() + "/imposto.json";
+    public static String incomeTaxPath = Paths.get("").toAbsolutePath().toString() + "/imposto.json";
 
-    public ImpostoDeRenda ReadImposto() {
+    public IncomeTax ReadIncomeTax() {
         gson = new Gson();
-        imposto = new ImpostoDeRenda();
+        incomeTax = new IncomeTax();
 
         try {
-            File configFile = new File(ImpostoPath);
+            File configFile = new File(incomeTaxPath);
             configFile.createNewFile();
         } catch (IOException exception) {
             System.out.println("Could not create config file");
         }
 
-        imposto = load();
-        return imposto;
+        incomeTax = load();
+        return incomeTax;
 
     }
 
-    public ImpostoDeRenda load() {
+    public IncomeTax load() {
 
         try {
             Gson gson = new Gson();
 
-            Reader reader = Files.newBufferedReader(Paths.get(ImpostoPath));
+            Reader reader = Files.newBufferedReader(Paths.get(incomeTaxPath));
 
-            imposto = gson.fromJson(reader, ImpostoDeRenda.class);
+            incomeTax = gson.fromJson(reader, IncomeTax.class);
 
-            // System.out.println(imposto.sessoes[0].nome);
+            // System.out.println(incomeTax.sections[0].name);
             reader.close();
 
-            // if (imposto == null)
+            // if (incomeTax == null)
                 // updateFileWithEmptyConfig();
 
             /*
@@ -59,7 +59,7 @@ public class JsonConvert {
             ex.printStackTrace();
         }
 
-        return imposto;
+        return incomeTax;
 
     }
 
