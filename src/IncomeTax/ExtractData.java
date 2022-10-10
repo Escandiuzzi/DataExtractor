@@ -73,34 +73,30 @@ public class ExtractData {
     }
 
 
-    public Result getSubwords(String searchTerm, int page, int yIni, int yFinal, int nextPage) throws IOException
+    public List<Result> getSubwords(String searchTerm, int page, int yIni, int yFinal, int nextPage) throws IOException
     {
+        List<Result> res = new ArrayList<Result>();
         int lastPage = page;
 
         if (page == 0) {
             lastPage = document.getNumberOfPages();
         }
 
-        List<TextPositionSequence> hits = new ArrayList<>();
-
         for (; page <= lastPage; page++)
         {
             List<TextPositionSequence> results = findSubwords(page, searchTerm, yIni, yFinal, nextPage);
             for (TextPositionSequence result : results)
             {
-                hits.add(result);
+                res.add(new Result(page, result));
             }
 
-            if (hits.size() > 0){
-                break;
-            }
         }
 
-        if (hits.size() == 0){
+        if (res.size() == 0){
             return null;
         }
 
-        return new Result(page, hits.get(0));
+        return res;
     }
 
     public String getTextByArea(int x, int y, int width, int height, Field field, int page ) throws IOException {

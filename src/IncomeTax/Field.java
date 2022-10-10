@@ -3,6 +3,7 @@ package IncomeTax;
 import utils.TextPositionSequence;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Field {
 
@@ -16,16 +17,18 @@ public class Field {
     public int width;
     public boolean table;
 
-    public void getContentField(Section section, ExtractData document, ExtractData.Result posSection, ExtractData.Result nextPosSection){
+    public void getContentField(Section section, ExtractData document, ExtractData.Result posSection, List<ExtractData.Result> nextPosSection){
 
         try {
 
-            ExtractData.Result campoResult = document.getSubwords(this.name, posSection.getPage(), (int)posSection.getPosition().getY(), nextPosSection == null ? 0 : (int)nextPosSection.getPosition().getY(), nextPosSection == null ? posSection.getPage() + 1 :nextPosSection.getPage());
+            List<ExtractData.Result> listCampoResult = document.getSubwords(this.name, posSection.getPage(), (int)posSection.getPosition().getY(), nextPosSection == null ? 0 : (int)nextPosSection.get(0).getPosition().getY(), nextPosSection == null ? posSection.getPage() + 1 : nextPosSection.get(0).getPage());
 
-            if (campoResult == null){
+            if (listCampoResult == null){
                 System.out.println("Não encontrou posicao do termo " + this.name + " page: " + posSection.getPage());
                 return;
             }
+
+            ExtractData.Result campoResult = listCampoResult.get(0);
 
             TextPositionSequence position = campoResult.getPosition();
 
@@ -35,25 +38,33 @@ public class Field {
                 this.content = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, (int)position.getY(), (int)position.getWidth() + 200, this.height, this, campoResult.getPage() - 1);
             }
 
-            System.out.println( "Field: " + this.name + ": " + this.content);
+            System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + (int)position.getY());
 
             if (section.table){
 
                 String content2 = "a";
 
-                int y = (int) position.getY() + section.numberOfLines;
+                int y = (int) position.getY();
 
-                System.out.println("Section is table !!!");
+                System.out.println("Section is table !!! Get POSITIOn : " + (int) position.getY() + " Y: " + y);
 
                 while (!content2.trim().isEmpty()) {
 
+                    y += (section.numberOfLines * section.heightOfLines);
+
+                    if (y > 739){
+                        break;
+                        //campoResult.setPage(campoResult.getPage() + 1);
+                        //y = 50;
+                    }
+
                     if (nextPosSection != null){
-                        if (nextPosSection.getPosition().getY() < y && nextPosSection.getPage() == posSection.getPage() ){
+                        if ((nextPosSection.get(0).getPosition().getY() < y && nextPosSection.get(0).getPage() == campoResult.getPage()) ||
+                            (nextPosSection.get(0).getPosition().getY() < (y + section.numberOfLines * section.heightOfLines) && nextPosSection.get(0).getPage() == campoResult.getPage())){
+                            System.out.println("Break");
                             break;
                         }
                     }
-
-                    y += section.numberOfLines;
 
                     System.out.println("Position Get Y " + y);
 
@@ -66,6 +77,8 @@ public class Field {
                     if (!content2.trim().isEmpty()){
                         System.out.println("Field 2: " + this.name + ": " + content2);
                     }
+
+                    //y += (section.numberOfLines * section.heightOfLines);
 
                 }
 

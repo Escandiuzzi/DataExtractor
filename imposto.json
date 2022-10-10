@@ -230,7 +230,8 @@
     {
       "name": "DEPENDENTES",
       "table": true,
-      "numberOfLines": 32,
+      "numberOfLines": 3,
+      "heightOfLines": 16,
       "fields": [
         {
           "name": "CÓDIGO",
@@ -318,11 +319,12 @@
       "name": "ALIMENTANDOS",
       "table": true,
       "numberOfLines": 2,
+      "heightOfLines": 20,
       "fields": [
         {
           "name": "NOME",
           "content": "",
-          "type": "int",
+          "type": "string",
           "pattern": "",
           "x": 0,
           "height": 10,
@@ -375,6 +377,7 @@
       "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR",
       "table": true,
       "numberOfLines": 2,
+      "heightOfLines": 20,
       "fields": [
         {
           "name": "NOME DA FONTE PAGADORA",

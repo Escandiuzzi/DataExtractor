@@ -1,6 +1,7 @@
 package IncomeTax;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GetIncomeTax {
 
@@ -36,26 +37,40 @@ public class GetIncomeTax {
                 Section section = incomeTax.sections[i];
 
                 try {
-                    ExtractData.Result nextResult = null;
-                    ExtractData.Result result = document.getSubwords(section.name, 0, 0, 5000, 0);
+                    List<ExtractData.Result> nextResult = null;
+                    List<ExtractData.Result> result = document.getSubwords(section.name, 0, 0, 5000, 0);
 
-                    if (result == null){
-                        System.out.println("Não encontrou posicao do termo " + section.name);
-                        continue;
+                    int sum = 0;
+                    int lastPage = 0;
+
+                    for(ExtractData.Result res: result){
+                        if (res == null){
+                            System.out.println("Não encontrou posicao do termo " + section.name);
+                        } else {
+                            System.out.println("RESULT: " + section.name + " X: " + res.getPosition().getX() + " Y: " + res.getPosition().getY() + " PAGE: " + res.getPage());
+
+                            if ((i + 1) < incomeTax.sections.length){
+                                nextResult = document.getSubwords(incomeTax.sections[i+1].name, 0, 0, 5000, 0);
+                            }
+
+                            if (sum > 0 && nextResult != null){
+
+                                if(lastPage == res.getPage()){
+                                    break;
+                                }
+
+                            }
+
+                            for (int j = 0; j< section.fields.length; j++){
+
+                                section.fields[j].getContentField(section, document, res, nextResult);
+
+                            }
+
+                            ++sum;
+                            lastPage = res.getPage();
+                        }
                     }
-
-                    if ((i + 1) < incomeTax.sections.length){
-                        nextResult = document.getSubwords(incomeTax.sections[i+1].name, 0, 0, 5000, 0);
-                    }
-
-                    System.out.println("RESULT: " + section.name + " X: " + result.getPosition().getX() + " Y: " + result.getPosition().getY() + " PAGE: " + result.getPage());
-
-                    for (int j = 0; j< section.fields.length; j++){
-
-                        section.fields[j].getContentField(section, document, result, nextResult);
-
-                    }
-
 
                 } catch (IOException dfg) {
                     System.out.println(dfg);
