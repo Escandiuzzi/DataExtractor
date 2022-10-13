@@ -7,4 +7,8 @@ public class Section {
     public int numberOfLines;
     public int heightOfLines;
     public Field[] fields;
+
+    public void setTable(boolean table) {
+        this.table = table;
+    }
 }

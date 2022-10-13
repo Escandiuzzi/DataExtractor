@@ -55,7 +55,7 @@ public class GetIncomeTax {
 
                             if (sum > 0 && nextResult != null){
 
-                                if(lastPage == res.getPage()){
+                                if(lastPage == res.getPage() || (res.getPage() - lastPage) > 1){
                                     break;
                                 }
 

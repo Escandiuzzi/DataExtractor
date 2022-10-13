@@ -9,17 +9,31 @@ public class Field {
 
     public String name;
     public String content;
-    public String type;
-    public String pattern;
+    public Field[] content2; //Peço desculpa a todos que possam se sentir ofendidos
     public int x;
     public int y;
     public int height;
     public int width;
     public boolean table;
+    public boolean hasNoContent;
 
     public void getContentField(Section section, ExtractData document, ExtractData.Result posSection, List<ExtractData.Result> nextPosSection){
 
         try {
+
+            if (this.hasNoContent){
+
+                System.out.println("Sem conteudo: " + this.name);
+                section.setTable(this.table);
+
+                for(int i=0; i<this.content2.length; i++){
+                    this.content2[i].getContentField(section, document, posSection, nextPosSection);
+                }
+
+                return;
+            }
+
+            // System.out.println("Page: " + posSection.getPage() + " Y: " + (int)posSection.getPosition().getY() + " Next y: " + nextPosSection == null ? 0 : (int)nextPosSection.get(0).getPosition().getY() + " NextPage: " + nextPosSection == null ? posSection.getPage() + 1 : nextPosSection.get(0).getPage());
 
             List<ExtractData.Result> listCampoResult = document.getSubwords(this.name, posSection.getPage(), (int)posSection.getPosition().getY(), nextPosSection == null ? 0 : (int)nextPosSection.get(0).getPosition().getY(), nextPosSection == null ? posSection.getPage() + 1 : nextPosSection.get(0).getPage());
 
@@ -32,19 +46,22 @@ public class Field {
 
             TextPositionSequence position = campoResult.getPosition();
 
+            int height = this.height > 0 ? this.height : 5;
+            int posY = this.table ? (int)position.getY() + (this.y > 0 ? this.y : height) : (int)position.getY();
+
             if (this.table){
-                this.content = document.getTextByArea((int)position.getX() - 25, (int)position.getY() + (this.y > 0 ? this.y : this.height) , (int)position.getWidth(), this.height, this, campoResult.getPage() - 1);
+                this.content = document.getTextByArea((int)position.getX() - 25, posY , (int)position.getWidth(), height, this, campoResult.getPage() - 1);
+                System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
             } else {
-                this.content = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, (int)position.getY(), (int)position.getWidth() + 200, this.height, this, campoResult.getPage() - 1);
+                this.content = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, posY, (int)position.getWidth() + 200, height, this, campoResult.getPage() - 1);
+                System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
             }
 
-            System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + (int)position.getY());
-
-            if (section.table){
+            if (section.table && this.height > 0){
 
                 String content2 = "a";
 
-                int y = (int) position.getY();
+                int y = posY;
 
                 System.out.println("Section is table !!! Get POSITIOn : " + (int) position.getY() + " Y: " + y);
 
