@@ -1,6 +1,321 @@
 {
   "sections": [
     {
+      "name": "IDENTIFICAÇÃO DO CONTRIBUINTE",
+      "table": false,
+      "numberOfLines": 0,
+      "fields": [
+        {
+          "name": "Nome",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 155,
+          "height": 10,
+          "width": 249,
+          "table": false
+        },
+        {
+          "name": "CPF",
+          "content": "",
+          "type": "String",
+          "pattern": "\\d{3}.\\d{3}.\\d{3}-?\\d{2}",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "Data de Nascimento",
+          "content": "",
+          "type": "Date",
+          "pattern": "",
+          "x": 155,
+          "height": 10,
+          "width": 45,
+          "table": false
+        },
+        {
+          "name": "Título Eleitoral",
+          "content": "",
+          "type": "int",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "Possui cônjuge ou companheiro(a)",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 155,
+          "height": 10,
+          "width": 20,
+          "table": false
+        },
+        {
+          "name": "CPF do cônjuge ou companheiro(a)",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "Houve alteração de dados cadastrais",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 155,
+          "height": 10,
+          "width": 20,
+          "table": false
+        },
+        {
+          "name": "Um dos declarantes é pessoa com doença grave ou portadora de deficiência física ou mental?",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 425,
+          "height": 10,
+          "width": 25,
+          "table": false
+        },
+        {
+          "name": "Endereço",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 250,
+          "table": false
+        },
+        {
+          "name": "Número",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "Complemento",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 250,
+          "table": false
+        },
+        {
+          "name": "Bairro/Distrito",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "Município",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 250,
+          "table": false
+        },
+        {
+          "name": "UF",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "CEP",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 250,
+          "table": false
+        },
+        {
+          "name": "DDD/Telefone",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "E-mail",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 250,
+          "table": false
+        },
+        {
+          "name": "DDD/Celular",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 460,
+          "height": 10,
+          "width": 100,
+          "table": false
+        },
+        {
+          "name": "Natureza da Ocupação",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 450,
+          "table": false
+        },
+        {
+          "name": "Ocupação Principal",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 450,
+          "table": false
+        },
+        {
+          "name": "Tipo de declaração",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 140,
+          "height": 10,
+          "width": 450,
+          "table": false
+        },
+        {
+          "name": "Nº do recibo da última declaração entregue do exercício de",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 230,
+          "height": 10,
+          "width": 450,
+          "table": false
+        }
+      ]
+    },
+    {
+      "name": "DEPENDENTES",
+      "table": true,
+      "numberOfLines": 3,
+      "heightOfLines": 16,
+      "fields": [
+        {
+          "name": "CÓDIGO",
+          "content": "",
+          "type": "int",
+          "pattern": "",
+          "x": 0,
+          "height": 5,
+          "width": 0,
+          "table": true
+        },
+        {
+          "name": "NOME",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 0,
+          "height": 5,
+          "width": 280,
+          "table": true
+        },
+        {
+          "name": "DATA DE NASCIMENTO",
+          "content": "",
+          "type": "Date",
+          "pattern": "",
+          "x": 0,
+          "height": 5,
+          "width": 0,
+          "table": true
+        },
+        {
+          "name": "CPF",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 0,
+          "height": 5,
+          "width": 100,
+          "table": true
+        },
+        {
+          "name": "Email",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 0,
+          "height": 5,
+          "width": 200,
+          "table": false
+        },
+        {
+          "name": "Celular",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 0,
+          "height": 5,
+          "width": 200,
+          "table": false
+        },
+        {
+          "name": "Dependente mora com o titular da declaração?",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 190,
+          "height": 10,
+          "width": 200,
+          "table": false
+        },
+        {
+          "name": "TOTAL DE DEDUÇÃO COM DEPENDENTES",
+          "content": "",
+          "type": "String",
+          "pattern": "",
+          "x": 0,
+          "height": 10,
+          "width": 400,
+          "table": false
+        }
+      ]
+    },
+    {
       "name": "ALIMENTANDOS",
       "table": true,
       "numberOfLines": 2,
@@ -52,9 +367,8 @@
         {
           "name": "NOME DA FONTE PAGADORA",
           "content": "",
-          "y": 20,
-          "height": 5,
-          "width": 210,
+          "height": 10,
+          "width": 160,
           "table": true
         },
         {
@@ -119,7 +433,7 @@
       ]
     },
     {
-      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOAS JURÍDICAS PELOS DEPENDENTES",
+      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELOS DEPENDENTES",
       "table": true,
       "numberOfLines": 2,
       "heightOfLines": 20,
@@ -296,6 +610,342 @@
           "table": false
         }
       ]
+    },
+    {
+      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA FÍSICA E DO EXTERIOR PELOS DEPENDENTES",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDIMENTOS ISENTOS E NÃO TRIBUTÁVEIS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDIMENTOS SUJEITOS À TRIBUTAÇÃO EXCLUSIVA / DEFINITIVA",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR (IMPOSTO COM EXIGIBILIDADE SUSPENSA)",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELOS DEPENDENTES (IMPOSTO COM EXIGIBILIDADE",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDIMENTOS TRIBUTÁVEIS DE PESSOA JURÍDICA RECEBIDOS ACUMULADAMENTE PELO TITULAR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDIMENTOS TRIBUTÁVEIS DE PESSOA JURÍDICA RECEBIDOS ACUMULADAMENTE PELOS DEPENDENTES",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "IMPOSTO PAGO / RETIDO",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "PAGAMENTOS EFETUADOS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DOAÇÕES EFETUADAS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DECLARAÇÃO DE BENS E DIREITOS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DÍVIDAS E ÔNUS REAIS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DOAÇÕES A PARTIDOS POLÍTICOS E CANDIDATOS A CARGOS ELETIVOS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DEMONSTRATIVO DE ATIVIDADE RURAL - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DADOS E IDENTIFICAÇÃO DO IMÓVEL EXPLORADO - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RECEITAS E DESPESAS - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "APURAÇÃO DO RESULTADO - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "MOVIMENTAÇÃO DO REBANHO - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "BENS DA ATIVIDADE RURAL - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DÍVIDAS VINCULADAS À ATIVIDADE RURAL - BRASIL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DEMONSTRATIVO DE ATIVIDADE RURAL - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DADOS E IDENTIFICAÇÃO DO IMÓVEL EXPLORADO - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RECEITAS E DESPESAS - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "APURAÇÃO DO RESULTADO - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "MOVIMENTAÇÃO DO REBANHO - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "BENS DA ATIVIDADE RURAL - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DÍVIDAS VINCULADAS À ATIVIDADE RURAL - EXTERIOR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DEMONSTRATIVO DA APURAÇÃO DOS GANHOS DE CAPITAL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDA VARIÁVEL - OPERAÇÕES COMUNS/DAYTRADE - TITULAR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - JAN",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - FEV",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - FEV",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - MAR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - ABR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - MAI",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - JUN",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - JUL",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - AGO",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - SET",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - OUT",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - NOV",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "GANHOS LÍQUIDOS OU PERDAS - DEZ",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "RENDA VARIÁVEL - OPERAÇÕES COMUNS/DAYTRADE - DEPENDENTES",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "FUNDOS DE INVESTIMENTO IMOBILIÁRIO OU NAS CADEIAS PRODUTIVAS AGROINDUSTRIAIS - TITULAR",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "FUNDOS DE INVESTIMENTO IMOBILIÁRIO OU NAS CADEIAS PRODUTIVAS AGROINDUSTRIAIS - DEPENDENTES",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DOAÇÕES DIRETAMENTE NA DECLARAÇÃO - ECA",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "DOAÇÕES DIRETAMENTE NA DECLARAÇÃO - IDOSO",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
+    },
+    {
+      "name": "TRIBUTAÇÃO UTILIZANDO AS DEDUÇÕES LEGAIS",
+      "table": true,
+      "numberOfLines": 0,
+      "heightOfLines": 0,
+      "fields": []
     }
   ]
 }
