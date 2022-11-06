@@ -2,12 +2,7 @@ package watchers;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.nio.file.*;
 
 import exporters.DocumentExporter;
 import extractors.PDFExtractor;
@@ -74,6 +69,15 @@ public class WatchDir {
 
 						if (isDocumentValid) {
 							ProcessDocument(configPersistence.getInputFolderPath() + File.separator + fileName.toString());
+						} else {
+							System.out.println(configPersistence.getInputFolderPath().toString() + "\\" + fileName);
+							Path move = Files.move(Paths.get(configPersistence.getInputFolderPath().toString() + "\\" + fileName), Paths.get(configPersistence.getErrorFolderPath() + "\\" + fileName));
+
+							if (move == null){
+								System.out.println("Ocorreu um erro ao mover arquivo");
+							} else {
+								System.out.println("Arquivo movido com sucesso");
+							}
 						}
 					}
 
