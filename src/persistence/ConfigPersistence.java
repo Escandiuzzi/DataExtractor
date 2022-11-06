@@ -70,6 +70,7 @@ public class ConfigPersistence {
             this.setInputFolderPath(config.inputFolderPath);
             this.setOutputFolderPath(config.outputFolderPath);
             this.setErrorFolderPath(config.errorFolderPath);
+            this.setConfigFolderPath(config.configFolderPath);
             this.setBeneficiaryConfig(config.invoiceConfigDto.beneficiary);
             this.setCnpjConfig(config.invoiceConfigDto.cnpj);
             this.setPayerConfig(config.invoiceConfigDto.payer);
@@ -133,6 +134,14 @@ public class ConfigPersistence {
     public String getErrorFolderPath() {
 
         return config.errorFolderPath;
+    }
+
+    public void setConfigFolderPath(String configFolderPath) {
+        config.configFolderPath = configFolderPath;
+    }
+
+    public String getConfigFolderPath() {
+        return config.configFolderPath;
     }
 
     public boolean getBeneficiaryConfig() { return config.invoiceConfigDto.beneficiary; }

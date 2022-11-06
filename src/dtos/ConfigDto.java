@@ -11,5 +11,7 @@ public class ConfigDto {
 
     public String errorFolderPath = "";
 
+    public String configFolderPath = "";
+
     public InvoiceConfigDto invoiceConfigDto = new InvoiceConfigDto();
 }

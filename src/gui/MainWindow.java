@@ -14,13 +14,13 @@ public class MainWindow extends JDialog implements ActionListener {
     JPanel panel, contentPanel, invoiceCheckboxPanel, bottomPanel;
     JRadioButton jRadioInvoice, jRadioIR;
     ButtonGroup documentTypeGroup;
-    JLabel header, title, documentTypeLabel, inputDirLabel, outputDirLabel, errorDirLabel,
-            fileLocation, inputFile, outputFile, errorFile;
+    JLabel header, title, documentTypeLabel, inputDirLabel, outputDirLabel, errorDirLabel, configDirLabel,
+            fileLocation, inputFile, outputFile, errorFile, configFile;
 
     JCheckBox beneficiary, cnpj, payer, cpf, beneficiaryCode, dueDate, ourNumber, documentPrice, documentNumber,
             addition, chargedValue, documentDate, discount, currency, otherDeductions, penalty;
-    JButton inputDirButton, outputDirButton, errorDirButton, cancelButton, saveButton;
-    JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
+    JButton inputDirButton, outputDirButton, errorDirButton, configDirButton, cancelButton, saveButton;
+    JFileChooser inputFileChooser, outputFileChooser, errorFileChooser, configFileChooser;
 
     ConfigPersistence configPersistence;
 
@@ -57,10 +57,12 @@ public class MainWindow extends JDialog implements ActionListener {
             inputFile.setText(configPersistence.getInputFolderPath());
             outputFile.setText(configPersistence.getOutputFolderPath());
             errorFile.setText(configPersistence.getErrorFolderPath());
+            configFile.setText(configPersistence.getConfigFolderPath());
 
             inputFileChooser.setSelectedFile(new File(configPersistence.getInputFolderPath()));
             outputFileChooser.setSelectedFile(new File(configPersistence.getOutputFolderPath()));
             errorFileChooser.setSelectedFile(new File(configPersistence.getErrorFolderPath()));
+            configFileChooser.setSelectedFile(new File(configPersistence.getConfigFolderPath()));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -132,49 +134,61 @@ public class MainWindow extends JDialog implements ActionListener {
 
     private void createDirectoriesField() {
         fileLocation = new JLabel("Local do Arquivo: ");
-        fileLocation.setBounds(20, 60, 110, 40);
+        fileLocation.setBounds(20, 50, 110, 40);
 
         /// Input
         inputDirLabel = new JLabel("Entrada: ");
-        inputDirLabel.setBounds(40, 85, 70, 40);
+        inputDirLabel.setBounds(40, 75, 70, 40);
 
         inputDirButton = new JButton("Informe a pasta de entrada");
-        inputDirButton.setBounds(100, 95, 200, 23);
+        inputDirButton.setBounds(100, 85, 200, 23);
 
         inputFile = new JLabel("");
-        inputFile.setBounds(305, 95, 250, 23);
+        inputFile.setBounds(305, 85, 250, 23);
 
         /// Output
         outputDirLabel = new JLabel("Saída: ");
-        outputDirLabel.setBounds(40, 115, 50, 40);
+        outputDirLabel.setBounds(40, 105, 50, 40);
         outputDirButton = new JButton("Informe a pasta de saída");
-        outputDirButton.setBounds(100, 125, 200, 23);
+        outputDirButton.setBounds(100, 115, 200, 23);
         outputFile = new JLabel("");
-        outputFile.setBounds(305, 125, 250, 23);
+        outputFile.setBounds(305, 115, 250, 23);
 
         /// Error
         errorDirLabel = new JLabel("Erro: ");
-        errorDirLabel.setBounds(40, 145, 50, 40);
+        errorDirLabel.setBounds(40, 135, 50, 40);
         errorDirButton = new JButton("Informe a pasta de erros");
-        errorDirButton.setBounds(100, 155, 200, 23);
+        errorDirButton.setBounds(100, 145, 200, 23);
         errorFile = new JLabel("");
-        errorFile.setBounds(305, 155, 250, 23);
+        errorFile.setBounds(305, 145, 250, 23);
+
+        /// Config
+        configDirLabel = new JLabel("Configuração: ");
+        configDirLabel.setBounds(40, 165, 50, 40);
+        configDirButton = new JButton("Informe a pasta de configuração");
+        configDirButton.setBounds(100, 175, 200, 23);
+        configFile = new JLabel("");
+        configFile.setBounds(305, 175, 250, 23);
 
         inputDirButton.addActionListener(this);
         outputDirButton.addActionListener(this);
         errorDirButton.addActionListener(this);
+        configDirButton.addActionListener(this);
 
         inputFileChooser = new JFileChooser();
         outputFileChooser = new JFileChooser();
         errorFileChooser = new JFileChooser();
+        configFileChooser = new JFileChooser();
 
         inputFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         outputFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         errorFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        configFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         inputFileChooser.setAcceptAllFileFilterUsed(false);
         outputFileChooser.setAcceptAllFileFilterUsed(false);
         errorFileChooser.setAcceptAllFileFilterUsed(false);
+        configFileChooser.setAcceptAllFileFilterUsed(false);
     }
 
     private void createInvoiceFieldsPanel() {
@@ -214,7 +228,7 @@ public class MainWindow extends JDialog implements ActionListener {
         invoiceCheckboxPanel.add(otherDeductions);
         invoiceCheckboxPanel.add(penalty);
 
-        invoiceCheckboxPanel.setBounds(20, 190, 550, 100);
+        invoiceCheckboxPanel.setBounds(20, 205, 550, 100);
 
         contentPanel.add(invoiceCheckboxPanel);
 
@@ -267,6 +281,15 @@ public class MainWindow extends JDialog implements ActionListener {
                         errorFile.setText(errorFileChooser.getSelectedFile().getAbsolutePath());
                         System.out.println(errorFileChooser.getSelectedFile().getAbsolutePath());
                     }
+                } else {
+                    if (e.getSource() == configDirButton) {
+                        int result = configFileChooser.showSaveDialog(null);
+
+                        if (result == JFileChooser.APPROVE_OPTION){
+                            configFile.setText(configFileChooser.getSelectedFile().getAbsolutePath());
+                            System.out.println(configFileChooser.getSelectedFile().getAbsolutePath());
+                        }
+                    }
                 }
             }
         }
@@ -280,14 +303,17 @@ public class MainWindow extends JDialog implements ActionListener {
         contentPanel.add(inputDirLabel);
         contentPanel.add(outputDirLabel);
         contentPanel.add(errorDirLabel);
+        contentPanel.add(configDirLabel);
 
         contentPanel.add(inputDirButton);
         contentPanel.add(outputDirButton);
         contentPanel.add(errorDirButton);
+        contentPanel.add(configDirButton);
 
         contentPanel.add(inputFile);
         contentPanel.add(outputFile);
         contentPanel.add(errorFile);
+        contentPanel.add(configFile);
 
         contentPanel.add(jRadioInvoice);
         //contentPanel.add(jRadioIR);
@@ -326,6 +352,7 @@ public class MainWindow extends JDialog implements ActionListener {
                 configPersistence.setInputFolderPath(inputFile.getText());
                 configPersistence.setOutputFolderPath(outputFile.getText());
                 configPersistence.setErrorFolderPath(errorFile.getText());
+                configPersistence.setConfigFolderPath(configFile.getText());
 
                 updateConfigInvoiceFields();
 
