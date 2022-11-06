@@ -14,12 +14,11 @@ public class MainWindow extends JDialog implements ActionListener {
     JPanel panel, contentPanel, invoiceCheckboxPanel, bottomPanel;
     JRadioButton jRadioInvoice, jRadioIR;
     ButtonGroup documentTypeGroup;
-    JLabel header, title, documentTypeLabel, frequencyLabel, inputDirLabel, outputDirLabel, errorDirLabel,
-            frequency, fileLocation, inputFile, outputFile, errorFile;
+    JLabel header, title, documentTypeLabel, inputDirLabel, outputDirLabel, errorDirLabel,
+            fileLocation, inputFile, outputFile, errorFile;
 
     JCheckBox beneficiary, cnpj, payer, cpf, beneficiaryCode, dueDate, ourNumber, documentPrice, documentNumber,
             addition, chargedValue, documentDate, discount, currency, otherDeductions, penalty;
-    JTextField frequencyField;
     JButton inputDirButton, outputDirButton, errorDirButton, cancelButton, saveButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser;
 
@@ -52,10 +51,8 @@ public class MainWindow extends JDialog implements ActionListener {
         try {
             if (configPersistence.getFileType().equals(ConfigPersistence.Invoice))
                 jRadioInvoice.setSelected(true);
-            else if (configPersistence.getFileType().equals(ConfigPersistence.IR))
-                jRadioIR.setSelected(true);
-
-            frequencyField.setText(configPersistence.getFrequency());
+            //else if (configPersistence.getFileType().equals(ConfigPersistence.IR))
+            //    jRadioIR.setSelected(true);
 
             inputFile.setText(configPersistence.getInputFolderPath());
             outputFile.setText(configPersistence.getOutputFolderPath());
@@ -85,7 +82,6 @@ public class MainWindow extends JDialog implements ActionListener {
 
         createTitle();
         createDocumentTypeField();
-        createFrequencyField();
         createDirectoriesField();
         createInvoiceFieldsPanel();
 
@@ -103,7 +99,7 @@ public class MainWindow extends JDialog implements ActionListener {
         documentTypeLabel.setBounds(20, 50, 180, 40);
 
         jRadioInvoice = new JRadioButton();
-        jRadioIR = new JRadioButton();
+        //jRadioIR = new JRadioButton();
 
         jRadioInvoice.addActionListener(new ActionListener() {
             @Override
@@ -112,68 +108,57 @@ public class MainWindow extends JDialog implements ActionListener {
             }
         });
 
-        jRadioIR.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invoiceCheckboxPanel.setVisible(false);
-            }
-        });
+        //jRadioIR.addActionListener(new ActionListener() {
+        //    @Override
+        //    public void actionPerformed(ActionEvent e) {
+        //        invoiceCheckboxPanel.setVisible(false);
+        //    }
+        //});
 
 
         jRadioInvoice.setActionCommand(ConfigPersistence.Invoice);
-        jRadioIR.setActionCommand(ConfigPersistence.IR);
+        //jRadioIR.setActionCommand(ConfigPersistence.IR);
 
         jRadioInvoice.setText("Boleto");
-        jRadioIR.setText("Imposto de renda");
+        //jRadioIR.setText("Imposto de renda");
 
         jRadioInvoice.setBounds(200, 50, 80, 40);
-        jRadioIR.setBounds(280, 50, 250, 40);
+        //jRadioIR.setBounds(280, 50, 250, 40);
 
         documentTypeGroup = new ButtonGroup();
         documentTypeGroup.add(jRadioInvoice);
-        documentTypeGroup.add(jRadioIR);
-    }
-
-    private void createFrequencyField() {
-        frequencyLabel = new JLabel("Informe a periodicidade: ");
-        frequencyLabel.setBounds(20, 60, 180, 40);
-
-        frequencyField = new JTextField(5);
-        frequencyField.setBounds(170, 70, 60, 23);
-
-        frequency = new JLabel("horas");
-        frequency.setBounds(240, 62, 50, 40);
+        //documentTypeGroup.add(jRadioIR);
     }
 
     private void createDirectoriesField() {
         fileLocation = new JLabel("Local do Arquivo: ");
-        fileLocation.setBounds(20, 85, 110, 40);
+        fileLocation.setBounds(20, 60, 110, 40);
 
         /// Input
         inputDirLabel = new JLabel("Entrada: ");
-        inputDirLabel.setBounds(40, 110, 70, 40);
+        inputDirLabel.setBounds(40, 85, 70, 40);
 
         inputDirButton = new JButton("Informe a pasta de entrada");
-        inputDirButton.setBounds(100, 120, 200, 23);
+        inputDirButton.setBounds(100, 95, 200, 23);
 
         inputFile = new JLabel("");
-        inputFile.setBounds(305, 120, 250, 23);
+        inputFile.setBounds(305, 95, 250, 23);
 
         /// Output
         outputDirLabel = new JLabel("Saída: ");
-        outputDirLabel.setBounds(40, 140, 50, 40);
+        outputDirLabel.setBounds(40, 115, 50, 40);
         outputDirButton = new JButton("Informe a pasta de saída");
-        outputDirButton.setBounds(100, 150, 200, 23);
+        outputDirButton.setBounds(100, 125, 200, 23);
         outputFile = new JLabel("");
-        outputFile.setBounds(305, 150, 250, 23);
+        outputFile.setBounds(305, 125, 250, 23);
 
         /// Error
         errorDirLabel = new JLabel("Erro: ");
-        errorDirLabel.setBounds(40, 170, 50, 40);
+        errorDirLabel.setBounds(40, 145, 50, 40);
         errorDirButton = new JButton("Informe a pasta de erros");
-        errorDirButton.setBounds(100, 180, 200, 23);
+        errorDirButton.setBounds(100, 155, 200, 23);
         errorFile = new JLabel("");
-        errorFile.setBounds(305, 180, 250, 23);
+        errorFile.setBounds(305, 155, 250, 23);
 
         inputDirButton.addActionListener(this);
         outputDirButton.addActionListener(this);
@@ -229,7 +214,7 @@ public class MainWindow extends JDialog implements ActionListener {
         invoiceCheckboxPanel.add(otherDeductions);
         invoiceCheckboxPanel.add(penalty);
 
-        invoiceCheckboxPanel.setBounds(20, 205, 550, 100);
+        invoiceCheckboxPanel.setBounds(20, 190, 550, 100);
 
         contentPanel.add(invoiceCheckboxPanel);
 
@@ -290,9 +275,6 @@ public class MainWindow extends JDialog implements ActionListener {
     private void addComponentsToPanel() {
         contentPanel.add(title);
         contentPanel.add(documentTypeLabel);
-        contentPanel.add(frequencyLabel);
-        contentPanel.add(frequencyField);
-        contentPanel.add(frequency);
 
         contentPanel.add(fileLocation);
         contentPanel.add(inputDirLabel);
@@ -308,10 +290,10 @@ public class MainWindow extends JDialog implements ActionListener {
         contentPanel.add(errorFile);
 
         contentPanel.add(jRadioInvoice);
-        contentPanel.add(jRadioIR);
+        //contentPanel.add(jRadioIR);
 
         this.add(jRadioInvoice);
-        this.add(jRadioIR);
+        //this.add(jRadioIR);
         this.add(documentTypeLabel);
     }
 
@@ -341,7 +323,6 @@ public class MainWindow extends JDialog implements ActionListener {
             public void actionPerformed(ActionEvent e) {
 
                 configPersistence.setFileType(documentTypeGroup.getSelection().getActionCommand());
-                configPersistence.setFrequency(frequencyField.getText());
                 configPersistence.setInputFolderPath(inputFile.getText());
                 configPersistence.setOutputFolderPath(outputFile.getText());
                 configPersistence.setErrorFolderPath(errorFile.getText());
