@@ -1,6 +1,16 @@
 package IncomeTax;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import dtos.InvoiceDto;
+import org.apache.pdfbox.pdmodel.PDDocument;
+
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class GetIncomeTax {
@@ -15,6 +25,33 @@ public class GetIncomeTax {
         System.out.println(json);
 
         */
+
+
+
+        /*
+        No fim adiciona: Para Salvar Gson no arquivo
+        String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        try {
+            Files.writeString(Path.of( "C:\\document-" + date + ".json"), gson.toJson(incomeTaxTeste), StandardCharsets.UTF_8);
+        } catch (IOException exception) {
+            System.out.print(exception.getMessage());
+        }
+         */
+
+
+
+        //Gson gson = new Gson();
+        //String jsonTeste = gson.toJson(incomeTaxTeste);
+        //System.out.println(jsonTeste);
+
+
+        Gson gson = new Gson();
+        IncomeTax incomeTaxTeste = new IncomeTax();
+        JsonElement jsonElement = gson.toJsonTree(incomeTaxTeste);
+        //jsonElement.getAsJsonObject().addProperty("url_to_user", "teste");
+        //String jsonTeste = gson.toJson(jsonElement);
+        //System.out.println(jsonTeste);
+
 
 
         // Desserialized
@@ -61,11 +98,18 @@ public class GetIncomeTax {
 
                             }
 
+                            Gson gsonSection = new Gson();
+                            JsonElement jsonElementSection = gsonSection.toJsonTree(incomeTaxTeste);
+
                             for (int j = 0; j< section.fields.length; j++){
 
                                 section.fields[j].getContentField(section, document, res, nextResult);
+                                section.fields[j].getObjectFromField(section.fields[j], jsonElementSection);
 
                             }
+
+                            String jsonSection = gsonSection.toJson(jsonElementSection);
+                            jsonElement.getAsJsonObject().addProperty(section.name, jsonSection);
 
                             ++sum;
                             lastPage = res.getPage();
@@ -82,5 +126,16 @@ public class GetIncomeTax {
             System.out.println(error);
         }
 
+        String jsonTeste = gson.toJson(jsonElement);
+        System.out.println(jsonTeste);
+
+        String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        try {
+            Files.writeString(Path.of( "C:\\Users\\Hobuu\\Documents\\document-" + date + ".json"), gson.toJson(jsonElement), StandardCharsets.UTF_8);
+        } catch (IOException exception) {
+            System.out.print("ERRO: " + exception.getMessage());
+        }
+
     }
+
 }

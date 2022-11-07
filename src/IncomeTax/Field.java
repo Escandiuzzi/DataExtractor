@@ -1,7 +1,10 @@
 package IncomeTax;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import utils.TextPositionSequence;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -51,10 +54,10 @@ public class Field {
 
             if (this.table){
                 this.content = document.getTextByArea((int)position.getX() - 25, posY , (int)position.getWidth(), height, this, campoResult.getPage() - 1);
-                System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
+                //System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
             } else {
                 this.content = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, posY, (int)position.getWidth() + 200, height, this, campoResult.getPage() - 1);
-                System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
+                //System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
             }
 
             if (section.table && this.height > 0){
@@ -63,7 +66,7 @@ public class Field {
 
                 int y = posY;
 
-                System.out.println("Section is table !!! Get POSITIOn : " + (int) position.getY() + " Y: " + y);
+                //System.out.println("Section is table !!! Get POSITIOn : " + (int) position.getY() + " Y: " + y);
 
                 while (!content2.trim().isEmpty()) {
 
@@ -78,12 +81,12 @@ public class Field {
                     if (nextPosSection != null){
                         if ((nextPosSection.get(0).getPosition().getY() < y && nextPosSection.get(0).getPage() == campoResult.getPage()) ||
                             (nextPosSection.get(0).getPosition().getY() < (y + section.numberOfLines * section.heightOfLines) && nextPosSection.get(0).getPage() == campoResult.getPage())){
-                            System.out.println("Break");
+                            //System.out.println("Break");
                             break;
                         }
                     }
 
-                    System.out.println("Position Get Y " + y);
+                    //System.out.println("Position Get Y " + y);
 
                     if (this.table) {
                         content2 = document.getTextByArea((int) position.getX() - 25, y, (int) position.getWidth(), this.height, this, campoResult.getPage() - 1);
@@ -92,7 +95,7 @@ public class Field {
                     }
 
                     if (!content2.trim().isEmpty()){
-                        System.out.println("Field 2: " + this.name + ": " + content2);
+                        //System.out.println("Field 2: " + this.name + ": " + content2);
                     }
 
                     //y += (section.numberOfLines * section.heightOfLines);
@@ -104,5 +107,26 @@ public class Field {
         } catch (IOException dfg) {
             System.out.println(dfg);
         }
+    }
+
+    public void getObjectFromField(Field field, JsonElement jsonElement){
+
+        if (field.content2 != null){
+
+            Gson gsonSection = new Gson();
+            JsonElement jsonElementSection = gsonSection.toJsonTree(new Object());
+
+            for (Field item: field.content2){
+                this.getObjectFromField(item, jsonElementSection);
+            }
+
+            String jsonSection = gsonSection.toJson(jsonElementSection);
+            jsonElement.getAsJsonObject().addProperty(field.name, jsonSection);
+
+        } else {
+            jsonElement.getAsJsonObject().addProperty(field.name, field.content);
+        }
+
+
     }
 }

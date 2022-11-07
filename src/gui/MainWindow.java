@@ -5,6 +5,7 @@ import persistence.ConfigPersistence;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,8 +52,8 @@ public class MainWindow extends JDialog implements ActionListener {
         try {
             if (configPersistence.getFileType().equals(ConfigPersistence.Invoice))
                 jRadioInvoice.setSelected(true);
-            //else if (configPersistence.getFileType().equals(ConfigPersistence.IR))
-            //    jRadioIR.setSelected(true);
+            else if (configPersistence.getFileType().equals(ConfigPersistence.IR))
+                jRadioIR.setSelected(true);
 
             inputFile.setText(configPersistence.getInputFolderPath());
             outputFile.setText(configPersistence.getOutputFolderPath());
@@ -101,74 +102,80 @@ public class MainWindow extends JDialog implements ActionListener {
         documentTypeLabel.setBounds(20, 50, 180, 40);
 
         jRadioInvoice = new JRadioButton();
-        //jRadioIR = new JRadioButton();
+        jRadioIR = new JRadioButton();
 
         jRadioInvoice.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invoiceCheckboxPanel.setVisible(true);
+                configDirLabel.setVisible(false);
+                configDirButton.setVisible(false);
+                configFile.setVisible(false);
             }
         });
 
-        //jRadioIR.addActionListener(new ActionListener() {
-        //    @Override
-        //    public void actionPerformed(ActionEvent e) {
-        //        invoiceCheckboxPanel.setVisible(false);
-        //    }
-        //});
+        jRadioIR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invoiceCheckboxPanel.setVisible(false);
+                configDirLabel.setVisible(true);
+                configDirButton.setVisible(true);
+                configFile.setVisible(true);
+            }
+        });
 
 
         jRadioInvoice.setActionCommand(ConfigPersistence.Invoice);
-        //jRadioIR.setActionCommand(ConfigPersistence.IR);
+        jRadioIR.setActionCommand(ConfigPersistence.IR);
 
         jRadioInvoice.setText("Boleto");
-        //jRadioIR.setText("Imposto de renda");
+        jRadioIR.setText("Imposto de renda");
 
         jRadioInvoice.setBounds(200, 50, 80, 40);
-        //jRadioIR.setBounds(280, 50, 250, 40);
+        jRadioIR.setBounds(280, 50, 250, 40);
 
         documentTypeGroup = new ButtonGroup();
         documentTypeGroup.add(jRadioInvoice);
-        //documentTypeGroup.add(jRadioIR);
+        documentTypeGroup.add(jRadioIR);
     }
 
     private void createDirectoriesField() {
         fileLocation = new JLabel("Local do Arquivo: ");
-        fileLocation.setBounds(20, 50, 110, 40);
+        fileLocation.setBounds(20, 55, 110, 40);
 
         /// Input
         inputDirLabel = new JLabel("Entrada: ");
-        inputDirLabel.setBounds(40, 75, 70, 40);
+        inputDirLabel.setBounds(40, 80, 70, 40);
 
         inputDirButton = new JButton("Informe a pasta de entrada");
-        inputDirButton.setBounds(100, 85, 200, 23);
+        inputDirButton.setBounds(100, 90, 200, 23);
 
         inputFile = new JLabel("");
-        inputFile.setBounds(305, 85, 250, 23);
+        inputFile.setBounds(305, 90, 250, 23);
 
         /// Output
         outputDirLabel = new JLabel("Saída: ");
-        outputDirLabel.setBounds(40, 105, 50, 40);
+        outputDirLabel.setBounds(40, 110, 50, 40);
         outputDirButton = new JButton("Informe a pasta de saída");
-        outputDirButton.setBounds(100, 115, 200, 23);
+        outputDirButton.setBounds(100, 120, 200, 23);
         outputFile = new JLabel("");
-        outputFile.setBounds(305, 115, 250, 23);
+        outputFile.setBounds(305, 120, 250, 23);
 
         /// Error
         errorDirLabel = new JLabel("Erro: ");
-        errorDirLabel.setBounds(40, 135, 50, 40);
+        errorDirLabel.setBounds(40, 140, 50, 40);
         errorDirButton = new JButton("Informe a pasta de erros");
-        errorDirButton.setBounds(100, 145, 200, 23);
+        errorDirButton.setBounds(100, 150, 200, 23);
         errorFile = new JLabel("");
-        errorFile.setBounds(305, 145, 250, 23);
+        errorFile.setBounds(305, 150, 250, 23);
 
         /// Config
         configDirLabel = new JLabel("Configuração: ");
-        configDirLabel.setBounds(40, 165, 50, 40);
+        configDirLabel.setBounds(40, 170, 50, 40);
         configDirButton = new JButton("Informe a pasta de configuração");
-        configDirButton.setBounds(100, 175, 200, 23);
+        configDirButton.setBounds(100, 180, 200, 23);
         configFile = new JLabel("");
-        configFile.setBounds(305, 175, 250, 23);
+        configFile.setBounds(305, 180, 250, 23);
 
         inputDirButton.addActionListener(this);
         outputDirButton.addActionListener(this);
@@ -183,12 +190,19 @@ public class MainWindow extends JDialog implements ActionListener {
         inputFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         outputFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         errorFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        configFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        configFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         inputFileChooser.setAcceptAllFileFilterUsed(false);
         outputFileChooser.setAcceptAllFileFilterUsed(false);
         errorFileChooser.setAcceptAllFileFilterUsed(false);
         configFileChooser.setAcceptAllFileFilterUsed(false);
+
+        FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .json files", "json");
+        configFileChooser.addChoosableFileFilter(restrict);
+
+        configDirLabel.setVisible(false);
+        configDirButton.setVisible(false);
+        configFile.setVisible(false);
     }
 
     private void createInvoiceFieldsPanel() {
@@ -228,7 +242,7 @@ public class MainWindow extends JDialog implements ActionListener {
         invoiceCheckboxPanel.add(otherDeductions);
         invoiceCheckboxPanel.add(penalty);
 
-        invoiceCheckboxPanel.setBounds(20, 205, 550, 100);
+        invoiceCheckboxPanel.setBounds(20, 190, 550, 100);
 
         contentPanel.add(invoiceCheckboxPanel);
 
@@ -316,10 +330,10 @@ public class MainWindow extends JDialog implements ActionListener {
         contentPanel.add(configFile);
 
         contentPanel.add(jRadioInvoice);
-        //contentPanel.add(jRadioIR);
+        contentPanel.add(jRadioIR);
 
         this.add(jRadioInvoice);
-        //this.add(jRadioIR);
+        this.add(jRadioIR);
         this.add(documentTypeLabel);
     }
 
