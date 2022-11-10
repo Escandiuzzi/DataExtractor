@@ -119,11 +119,10 @@ public class Field {
                 this.getObjectFromField(item, jsonElementSection);
             }
 
-            String jsonSection = gsonSection.toJson(jsonElementSection);
-            jsonElement.getAsJsonObject().addProperty(field.name, jsonSection);
+            jsonElement.getAsJsonObject().add(field.name, jsonElementSection);
 
         } else {
-            jsonElement.getAsJsonObject().addProperty(field.name, field.content);
+            jsonElement.getAsJsonObject().addProperty(field.name, field.content.trim());
         }
 
 

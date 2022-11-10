@@ -34,7 +34,6 @@ public class DataHandler {
 
     private ConfigPersistence configPersistence;
 
-
     public DataHandler(DocumentExporter documentExporter, ConfigPersistence configPersistence) {
         this.documentExporter = documentExporter;
         this.configPersistence = configPersistence;
@@ -56,7 +55,7 @@ public class DataHandler {
 
         checkBankInstitution();
 
-        CreatePDFStripperByArea();
+        createPDFStripperByArea();
 
         extractTextByArea();
 
@@ -85,7 +84,7 @@ public class DataHandler {
         }
     }
 
-    private void CreatePDFStripperByArea() throws IOException{
+    private void createPDFStripperByArea() throws IOException{
         stripper = new PDFTextStripperByArea();
         stripper.setSortByPosition( true );
     }

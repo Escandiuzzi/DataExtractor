@@ -2,61 +2,29 @@ package incomeTax;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import exporters.DocumentExporter;
 import persistence.ConfigPersistence;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class GetIncomeTax {
 
     private ConfigPersistence configPersistence;
+    private DocumentExporter documentExporter;
 
     public GetIncomeTax(ConfigPersistence configPersistence) {
         this.configPersistence = configPersistence;
+        this.documentExporter = new DocumentExporter(this.configPersistence);
     }
 
     public void process(String filepath) {
-
-        /*
-        Serialized
-        IncomeTax incomeTax = new IncomeTax();
         Gson gson = new Gson();
-        String json = gson.toJson(incomeTax);
-        System.out.println(json);
 
-        */
-
-        /*
-        No fim adiciona: Para Salvar Gson no arquivo
-        String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        try {
-            Files.writeString(Path.of( "C:\\document-" + date + ".json"), gson.toJson(incomeTaxTeste), StandardCharsets.UTF_8);
-        } catch (IOException exception) {
-            System.out.print(exception.getMessage());
-        }
-         */
-
-        //Gson gson = new Gson();
-        //String jsonTeste = gson.toJson(incomeTaxTeste);
-        //System.out.println(jsonTeste);
-
-        Gson gson = new Gson();
-        IncomeTax incomeTaxTeste = new IncomeTax();
-        JsonElement jsonElement = gson.toJsonTree(incomeTaxTeste);
-        //jsonElement.getAsJsonObject().addProperty("url_to_user", "teste");
-        //String jsonTeste = gson.toJson(jsonElement);
-        //System.out.println(jsonTeste);
-
-
-
-        // Desserialized
+        IncomeTax incomeTaxJson = new IncomeTax();
+        JsonElement jsonElement = gson.toJsonTree(incomeTaxJson);
 
         JsonConvert json = new JsonConvert();
-
         IncomeTax incomeTax = json.ReadIncomeTax();
 
         ExtractData document = new ExtractData();
@@ -66,7 +34,7 @@ public class GetIncomeTax {
         }
 
         try {
-            document.openDocument("C:\\imposto.pdf");
+            document.openDocument(filepath);
 
             for (int i = 0; i<incomeTax.sections.length; i++){
 
@@ -79,62 +47,55 @@ public class GetIncomeTax {
                     int sum = 0;
                     int lastPage = 0;
 
-                    for(ExtractData.Result res: result){
-                        if (res == null){
-                            System.out.println("Não encontrou posicao do termo " + section.name);
-                        } else {
-                            System.out.println("RESULT: " + section.name + " X: " + res.getPosition().getX() + " Y: " + res.getPosition().getY() + " PAGE: " + res.getPage());
+                    if(result != null) {
+                        for(ExtractData.Result res: result){
+                            if (res == null){
+                                System.out.println("Não encontrou posicao do termo " + section.name);
+                            } else {
+                                System.out.println("RESULT: " + section.name + " X: " + res.getPosition().getX() + " Y: " + res.getPosition().getY() + " PAGE: " + res.getPage());
 
-                            if ((i + 1) < incomeTax.sections.length){
-                                nextResult = document.getSubwords(incomeTax.sections[i+1].name, 0, 0, 5000, 0);
-                            }
-
-                            if (sum > 0 && nextResult != null){
-
-                                if(lastPage == res.getPage() || (res.getPage() - lastPage) > 1){
-                                    break;
+                                if ((i + 1) < incomeTax.sections.length){
+                                    nextResult = document.getSubwords(incomeTax.sections[i+1].name, 0, 0, 5000, 0);
                                 }
 
+                                if (sum > 0 && nextResult != null){
+
+                                    if(lastPage == res.getPage() || (res.getPage() - lastPage) > 1){
+                                        break;
+                                    }
+                                }
+
+                                Gson gsonSection = new Gson();
+                                JsonElement jsonElementSection = gsonSection.toJsonTree(incomeTaxJson);
+
+                                for (int j = 0; j< section.fields.length; j++){
+                                    section.fields[j].getContentField(section, document, res, nextResult);
+                                    section.fields[j].getObjectFromField(section.fields[j], jsonElementSection);
+                                }
+
+                                String jsonSection = gsonSection.toJson(jsonElementSection);
+                                jsonElement.getAsJsonObject().add(section.name, jsonElementSection);
+
+                                ++sum;
+                                lastPage = res.getPage();
                             }
-
-                            Gson gsonSection = new Gson();
-                            JsonElement jsonElementSection = gsonSection.toJsonTree(incomeTaxTeste);
-
-                            for (int j = 0; j< section.fields.length; j++){
-
-                                section.fields[j].getContentField(section, document, res, nextResult);
-                                section.fields[j].getObjectFromField(section.fields[j], jsonElementSection);
-
-                            }
-
-                            String jsonSection = gsonSection.toJson(jsonElementSection);
-                            jsonElement.getAsJsonObject().addProperty(section.name, jsonSection);
-
-                            ++sum;
-                            lastPage = res.getPage();
                         }
                     }
 
                 } catch (IOException dfg) {
                     System.out.println(dfg);
                 }
-
             }
 
         } catch (IOException error) {
             System.out.println(error);
         }
 
-        String jsonTeste = gson.toJson(jsonElement);
-        System.out.println(jsonTeste);
+        String outputJson = gson.toJson(jsonElement);
+        System.out.println(outputJson);
 
-        String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        try {
-            Files.writeString(Path.of( "C:\\Users\\Hobuu\\Documents\\document-" + date + ".json"), gson.toJson(jsonElement), StandardCharsets.UTF_8);
-        } catch (IOException exception) {
-            System.out.print("ERRO: " + exception.getMessage());
-        }
+        String jsonData = gson.toJson(jsonElement);
 
+        documentExporter.exportDocument(jsonData);
     }
-
 }

@@ -22,13 +22,28 @@ public class DocumentExporter {
     }
 
     public void exportDocument(InvoiceDto invoice) {
-        String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        String json = gson.toJson(invoice);
+        export(json);
+    }
+
+    public void exportDocument(String json) {
+        export(json);
+    }
+
+    private void export(String json) {
+        String date = getDate();
+
         try {
-            Files.writeString(Path.of(configPersistence.getOutputFolderPath() + "/document-" + date
-                            + ".json")
-                    ,gson.toJson(invoice), StandardCharsets.UTF_8);
+            Files.writeString(
+                    Path.of(configPersistence.getOutputFolderPath() + "/document-" + date + ".json"),
+                    json,
+                    StandardCharsets.UTF_8);
         } catch (IOException exception) {
             System.out.print(exception.getMessage());
         }
+    }
+
+    private String getDate() {
+        return new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
     }
 }
