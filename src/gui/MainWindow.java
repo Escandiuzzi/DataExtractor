@@ -247,6 +247,14 @@ public class MainWindow extends JDialog implements ActionListener {
         contentPanel.add(invoiceCheckboxPanel);
 
         initializeInvoiceCheckbox();
+
+        if(configPersistence.getFileType().equals(ConfigPersistence.IR))
+        {
+            invoiceCheckboxPanel.setVisible(false);
+            configDirLabel.setVisible(true);
+            configDirButton.setVisible(true);
+            configFile.setVisible(true);
+        }
     }
 
     private void initializeInvoiceCheckbox() {
@@ -369,7 +377,6 @@ public class MainWindow extends JDialog implements ActionListener {
                 configPersistence.setConfigFolderPath(configFile.getText());
 
                 updateConfigInvoiceFields();
-
 
                 configPersistence.save();
             }

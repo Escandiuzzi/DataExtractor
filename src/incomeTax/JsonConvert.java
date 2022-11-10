@@ -1,4 +1,4 @@
-package IncomeTax;
+package incomeTax;
 
 import com.google.gson.Gson;
 

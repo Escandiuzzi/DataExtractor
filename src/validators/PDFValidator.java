@@ -27,7 +27,7 @@ public class PDFValidator {
 	private boolean validSize(String inputFolderPath, String file) {
 		File f = new File(inputFolderPath + File.separator + file);
 
-		return f.length() <= 204800;
+		return f.length() <= 1500000;
 	}
 
 	static String getFileExtension(String filename) {

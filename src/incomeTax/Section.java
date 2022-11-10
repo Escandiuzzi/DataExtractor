@@ -1,4 +1,4 @@
-package IncomeTax;
+package incomeTax;
 
 public class Section {
 

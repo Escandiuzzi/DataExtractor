@@ -1,11 +1,9 @@
-package IncomeTax;
+package incomeTax;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import dtos.InvoiceDto;
-import org.apache.pdfbox.pdmodel.PDDocument;
+import persistence.ConfigPersistence;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -15,7 +13,13 @@ import java.util.List;
 
 public class GetIncomeTax {
 
-    public static void main(String[] args) {
+    private ConfigPersistence configPersistence;
+
+    public GetIncomeTax(ConfigPersistence configPersistence) {
+        this.configPersistence = configPersistence;
+    }
+
+    public void process(String filepath) {
 
         /*
         Serialized
@@ -25,8 +29,6 @@ public class GetIncomeTax {
         System.out.println(json);
 
         */
-
-
 
         /*
         No fim adiciona: Para Salvar Gson no arquivo
@@ -38,12 +40,9 @@ public class GetIncomeTax {
         }
          */
 
-
-
         //Gson gson = new Gson();
         //String jsonTeste = gson.toJson(incomeTaxTeste);
         //System.out.println(jsonTeste);
-
 
         Gson gson = new Gson();
         IncomeTax incomeTaxTeste = new IncomeTax();

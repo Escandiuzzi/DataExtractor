@@ -7,6 +7,7 @@ import java.nio.file.*;
 import exporters.DocumentExporter;
 import extractors.PDFExtractor;
 import handlers.DataHandler;
+import incomeTax.GetIncomeTax;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import persistence.ConfigPersistence;
 import validators.PDFValidator;
@@ -19,6 +20,8 @@ public class WatchDir {
 	private static DataHandler dataHandler;
 	private static PDFValidator pdfValidator;
 
+	private static GetIncomeTax getIncomeTax;
+
 	public WatchDir(ConfigPersistence configPersistence) {
 		this.configPersistence = configPersistence;
 
@@ -27,6 +30,7 @@ public class WatchDir {
 		documentExporter = new DocumentExporter(configPersistence);
 		dataHandler = new DataHandler(documentExporter, configPersistence);
 		pdfValidator = new PDFValidator();
+		getIncomeTax = new GetIncomeTax(configPersistence);
 	}
 
 	public static void watchDir() {
@@ -70,8 +74,9 @@ public class WatchDir {
 						if (isDocumentValid) {
 							ProcessDocument(configPersistence.getInputFolderPath() + File.separator + fileName.toString());
 						} else {
-							System.out.println(configPersistence.getInputFolderPath().toString() + "\\" + fileName);
-							Path move = Files.move(Paths.get(configPersistence.getInputFolderPath().toString() + "\\" + fileName), Paths.get(configPersistence.getErrorFolderPath() + "\\" + fileName));
+							System.out.println(configPersistence.getInputFolderPath().toString() + File.separator + fileName);
+							Path move = Files.move(Paths.get(configPersistence.getInputFolderPath().toString() + File.separator + fileName),
+									Paths.get(configPersistence.getErrorFolderPath() + File.separator + fileName));
 
 							if (move == null){
 								System.out.println("Ocorreu um erro ao mover arquivo");
@@ -107,13 +112,31 @@ public class WatchDir {
 
 	private static void ProcessDocument(String filePath) {
 		try {
-			PDDocument pdDocument = pdfExtractor.InitializeDocument(filePath);
-			dataHandler.HandleData(pdDocument);
+			switch (configPersistence.getFileType()) {
+				case ConfigPersistence.Invoice :
+					ProcessInvoice(filePath);
+					break;
+				case ConfigPersistence.IR :
+					ProcessIR(filePath);
+					break;
+				default:
+					System.out.println("Error on process document - Invalid file type");
+					break;
+			}
 		} catch (IOException ex) {
 			System.out.println(ex.getMessage());
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
+	}
+
+	private static void ProcessInvoice(String filePath) throws IOException {
+		PDDocument pdDocument = pdfExtractor.InitializeDocument(filePath);
+		dataHandler.HandleData(pdDocument);
+	}
+
+	private static void ProcessIR(String filePath) throws IOException {
+		getIncomeTax.process(filePath);
 	}
 }
 

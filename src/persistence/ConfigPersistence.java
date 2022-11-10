@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 
 public class ConfigPersistence {
 
-    public static String Invoice = "Boleto";
-    public static String IR = "IR";
+    public static final String Invoice = "Boleto";
+    public static final String IR = "IR";
 
     private static String filePath;
 

@@ -1,10 +1,9 @@
-package IncomeTax;
+package incomeTax;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import utils.TextPositionSequence;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
