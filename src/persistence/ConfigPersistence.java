@@ -131,10 +131,7 @@ public class ConfigPersistence {
         config.errorFolderPath = errorFolderPath;
     }
 
-    public String getErrorFolderPath() {
-
-        return config.errorFolderPath;
-    }
+    public String getErrorFolderPath() { return config.errorFolderPath; }
 
     public void setConfigFolderPath(String configFolderPath) {
         config.configFolderPath = configFolderPath;

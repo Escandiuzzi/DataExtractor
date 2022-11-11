@@ -24,7 +24,7 @@ public class GetIncomeTax {
         IncomeTax incomeTaxJson = new IncomeTax();
         JsonElement jsonElement = gson.toJsonTree(incomeTaxJson);
 
-        JsonConvert json = new JsonConvert();
+        JsonConvert json = new JsonConvert(configPersistence.getConfigFolderPath());
         IncomeTax incomeTax = json.ReadIncomeTax();
 
         ExtractData document = new ExtractData();

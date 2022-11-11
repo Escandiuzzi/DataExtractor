@@ -13,7 +13,15 @@ public class JsonConvert {
     Gson gson;
     IncomeTax incomeTax;
 
-    public static String incomeTaxPath = Paths.get("").toAbsolutePath().toString() + "/imposto.json";
+    public String incomeTaxPath = Paths.get("").toAbsolutePath().toString() + "/imposto.json";
+
+    public JsonConvert(String incomeTaxPath) {
+
+        if(incomeTaxPath != null || !incomeTaxPath.isEmpty())
+        {
+            this.incomeTaxPath = incomeTaxPath;
+        }
+    }
 
     public IncomeTax ReadIncomeTax() {
         gson = new Gson();
@@ -28,7 +36,6 @@ public class JsonConvert {
 
         incomeTax = load();
         return incomeTax;
-
     }
 
     public IncomeTax load() {
