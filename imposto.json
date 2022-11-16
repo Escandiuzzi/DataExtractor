@@ -8,8 +8,6 @@
         {
           "name": "Nome",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 155,
           "height": 10,
           "width": 249,
@@ -18,8 +16,6 @@
         {
           "name": "CPF",
           "content": "",
-          "type": "String",
-          "pattern": "\\d{3}.\\d{3}.\\d{3}-?\\d{2}",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -28,8 +24,6 @@
         {
           "name": "Data de Nascimento",
           "content": "",
-          "type": "Date",
-          "pattern": "",
           "x": 155,
           "height": 10,
           "width": 45,
@@ -38,8 +32,6 @@
         {
           "name": "Título Eleitoral",
           "content": "",
-          "type": "int",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -48,8 +40,6 @@
         {
           "name": "Possui cônjuge ou companheiro(a)",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 155,
           "height": 10,
           "width": 20,
@@ -58,8 +48,6 @@
         {
           "name": "CPF do cônjuge ou companheiro(a)",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -68,8 +56,6 @@
         {
           "name": "Houve alteração de dados cadastrais",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 155,
           "height": 10,
           "width": 20,
@@ -78,8 +64,6 @@
         {
           "name": "Um dos declarantes é pessoa com doença grave ou portadora de deficiência física ou mental?",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 425,
           "height": 10,
           "width": 25,
@@ -88,8 +72,6 @@
         {
           "name": "Endereço",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 250,
@@ -98,8 +80,6 @@
         {
           "name": "Número",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -108,8 +88,6 @@
         {
           "name": "Complemento",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 250,
@@ -118,8 +96,6 @@
         {
           "name": "Bairro/Distrito",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -128,8 +104,6 @@
         {
           "name": "Município",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 250,
@@ -138,8 +112,6 @@
         {
           "name": "UF",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -148,8 +120,6 @@
         {
           "name": "CEP",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 250,
@@ -158,8 +128,6 @@
         {
           "name": "DDD/Telefone",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -168,8 +136,6 @@
         {
           "name": "E-mail",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 250,
@@ -178,8 +144,6 @@
         {
           "name": "DDD/Celular",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 460,
           "height": 10,
           "width": 100,
@@ -188,8 +152,6 @@
         {
           "name": "Natureza da Ocupação",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 450,
@@ -198,8 +160,6 @@
         {
           "name": "Ocupação Principal",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 450,
@@ -208,8 +168,6 @@
         {
           "name": "Tipo de declaração",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 140,
           "height": 10,
           "width": 450,
@@ -218,8 +176,6 @@
         {
           "name": "Nº do recibo da última declaração entregue do exercício de",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 230,
           "height": 10,
           "width": 450,
@@ -236,8 +192,6 @@
         {
           "name": "CÓDIGO",
           "content": "",
-          "type": "int",
-          "pattern": "",
           "x": 0,
           "height": 5,
           "width": 0,
@@ -246,8 +200,6 @@
         {
           "name": "NOME",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 0,
           "height": 5,
           "width": 280,
@@ -256,8 +208,6 @@
         {
           "name": "DATA DE NASCIMENTO",
           "content": "",
-          "type": "Date",
-          "pattern": "",
           "x": 0,
           "height": 5,
           "width": 0,
@@ -266,8 +216,6 @@
         {
           "name": "CPF",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 0,
           "height": 5,
           "width": 100,
@@ -276,8 +224,6 @@
         {
           "name": "Email",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 0,
           "height": 5,
           "width": 200,
@@ -286,8 +232,6 @@
         {
           "name": "Celular",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 0,
           "height": 5,
           "width": 200,
@@ -296,8 +240,6 @@
         {
           "name": "Dependente mora com o titular da declaração?",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 190,
           "height": 10,
           "width": 200,
@@ -306,8 +248,6 @@
         {
           "name": "TOTAL DE DEDUÇÃO COM DEPENDENTES",
           "content": "",
-          "type": "String",
-          "pattern": "",
           "x": 0,
           "height": 10,
           "width": 400,
@@ -422,13 +362,6 @@
           "height": 5,
           "width": 100,
           "table": false
-        },
-        {
-          "name": "TOTAL",
-          "content": "",
-          "height": 10,
-          "width": 900,
-          "table": false
         }
       ]
     },
@@ -521,11 +454,11 @@
         {
           "name": "RENDIMENTOS",
           "hasNoContent": true,
-          "content2":[
+          "obj":[
             {
               "name": "JAN",
               "hasNoContent": true,
-              "content2": [
+              "obj": [
                 {
                   "name": "TRABALHO NÃO",
                   "content": "",
@@ -566,7 +499,7 @@
             {
               "name": "FEV",
               "hasNoContent": true,
-              "content2": [
+              "obj": [
                 {
                   "name": "TRABALHO NÃO",
                   "content": "",
@@ -627,10 +560,93 @@
     },
     {
       "name": "RENDIMENTOS SUJEITOS À TRIBUTAÇÃO EXCLUSIVA / DEFINITIVA",
-      "table": true,
+      "table": false,
       "numberOfLines": 0,
       "heightOfLines": 0,
-      "fields": []
+      "fields": [
+        {
+          "name": "01. 13º salário",
+          "content": "",
+          "height": 10,
+          "width": 700,
+          "table": false
+        },
+        {
+          "name": "05. Ganhos líquidos em renda variável",
+          "content": "",
+          "x": 500,
+          "height": 10,
+          "width": 200,
+          "table": false
+        },
+        {
+          "name": "06. Rendimentos de aplicações financeiras",
+          "hasNoContent": true,
+          "height": 0,
+          "width": 0,
+          "table": false,
+          "obj":[
+            {
+              "name": "Beneficiário",
+              "content": "",
+              "height": 8,
+              "width": 100,
+              "table": true
+            },
+            {
+              "name": "CPF",
+              "content": "",
+              "x": 200,
+              "height": 8,
+              "width": 100,
+              "table": true
+            },
+            {
+              "name": "CNPJ da Fonte Pagadora",
+              "content": "",
+              "x": 250,
+              "height": 8,
+              "width": 100,
+              "table": true
+            },
+            {
+              "name": "Nome da Fonte Pagadora",
+              "content": "",
+              "height": 8,
+              "width": 200,
+              "table": true
+            },
+            {
+              "name": "Valor",
+              "content": "",
+              "height": 8,
+              "width": 150,
+              "table": true
+            }
+          ]
+        },
+        {
+          "name": "07. Rendimentos recebidos acumuladamente",
+          "content": "",
+          "height": 10,
+          "width": 700,
+          "table": false
+        },
+        {
+          "name": "08. 13º salário recebido pelos dependentes",
+          "content": "",
+          "height": 10,
+          "width": 700,
+          "table": false
+        },
+        {
+          "name": "TOTAL",
+          "content": "",
+          "height": 10,
+          "width": 700,
+          "table": false
+        }
+      ]
     },
     {
       "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR (IMPOSTO COM EXIGIBILIDADE SUSPENSA)",
@@ -662,10 +678,43 @@
     },
     {
       "name": "IMPOSTO PAGO / RETIDO",
-      "table": true,
+      "table": false,
       "numberOfLines": 0,
       "heightOfLines": 0,
-      "fields": []
+      "fields": [
+        {
+          "name": "01. Imposto complementar",
+          "content": "",
+          "x": 500,
+          "height": 10,
+          "width": 300,
+          "table": false
+        },
+        {
+          "name": "02. Imposto pago no exterior pelo titular e pelos dependentes",
+          "content": "",
+          "x": 500,
+          "height": 10,
+          "width": 300,
+          "table": false
+        },
+        {
+          "name": "Imposto devido com os rendimentos no exterior",
+          "content": "",
+          "x": 500,
+          "height": 10,
+          "width": 300,
+          "table": false
+        },
+        {
+          "name": "04. Imposto retido na fonte do titular",
+          "content": "",
+          "x": 500,
+          "height": 10,
+          "width": 300,
+          "table": false
+        }
+      ]
     },
     {
       "name": "PAGAMENTOS EFETUADOS",
@@ -945,7 +994,122 @@
       "table": true,
       "numberOfLines": 0,
       "heightOfLines": 0,
-      "fields": []
+      "fields": [
+        {
+          "name": "RENDIMENTOS TRIBUTÁVEIS",
+          "hasNoContent": true,
+          "height": 0,
+          "width": 0,
+          "table": false,
+          "obj":[
+            {
+              "name": "Recebidos de Pessoa Jurídica pelo titular",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Recebidos de Pessoa Jurídica pelos dependentes",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Recebidos de Pessoa Física/Exterior pelo titular",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Recebidos de Pessoa Física/Exterior pelos dependentes",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Recebidos acumuladamente pelo titular",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Recebidos acumuladamente pelos dependentes",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Resultado tributável da Atividade Rural",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "TOTAL",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            }
+          ]
+        },
+        {
+          "name": "DEDUÇÕES",
+          "hasNoContent": true,
+          "height": 8,
+          "width": 0,
+          "table": false,
+          "obj":[
+            {
+              "name": "Contribuição à previdência oficial e à previdência complementar pública (até o limite do patrocinador)",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Dependentes",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "Despesas com instrução",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            },
+            {
+              "name": "TOTAL",
+              "content": "",
+              "x": 500,
+              "height": 10,
+              "width": 300,
+              "table": false
+            }
+          ]
+        }
+      ]
     }
   ]
 }
