@@ -1,11 +1,13 @@
 package incomeTax;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import exporters.DocumentExporter;
 import persistence.ConfigPersistence;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetIncomeTax {
@@ -65,16 +67,57 @@ public class GetIncomeTax {
                                     }
                                 }
 
+                                ArrayList<Field> fields = new ArrayList<>();
+
+                                for (int j = 0; j< section.fields.length; j++){
+
+                                    Field field = section.fields[j].getContentField(section, document, res, nextResult);
+
+                                    if (field != null){
+                                        fields.add(field);
+                                    }
+                                }
+
                                 Gson gsonSection = new Gson();
                                 JsonElement jsonElementSection = gsonSection.toJsonTree(incomeTaxJson);
 
-                                for (int j = 0; j< section.fields.length; j++){
-                                    section.fields[j].getContentField(section, document, res, nextResult);
-                                    section.fields[j].getObjectFromField(section.fields[j], jsonElementSection);
-                                }
+                                if (section.table && fields.size() > 0 && fields.get(0).content != null && fields.get(0).content.size() > 1){
 
-                                String jsonSection = gsonSection.toJson(jsonElementSection);
-                                jsonElement.getAsJsonObject().add(section.name, jsonElementSection);
+                                    JsonArray list = new JsonArray();
+
+                                    for (int k=0; k<fields.get(0).content.size(); k++){
+
+                                        Gson gsonArray = new Gson();
+                                        JsonElement jsonElementArray = gsonArray.toJsonTree(new Object());
+
+                                        for(Field field: fields) {
+                                            if (field.content != null && field.content.size() > k && field.content.size() > 0){
+
+                                                System.out.println("Add array " + field.name + " " +  field.content.get(k).trim() );
+                                                jsonElementArray.getAsJsonObject().addProperty(field.name, field.content.get(k).trim());
+
+                                            }
+                                        }
+
+                                        list.add(jsonElementArray);
+                                    }
+
+                                    jsonElement.getAsJsonObject().add(section.name, list);
+
+                                } else {
+
+                                    if (fields.size() > 0){
+
+                                        for(Field field: fields) {
+                                            field.getObjectFromField(field, jsonElementSection);
+                                        }
+
+                                        //String jsonSection = gsonSection.toJson(jsonElementSection);
+                                        jsonElement.getAsJsonObject().add(section.name, jsonElementSection);
+
+                                    }
+
+                                }
 
                                 ++sum;
                                 lastPage = res.getPage();

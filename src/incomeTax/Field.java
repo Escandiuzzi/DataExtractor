@@ -5,13 +5,14 @@ import com.google.gson.JsonElement;
 import utils.TextPositionSequence;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Field {
 
     public String name;
-    public String content;
-    public Field[] content2; //Peço desculpa a todos que possam se sentir ofendidos
+    public ArrayList<String> content;
+    public Field[] obj;
     public int x;
     public int y;
     public int height;
@@ -19,20 +20,22 @@ public class Field {
     public boolean table;
     public boolean hasNoContent;
 
-    public void getContentField(Section section, ExtractData document, ExtractData.Result posSection, List<ExtractData.Result> nextPosSection){
+    public Field getContentField(Section section, ExtractData document, ExtractData.Result posSection, List<ExtractData.Result> nextPosSection){
 
         try {
+
+            this.content = new ArrayList<>();
 
             if (this.hasNoContent){
 
                 System.out.println("Sem conteudo: " + this.name);
                 section.setTable(this.table);
 
-                for(int i=0; i<this.content2.length; i++){
-                    this.content2[i].getContentField(section, document, posSection, nextPosSection);
+                for(int i=0; i<this.obj.length; i++){
+                    this.obj[i].getContentField(section, document, posSection, nextPosSection);
                 }
 
-                return;
+                return this;
             }
 
             // System.out.println("Page: " + posSection.getPage() + " Y: " + (int)posSection.getPosition().getY() + " Next y: " + nextPosSection == null ? 0 : (int)nextPosSection.get(0).getPosition().getY() + " NextPage: " + nextPosSection == null ? posSection.getPage() + 1 : nextPosSection.get(0).getPage());
@@ -41,7 +44,7 @@ public class Field {
 
             if (listCampoResult == null){
                 System.out.println("Não encontrou posicao do termo " + this.name + " page: " + posSection.getPage());
-                return;
+                return null;
             }
 
             ExtractData.Result campoResult = listCampoResult.get(0);
@@ -51,13 +54,15 @@ public class Field {
             int height = this.height > 0 ? this.height : 5;
             int posY = this.table ? (int)position.getY() + (this.y > 0 ? this.y : height) : (int)position.getY();
 
+            String cont;
+
             if (this.table){
-                this.content = document.getTextByArea((int)position.getX() - 25, posY , (int)position.getWidth(), height, this, campoResult.getPage() - 1);
-                //System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
+                cont = document.getTextByArea((int)position.getX() - 25, posY , (int)position.getWidth(), height, this, campoResult.getPage() - 1);
             } else {
-                this.content = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, posY, (int)position.getWidth() + 200, height, this, campoResult.getPage() - 1);
-                //System.out.println( "Field: " + this.name + ": " + this.content + " Position: " + posY);
+                cont = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, posY, (int)position.getWidth() + 200, height, this, campoResult.getPage() - 1);
             }
+
+            this.content.add(cont);
 
             if (section.table && this.height > 0){
 
@@ -79,7 +84,7 @@ public class Field {
 
                     if (nextPosSection != null){
                         if ((nextPosSection.get(0).getPosition().getY() < y && nextPosSection.get(0).getPage() == campoResult.getPage()) ||
-                            (nextPosSection.get(0).getPosition().getY() < (y + section.numberOfLines * section.heightOfLines) && nextPosSection.get(0).getPage() == campoResult.getPage())){
+                                (nextPosSection.get(0).getPosition().getY() < (y + section.numberOfLines * section.heightOfLines) && nextPosSection.get(0).getPage() == campoResult.getPage())) {
                             //System.out.println("Break");
                             break;
                         }
@@ -93,8 +98,9 @@ public class Field {
                         content2 = document.getTextByArea((int) position.getX() + (int) position.getWidth() + 10, y, (int) position.getWidth() + 200, this.height, this, campoResult.getPage() - 1);
                     }
 
-                    if (!content2.trim().isEmpty()){
-                        //System.out.println("Field 2: " + this.name + ": " + content2);
+                    if (!content2.trim().isEmpty()) {
+                        this.content.add(content2);
+                        System.out.println("Field 2: " + this.name + ": " + content2);
                     }
 
                     //y += (section.numberOfLines * section.heightOfLines);
@@ -103,28 +109,36 @@ public class Field {
 
             }
 
+            return this;
+
         } catch (IOException dfg) {
             System.out.println(dfg);
+            return null;
         }
+
     }
 
     public void getObjectFromField(Field field, JsonElement jsonElement){
 
-        if (field.content2 != null){
+        if (field.content == null){
+            jsonElement.getAsJsonObject().addProperty(field.name, "");
+            return;
+        }
+
+        if (field.obj != null){
 
             Gson gsonSection = new Gson();
             JsonElement jsonElementSection = gsonSection.toJsonTree(new Object());
 
-            for (Field item: field.content2){
+            for (Field item: field.obj) {
                 this.getObjectFromField(item, jsonElementSection);
             }
 
             jsonElement.getAsJsonObject().add(field.name, jsonElementSection);
 
-        } else {
-            jsonElement.getAsJsonObject().addProperty(field.name, field.content.trim());
+        } else if (field.content.size() == 1 && field.content.get(0) != null) {
+            jsonElement.getAsJsonObject().addProperty(field.name, field.content.get(0).trim());
         }
-
 
     }
 }
