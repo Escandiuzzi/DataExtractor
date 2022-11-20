@@ -18,6 +18,8 @@ public class Field {
     public int height;
     public int width;
     public boolean table;
+    public int numberOfLines;
+    public int heightOfLines;
     public boolean hasNoContent;
 
     public Field getContentField(Section section, ExtractData document, ExtractData.Result posSection, List<ExtractData.Result> nextPosSection){
@@ -29,10 +31,15 @@ public class Field {
             if (this.hasNoContent){
 
                 System.out.println("Sem conteudo: " + this.name);
-                section.setTable(this.table);
 
-                for(int i=0; i<this.obj.length; i++){
-                    this.obj[i].getContentField(section, document, posSection, nextPosSection);
+                Section subSection = new Section(this.name, this.table, this.numberOfLines, this.heightOfLines, this.obj);
+
+                List<ExtractData.Result> resultSubSection = document.getSubwords(subSection.name, posSection.getPage(), (int)posSection.getPosition().getY(), nextPosSection != null ? (int)nextPosSection.get(0).getPosition().getY() : 500, nextPosSection != null ? nextPosSection.get(0).getPage() : 0);
+
+                if (resultSubSection != null){
+                    for(int i=0; i<this.obj.length; i++){
+                        this.obj[i].getContentField(subSection, document, resultSubSection.get(0), nextPosSection);
+                    }
                 }
 
                 return this;
@@ -57,9 +64,9 @@ public class Field {
             String cont;
 
             if (this.table){
-                cont = document.getTextByArea((int)position.getX() - 25, posY , (int)position.getWidth(), height, this, campoResult.getPage() - 1);
+                cont = document.getTextByArea((int)position.getX() + this.x, posY , (int)position.getWidth(), height, this, campoResult.getPage() - 1);
             } else {
-                cont = document.getTextByArea((int)position.getX() + (int)position.getWidth() + 10, posY, (int)position.getWidth() + 200, height, this, campoResult.getPage() - 1);
+                cont = document.getTextByArea((int)position.getX() + (int)position.getWidth() + this.x, posY, (int)position.getWidth() + 200, height, this, campoResult.getPage() - 1);
             }
 
             this.content.add(cont);
@@ -93,9 +100,9 @@ public class Field {
                     //System.out.println("Position Get Y " + y);
 
                     if (this.table) {
-                        content2 = document.getTextByArea((int) position.getX() - 25, y, (int) position.getWidth(), this.height, this, campoResult.getPage() - 1);
+                        content2 = document.getTextByArea((int) position.getX() + this.x, y, (int) position.getWidth(), this.height, this, campoResult.getPage() - 1);
                     } else {
-                        content2 = document.getTextByArea((int) position.getX() + (int) position.getWidth() + 10, y, (int) position.getWidth() + 200, this.height, this, campoResult.getPage() - 1);
+                        content2 = document.getTextByArea((int) position.getX() + (int) position.getWidth() + this.x, y, (int) position.getWidth() + 200, this.height, this, campoResult.getPage() - 1);
                     }
 
                     if (!content2.trim().isEmpty()) {

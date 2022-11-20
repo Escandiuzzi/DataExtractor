@@ -216,7 +216,7 @@
         {
           "name": "CPF",
           "content": null,
-          "x": 0,
+          "x": -25,
           "height": 5,
           "width": 100,
           "table": true
@@ -271,6 +271,7 @@
         {
           "name": "RESIDENTE",
           "content": null,
+          "x": -15,
           "height": 10,
           "width": 100,
           "table": true
@@ -285,6 +286,7 @@
         {
           "name": "CPF",
           "content": null,
+          "x": -25,
           "height": 10,
           "width": 70,
           "table": true
@@ -293,7 +295,7 @@
           "name": "Alimentando do:",
           "content": null,
           "height": 10,
-          "width": 100,
+          "width": 85,
           "table": true
         }
       ]
@@ -302,7 +304,7 @@
       "name": "RENDIMENTOS TRIBUTÁVEIS RECEBIDOS DE PESSOA JURÍDICA PELO TITULAR",
       "table": true,
       "numberOfLines": 2,
-      "heightOfLines": 20,
+      "heightOfLines": 19,
       "fields": [
         {
           "name": "NOME DA FONTE PAGADORA",
@@ -568,20 +570,20 @@
               "name": "Beneficiário",
               "content": null,
               "height": 8,
-              "width": 100,
+              "width": 70,
               "table": true
             },
             {
               "name": "CPF",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 100,
+              "width": 75,
               "table": true
             },
             {
-              "name": "CNPJ da Fonte Pagadora",
+              "name": "CPF/CNPJ da Fonte Pagadora",
               "content": null,
-              "x": 250,
               "height": 8,
               "width": 90,
               "table": true
@@ -589,13 +591,15 @@
             {
               "name": "Nome da Fonte Pagadora",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 200,
+              "width": 120,
               "table": true
             },
             {
               "name": "Valor",
               "content": null,
+              "x": -30,
               "height": 8,
               "width": 150,
               "table": true
@@ -613,14 +617,15 @@
               "name": "Beneficiário",
               "content": null,
               "height": 8,
-              "width": 100,
+              "width": 70,
               "table": true
             },
             {
               "name": "CPF",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 100,
+              "width": 75,
               "table": true
             },
             {
@@ -682,26 +687,29 @@
           "hasNoContent": true,
           "height": 0,
           "width": 0,
-          "table": false,
+          "table": true,
+          "numberOfLines": 1,
+          "heightOfLines": 10,
           "obj":[
             {
               "name": "Beneficiário",
               "content": null,
               "height": 8,
-              "width": 100,
+              "width": 70,
               "table": true
             },
             {
               "name": "CPF",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 100,
+              "width": 75,
               "table": true
             },
             {
               "name": "CNPJ da Fonte Pagadora",
               "content": null,
-              "x": 250,
+              "x": 0,
               "height": 8,
               "width": 100,
               "table": true
@@ -710,12 +718,13 @@
               "name": "Nome da Fonte Pagadora",
               "content": null,
               "height": 8,
-              "width": 200,
+              "width": 100,
               "table": true
             },
             {
-              "name": "Valor",
+              "name": "Valor ",
               "content": null,
+              "x": 450,
               "height": 8,
               "width": 150,
               "table": true
@@ -747,14 +756,15 @@
               "name": "Beneficiário",
               "content": null,
               "height": 8,
-              "width": 100,
+              "width": 70,
               "table": true
             },
             {
               "name": "CPF",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 100,
+              "width": 75,
               "table": true
             },
             {
@@ -792,20 +802,22 @@
               "name": "Beneficiário",
               "content": null,
               "height": 8,
-              "width": 100,
+              "width": 70,
               "table": true
             },
             {
               "name": "CPF",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 100,
+              "width": 75,
               "table": true
             },
             {
-              "name": "CNPJ da Fonte",
+              "name": "CPF/CNPJ da Fonte",
               "content": null,
-              "x": 100,
+              "y": 15,
+              "x": 0,
               "height": 8,
               "width": 100,
               "table": true
@@ -813,21 +825,24 @@
             {
               "name": "Nome da Fonte",
               "content": null,
-              "x": -40,
+              "y": 15,
+              "x": -5,
               "height": 8,
-              "width": 200,
+              "width": 80,
               "table": true
             },
             {
               "name": "Descrição",
               "content": null,
+              "x": -20,
               "height": 8,
-              "width": 200,
+              "width": 85,
               "table": true
             },
             {
               "name": "Valor",
               "content": null,
+              "x": 450,
               "height": 8,
               "width": 150,
               "table": true
@@ -928,69 +943,75 @@
     {
       "name": "DECLARAÇÃO DE BENS E DIREITOS",
       "table": true,
-      "numberOfLines": 4,
-      "heightOfLines": 8,
+      "numberOfLines": 7,
+      "heightOfLines": 12,
       "fields": [
         {
           "name": "GRUPO",
           "content": null,
-          "height": 10,
-          "width": 50,
+          "height": 12,
+          "width": 20,
           "table": true
         },
         {
           "name": "CÓDIGO",
           "content": null,
-          "height": 10,
-          "width": 50,
+          "height": 12,
+          "width": 20,
           "table": true
         },
         {
           "name": "DISCRIMINAÇÃO",
           "content": null,
-          "height": 10,
-          "width": 200,
+          "height": 12,
+          "width": 260,
           "table": true
         },
         {
           "name": "31/12/2020",
           "content": null,
-          "height": 10,
+          "x": -10,
+          "height": 12,
           "width": 80,
           "table": true
         },
         {
           "name": "31/12/2021",
           "content": null,
-          "height": 10,
+          "x": -10,
+          "height": 12,
           "width": 80,
           "table": true
         },
         {
           "name": "RENAVAM",
           "content": null,
-          "height": 10,
-          "width": 130,
+          "x": -5,
+          "height": 12,
+          "width": 100,
           "table": false
         },
         {
           "name": "Bem ou direito pertencente a",
           "content": null,
-          "height": 10,
-          "width": 160,
+          "x": 10,
+          "height": 12,
+          "width": 80,
           "table": false
         },
         {
           "name": "CPF",
           "content": null,
-          "height": 10,
+          "x": 0,
+          "height": 12,
           "width": 100,
           "table": false
         },
         {
           "name": "CNPJ",
           "content": null,
-          "height": 10,
+          "x": 0,
+          "height": 12,
           "width": 100,
           "table": false
         }
