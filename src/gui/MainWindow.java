@@ -20,7 +20,7 @@ public class MainWindow extends JDialog implements ActionListener {
 
     JCheckBox beneficiary, cnpj, payer, cpf, beneficiaryCode, dueDate, ourNumber, documentPrice, documentNumber,
             addition, chargedValue, documentDate, discount, currency, otherDeductions, penalty;
-    JButton inputDirButton, outputDirButton, errorDirButton, configDirButton, cancelButton, saveButton;
+    JButton inputDirButton, outputDirButton, errorDirButton, configDirButton, execButton, saveButton;
     JFileChooser inputFileChooser, outputFileChooser, errorFileChooser, configFileChooser;
 
     ConfigPersistence configPersistence;
@@ -347,18 +347,18 @@ public class MainWindow extends JDialog implements ActionListener {
 
     private void createBottomPanel() {
         bottomPanel = new JPanel(new BorderLayout());
-        cancelButton = new JButton("Cancel");
-        cancelButton.setBackground(Color.white);
-        cancelButton.setFont(new Font("Sans Serif", Font.BOLD, 12));
+        execButton = new JButton("Iniciar");
+        execButton.setBackground(Color.white);
+        execButton.setFont(new Font("Sans Serif", Font.BOLD, 12));
 
-        saveButton = new JButton("Save");
+        saveButton = new JButton("Salvar");
         saveButton.setBackground(Color.white);
         saveButton.setFont(new Font("Sans Serif", Font.BOLD, 12));
 
-        bottomPanel.add(cancelButton, BorderLayout.WEST);
+        bottomPanel.add(execButton, BorderLayout.WEST);
         bottomPanel.add(saveButton, BorderLayout.EAST);
 
-        cancelButton.addActionListener(new ActionListener() {
+        execButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);

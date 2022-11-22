@@ -21,6 +21,20 @@ public class DocumentExporter {
         gson = new Gson();
     }
 
+    public void createErrorLog(String message)
+    {
+        String date = getDate();
+
+        try {
+            Files.writeString(
+                    Path.of(configPersistence.getErrorFolderPath() + "/error-" + date + ".txt"),
+                    message,
+                    StandardCharsets.UTF_8);
+        } catch (IOException exception) {
+            System.out.print(exception.getMessage());
+        }
+    }
+
     public void exportDocument(InvoiceDto invoice) {
         String json = gson.toJson(invoice);
         export(json);

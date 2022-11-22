@@ -21,7 +21,7 @@ public class PDFValidator {
 	private boolean checkFileExtension(String file) {
 		String fileExtension = getFileExtension(file);
 
-		return fileExtension.equals("pdf");
+		return fileExtension.toLowerCase().equals("pdf");
 	}
 	
 	private boolean validSize(String inputFolderPath, String file) {

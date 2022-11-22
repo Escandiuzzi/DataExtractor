@@ -65,6 +65,7 @@ public class WatchDir {
 
 					// Perform necessary action with the event
 					if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+						long startTime = System.nanoTime();
 
 						System.out.println("A new file is created : " + fileName);
 
@@ -78,12 +79,21 @@ public class WatchDir {
 							Path move = Files.move(Paths.get(configPersistence.getInputFolderPath().toString() + File.separator + fileName),
 									Paths.get(configPersistence.getErrorFolderPath() + File.separator + fileName));
 
-							if (move == null){
-								System.out.println("Ocorreu um erro ao mover arquivo");
+							documentExporter.createErrorLog("Documento Inválido " + fileName);
+
+							if (move == null) {
+								final String ErrorMessage = "Ocorreu um erro ao mover arquivo " + fileName;
+								documentExporter.createErrorLog(ErrorMessage);
+
+								System.out.println(ErrorMessage);
 							} else {
 								System.out.println("Arquivo movido com sucesso");
 							}
 						}
+
+						long elapsedTime = System.nanoTime() - startTime;
+
+						System.out.println("Total execution time to process in Java in millis: " + elapsedTime/1000000);
 					}
 
 					/*if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
@@ -124,8 +134,10 @@ public class WatchDir {
 					break;
 			}
 		} catch (IOException ex) {
+			documentExporter.createErrorLog(ex.getMessage());
 			System.out.println(ex.getMessage());
 		} catch (Exception ex) {
+			documentExporter.createErrorLog(ex.getMessage());
 			System.out.println(ex.getMessage());
 		}
 	}
